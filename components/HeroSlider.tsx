@@ -46,7 +46,7 @@ const slides: Slide[] = [
       label: "Дивитися рішення",
       icon: "arrow",
     },
-    secondary: { href: "/catalog?category=filter-jugs", label: "Фільтри-глечики" },
+    secondary: { href: "/catalog?category=flow-filters", label: "Проточні фільтри" },
     visual: "device",
     chip: { num: "200 л", label: "чистої води на добу" },
   },
@@ -63,7 +63,7 @@ const slides: Slide[] = [
       icon: "arrow",
     },
     secondary: {
-      href: "/catalog?category=softeners",
+      href: "/catalog?category=filtration-systems&subcategory=fs-softening",
       label: "Пом'якшення води",
     },
     visual: "device",

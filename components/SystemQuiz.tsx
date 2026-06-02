@@ -104,6 +104,7 @@ const steps: Step[] = [
 
 type Recommendation = {
   category: string;
+  subcategory?: string;
   title: string;
   text: string;
 };
@@ -112,7 +113,8 @@ function recommend(answers: Record<string, string>): Recommendation {
   const goal = answers.goal;
   if (goal === "scale") {
     return {
-      category: "softeners",
+      category: "filtration-systems",
+      subcategory: "fs-softening",
       title: "Системи пом'якшення",
       text: "Усунуть жорсткість і захистять бойлер, котел та пральну машину від накипу.",
     };
@@ -126,9 +128,9 @@ function recommend(answers: Record<string, string>): Recommendation {
   }
   if (goal === "budget") {
     return {
-      category: "filter-jugs",
-      title: "Фільтри-глечики",
-      text: "Просте й доступне рішення для смачної води без підключення до водопроводу.",
+      category: "flow-filters",
+      title: "Проточні фільтри",
+      text: "Просте й доступне рішення для смачної питної води під мийку.",
     };
   }
   return {
@@ -234,7 +236,12 @@ export default function SystemQuiz() {
           <h3 className="quiz__title">{rec.title}</h3>
           <p className="quiz__subtitle">{rec.text}</p>
           <div className="quiz__result-actions">
-            <Link href={`/catalog?category=${rec.category}`} className="btn btn--lg">
+            <Link
+              href={`/catalog?category=${rec.category}${
+                rec.subcategory ? `&subcategory=${rec.subcategory}` : ""
+              }`}
+              className="btn btn--lg"
+            >
               <Icon name="drop" />
               Переглянути рішення
             </Link>

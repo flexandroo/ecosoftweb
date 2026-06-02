@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { categories, products, getCategory } from "@/lib/products";
+import {
+  categories,
+  products,
+  getCategory,
+  getSubcategory,
+} from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import Icon from "@/components/Icon";
 
@@ -10,24 +15,37 @@ export const metadata = {
 export default function CatalogPage({
   searchParams,
 }: {
-  searchParams: { category?: string };
+  searchParams: { category?: string; subcategory?: string };
 }) {
   const activeCat = searchParams.category;
+  const activeSub = searchParams.subcategory;
   const category = activeCat ? getCategory(activeCat) : undefined;
-  const list = activeCat
-    ? products.filter((p) => p.category === activeCat)
-    : products;
+  const subcategory =
+    activeCat && activeSub ? getSubcategory(activeCat, activeSub) : undefined;
+
+  const list = products.filter((p) => {
+    if (activeCat && p.category !== activeCat) return false;
+    if (activeSub && p.subcategory !== activeSub) return false;
+    return true;
+  });
+
+  const heading = subcategory
+    ? subcategory.title
+    : category
+    ? category.title
+    : "Каталог товарів";
+  const subheading = subcategory
+    ? `${category?.title} — ${subcategory.title}`
+    : category
+    ? category.description
+    : "Усі системи очищення води Ecosoft в одному місці.";
 
   return (
     <>
       <div className="page-head">
         <div className="container">
-          <h1>{category ? category.title : "Каталог товарів"}</h1>
-          <p>
-            {category
-              ? category.description
-              : "Усі системи очищення води Ecosoft в одному місці."}
-          </p>
+          <h1>{heading}</h1>
+          <p>{subheading}</p>
         </div>
       </div>
 
@@ -38,15 +56,32 @@ export default function CatalogPage({
             <Link href="/catalog" className={!activeCat ? "active" : ""}>
               Усі товари
             </Link>
-            {categories.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/catalog?category=${cat.slug}`}
-                className={activeCat === cat.slug ? "active" : ""}
-              >
-                {cat.title}
-              </Link>
-            ))}
+            {categories.map((cat) => {
+              const catActive = activeCat === cat.slug;
+              return (
+                <div className="filters__group" key={cat.slug}>
+                  <Link
+                    href={`/catalog?category=${cat.slug}`}
+                    className={catActive && !activeSub ? "active" : ""}
+                  >
+                    {cat.title}
+                  </Link>
+                  {catActive && cat.subcategories.length > 0 && (
+                    <div className="filters__sub">
+                      {cat.subcategories.map((sub) => (
+                        <Link
+                          key={sub.slug}
+                          href={`/catalog?category=${cat.slug}&subcategory=${sub.slug}`}
+                          className={activeSub === sub.slug ? "active" : ""}
+                        >
+                          {sub.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </aside>
 
           <div>
@@ -58,8 +93,12 @@ export default function CatalogPage({
                 <h2>Товари незабаром</h2>
                 <p>
                   Цю категорію ми наповнюємо. Зверніться за консультацією — ми
-                  підкажемо потрібне рішення.
+                  підкажемо потрібне рішення під вашу воду.
                 </p>
+                <Link href="/contacts" className="btn btn--secondary">
+                  <Icon name="headset" />
+                  Отримати консультацію
+                </Link>
               </div>
             ) : (
               <div className="grid">

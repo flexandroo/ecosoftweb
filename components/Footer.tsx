@@ -33,11 +33,13 @@ export default function Footer() {
         <div className="footer__col">
           <h4>Рішення</h4>
           <Link href="/catalog?category=reverse-osmosis">Зворотний осмос</Link>
-          <Link href="/catalog?category=filter-jugs">Фільтри-глечики</Link>
+          <Link href="/catalog?category=flow-filters">Проточні фільтри</Link>
           <Link href="/catalog?category=mainline-filters">
             Магістральні фільтри
           </Link>
-          <Link href="/catalog?category=softeners">Пом'якшення води</Link>
+          <Link href="/catalog?category=filtration-systems">
+            Фільтраційні системи
+          </Link>
         </div>
 
         <div className="footer__col">

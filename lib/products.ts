@@ -1,10 +1,16 @@
 import type { IconName } from "@/components/Icon";
 
+export type Subcategory = {
+  slug: string;
+  title: string;
+};
+
 export type Category = {
   slug: string;
   title: string;
   description: string;
   icon: IconName;
+  subcategories: Subcategory[];
 };
 
 export type Product = {
@@ -12,6 +18,7 @@ export type Product = {
   slug: string;
   name: string;
   category: string; // category slug
+  subcategory?: string; // subcategory slug
   price: number; // UAH
   oldPrice?: number;
   shortDescription: string;
@@ -24,45 +31,102 @@ export type Product = {
 export const categories: Category[] = [
   {
     slug: "reverse-osmosis",
-    title: "Системи зворотного осмосу",
+    title: "Фільтри зворотного осмосу",
     description:
       "Багатоступеневе очищення води до рівня питної. Видаляють до 99,8% домішок, солей, бактерій і вірусів.",
     icon: "osmosis",
+    subcategories: [
+      { slug: "ro-pure", title: "PURE з мінералізацією" },
+      { slug: "ro-absolute", title: "Absolute" },
+      { slug: "ro-standard", title: "Standard" },
+      { slug: "ro-cross", title: "Смарт CROSS" },
+    ],
   },
   {
-    slug: "filter-jugs",
-    title: "Фільтри-глечики",
+    slug: "flow-filters",
+    title: "Проточні фільтри",
     description:
-      "Компактне рішення для квартири та офісу. Покращують смак і пом'якшують воду без підключення до водопроводу.",
-    icon: "jug",
+      "Системи під мийку для щоденного очищення питної води. Швидкий потік без накопичувального бака.",
+    icon: "drop",
+    subcategories: [{ slug: "flow-triple", title: "Потрійні системи" }],
+  },
+  {
+    slug: "filtration-systems",
+    title: "Фільтраційні системи",
+    description:
+      "Комплексне очищення води для дому — від заліза, жорсткості, хлору та сірководню до механічних домішок.",
+    icon: "gear",
+    subcategories: [
+      { slug: "fs-compact", title: "Компактні системи" },
+      { slug: "fs-iron-hardness", title: "Від заліза та твердості" },
+      { slug: "fs-column", title: "Колонного типу" },
+      { slug: "fs-softening", title: "Пом'якшення води" },
+      { slug: "fs-chlorine", title: "Видалення хлору" },
+      { slug: "fs-h2s", title: "Від сірководню" },
+      { slug: "fs-mechanical", title: "Механічного очищення" },
+    ],
   },
   {
     slug: "mainline-filters",
     title: "Магістральні фільтри",
     description:
-      "Очищення води на вході у квартиру чи будинок. Захищають побутову техніку від механічних домішок, іржі та хлору.",
+      "Очищення води на вході у квартиру чи будинок. Захищають сантехніку й техніку від домішок, іржі та накипу.",
     icon: "filter",
+    subcategories: [
+      { slug: "ml-flushing", title: "Промивні" },
+      { slug: "ml-cartridge", title: "Картриджні" },
+      { slug: "ml-antiscale", title: "Від накипу" },
+      { slug: "ml-hot", title: "Для гарячої води" },
+      { slug: "ml-cold", title: "Для холодної води" },
+    ],
   },
   {
-    slug: "softeners",
-    title: "Системи пом'якшення",
+    slug: "ro-cartridges",
+    title: "Картриджі для фільтрів води",
     description:
-      "Усувають жорсткість води, запобігають утворенню накипу та подовжують термін служби техніки.",
-    icon: "softener",
-  },
-  {
-    slug: "cartridges",
-    title: "Картриджі та змінні елементи",
-    description:
-      "Оригінальні картриджі та мембрани Ecosoft для своєчасної заміни й стабільної якості очищення.",
+      "Оригінальні змінні картриджі та мембрани Ecosoft для систем осмосу й проточних фільтрів.",
     icon: "cartridge",
+    subcategories: [
+      { slug: "roc-standard", title: "Standard" },
+      { slug: "roc-absolute", title: "Absolute" },
+      { slug: "roc-pure", title: "PURE" },
+      { slug: "roc-flow", title: "Для проточних фільтрів" },
+    ],
   },
   {
-    slug: "accessories",
-    title: "Аксесуари",
+    slug: "mainline-cartridges",
+    title: "Картриджі для магістральних фільтрів",
     description:
-      "Крани, конектори, корпуси та комплектуючі для монтажу й обслуговування систем водопідготовки.",
+      "Змінні картриджі типорозмірів Standard і Big Blue для магістральних корпусів Ecosoft.",
     icon: "accessory",
+    subcategories: [
+      { slug: "mlc-standard", title: "Standard 2,5\"×10\"" },
+      { slug: "mlc-bb10", title: "BB10 4,5\"×10\"" },
+      { slug: "mlc-bb20", title: "BB20 4,5\"×20\"" },
+      { slug: "mlc-antiscale", title: "Від накипу" },
+    ],
+  },
+  {
+    slug: "filter-media",
+    title: "Матеріали для фільтраційних систем",
+    description:
+      "Засипки та реагенти для завантаження й обслуговування фільтраційних колон і систем пом'якшення.",
+    icon: "leaf",
+    subcategories: [
+      { slug: "fm-ecomix", title: "Ecomix" },
+      { slug: "fm-salt", title: "Таблетована сіль" },
+      { slug: "fm-carbon", title: "Вугілля" },
+      { slug: "fm-resin", title: "Іонообмінні смоли" },
+      { slug: "fm-mechanical", title: "Для механічної фільтрації" },
+    ],
+  },
+  {
+    slug: "horeca",
+    title: "Фільтри для кафе, ресторанів, готелів",
+    description:
+      "Професійні рішення водопідготовки для HoReCa — для кавомашин, пароконвектоматів та льодогенераторів.",
+    icon: "award",
+    subcategories: [],
   },
 ];
 
@@ -73,6 +137,7 @@ export const products: Product[] = [
     slug: "ecosoft-standard",
     name: "Ecosoft Standard",
     category: "reverse-osmosis",
+    subcategory: "ro-standard",
     price: 5499,
     oldPrice: 6299,
     shortDescription: "5-ступенева система зворотного осмосу для щоденного використання.",
@@ -92,6 +157,7 @@ export const products: Product[] = [
     slug: "ecosoft-pure",
     name: "Ecosoft P'URE",
     category: "reverse-osmosis",
+    subcategory: "ro-pure",
     price: 9999,
     shortDescription: "Преміум-система з мінералізатором та помпою підвищення тиску.",
     description:
@@ -110,6 +176,7 @@ export const products: Product[] = [
     slug: "ecosoft-robust",
     name: "Ecosoft RObust",
     category: "reverse-osmosis",
+    subcategory: "ro-cross",
     price: 14990,
     shortDescription: "Прямоточна система без бака з високою продуктивністю.",
     description:
@@ -122,12 +189,13 @@ export const products: Product[] = [
     ],
     inStock: true,
   },
-  // Filter jugs
+  // Flow filters
   {
     id: "jug-dewberry",
     slug: "ecosoft-dewberry",
     name: "Ecosoft Dewberry",
-    category: "filter-jugs",
+    category: "flow-filters",
+    subcategory: "flow-triple",
     price: 549,
     shortDescription: "Фільтр-глечик 3 л із зручним відкидним клапаном.",
     description:
@@ -144,7 +212,8 @@ export const products: Product[] = [
     id: "jug-german",
     slug: "ecosoft-german",
     name: "Ecosoft German",
-    category: "filter-jugs",
+    category: "flow-filters",
+    subcategory: "flow-triple",
     price: 699,
     oldPrice: 799,
     shortDescription: "Глечик 3,5 л із преміальним дизайном і збільшеним ресурсом.",
@@ -164,6 +233,7 @@ export const products: Product[] = [
     slug: "ecosoft-bb10",
     name: "Ecosoft Big Blue 10",
     category: "mainline-filters",
+    subcategory: "ml-cartridge",
     price: 1890,
     shortDescription: "Магістральний корпус 10\" для механічного очищення води.",
     description:
@@ -181,6 +251,7 @@ export const products: Product[] = [
     slug: "ecosoft-bb20",
     name: "Ecosoft Big Blue 20",
     category: "mainline-filters",
+    subcategory: "ml-cartridge",
     price: 2490,
     shortDescription: "Магістральний корпус 20\" для будинку з високою витратою.",
     description:
@@ -193,12 +264,13 @@ export const products: Product[] = [
     ],
     inStock: false,
   },
-  // Softeners
+  // Filtration systems
   {
     id: "soft-fu",
     slug: "ecosoft-fu-cabinet",
     name: "Ecosoft FU Cabinet",
-    category: "softeners",
+    category: "filtration-systems",
+    subcategory: "fs-softening",
     price: 18900,
     shortDescription: "Компактна кабінетна система пом'якшення для квартири.",
     description:
@@ -220,6 +292,13 @@ export function getProduct(slug: string): Product | undefined {
 
 export function getCategory(slug: string): Category | undefined {
   return categories.find((c) => c.slug === slug);
+}
+
+export function getSubcategory(
+  categorySlug: string,
+  subSlug: string
+): Subcategory | undefined {
+  return getCategory(categorySlug)?.subcategories.find((s) => s.slug === subSlug);
 }
 
 export function productsByCategory(slug: string): Product[] {

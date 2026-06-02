@@ -1130,6 +1130,31 @@ p {
   color: var(--primary);
   font-weight: 700;
 }
+.filters__group {
+  display: flex;
+  flex-direction: column;
+}
+.filters__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 4px 12px;
+  padding-left: 10px;
+  border-left: 2px solid var(--line);
+}
+.filters__sub a {
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.filters__sub a:hover,
+.filters__sub a.active {
+  color: var(--primary);
+}
+.filters__sub a.active {
+  font-weight: 700;
+}
 
 /* ============================================================
    PRODUCT DETAIL
