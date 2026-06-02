@@ -7,6 +7,7 @@ import {
   formatPrice,
 } from "@/lib/products";
 import AddToCartButton from "@/components/AddToCartButton";
+import Icon from "@/components/Icon";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -29,7 +30,9 @@ export default function ProductPage({
   return (
     <div className="container">
       <div className="product">
-        <div className="product__media">💧</div>
+        <div className="product__media">
+          <Icon name={category?.icon ?? "drop"} />
+        </div>
         <div className="product__info">
           <div className="breadcrumbs">
             <Link href="/catalog">Каталог</Link>
@@ -46,7 +49,8 @@ export default function ProductPage({
           <span
             className={`stock ${product.inStock ? "stock--in" : "stock--out"}`}
           >
-            {product.inStock ? "● В наявності" : "● Немає в наявності"}
+            <Icon name={product.inStock ? "check" : "arrow"} size={16} />
+            {product.inStock ? "В наявності" : "Немає в наявності"}
           </span>
 
           <div className="product__price">
@@ -64,7 +68,10 @@ export default function ProductPage({
 
           <ul className="product__features">
             {product.features.map((f) => (
-              <li key={f}>{f}</li>
+              <li key={f}>
+                <Icon name="check" />
+                {f}
+              </li>
             ))}
           </ul>
 

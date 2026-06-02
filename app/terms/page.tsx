@@ -1,5 +1,7 @@
+import Icon from "@/components/Icon";
+
 export const metadata = {
-  title: "Умови праці",
+  title: "Оплата і доставка",
 };
 
 export default function TermsPage() {
@@ -7,25 +9,31 @@ export default function TermsPage() {
     <>
       <div className="page-head">
         <div className="container">
-          <h1>Умови праці</h1>
-          <p>Оплата, доставка, гарантія та повернення</p>
+          <h1>Оплата і доставка</h1>
+          <p>Умови покупки: оплата, доставка, гарантія та повернення</p>
         </div>
       </div>
 
       <div className="container">
         <div className="info-grid">
           <div className="info-card">
-            <div className="info-card__icon">💳</div>
+            <div className="info-card__icon">
+              <Icon name="award" />
+            </div>
             <h3>Оплата</h3>
             <p>Готівкою, карткою або безготівковий розрахунок для юросіб.</p>
           </div>
           <div className="info-card">
-            <div className="info-card__icon">📦</div>
+            <div className="info-card__icon">
+              <Icon name="truck" />
+            </div>
             <h3>Доставка</h3>
             <p>Новою поштою по всій Україні або кур'єром у межах міста.</p>
           </div>
           <div className="info-card">
-            <div className="info-card__icon">🛡️</div>
+            <div className="info-card__icon">
+              <Icon name="shield" />
+            </div>
             <h3>Гарантія</h3>
             <p>Офіційна гарантія на обладнання та сервісна підтримка.</p>
           </div>

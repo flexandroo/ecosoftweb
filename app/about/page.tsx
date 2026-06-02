@@ -1,34 +1,67 @@
+import Icon from "@/components/Icon";
+
 export const metadata = {
   title: "Про нас",
 };
+
+const stats = [
+  { num: "20+", label: "років на ринку водоочищення" },
+  { num: "1 000 000+", label: "задоволених клієнтів" },
+  { num: "99,8%", label: "ефективність очищення води" },
+  { num: "500+", label: "сервісних точок по Україні" },
+];
+
+const values = [
+  {
+    icon: "gear" as const,
+    title: "Власне виробництво",
+    text: "Контролюємо якість на кожному етапі — від мембрани до корпусу системи.",
+  },
+  {
+    icon: "award" as const,
+    title: "Сертифікація",
+    text: "Продукція відповідає чинним стандартам якості та безпеки питної води.",
+  },
+  {
+    icon: "headset" as const,
+    title: "Експертність",
+    text: "Інженери та консультанти підбирають рішення під конкретний аналіз води.",
+  },
+];
 
 export default function AboutPage() {
   return (
     <>
       <div className="page-head">
         <div className="container">
-          <h1>Про нас</h1>
-          <p>Ecosoft — чиста вода для кожної української родини</p>
+          <h1>Про компанію Ecosoft</h1>
+          <p>
+            Розробляємо та виробляємо системи водопідготовки, щоб чиста вода була
+            доступною кожній українській родині.
+          </p>
         </div>
       </div>
 
       <div className="container">
+        <div className="stats">
+          {stats.map((s) => (
+            <div className="stat" key={s.label}>
+              <div className="stat__num">{s.num}</div>
+              <div className="stat__label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+
         <div className="info-grid">
-          <div className="info-card">
-            <div className="info-card__icon">📅</div>
-            <h3>20+ років досвіду</h3>
-            <p>Розробляємо та виробляємо системи водопідготовки з 2003 року.</p>
-          </div>
-          <div className="info-card">
-            <div className="info-card__icon">🏭</div>
-            <h3>Власне виробництво</h3>
-            <p>Контролюємо якість на кожному етапі — від мембрани до корпусу.</p>
-          </div>
-          <div className="info-card">
-            <div className="info-card__icon">😊</div>
-            <h3>1 000 000+ клієнтів</h3>
-            <p>Нам довіряють родини, офіси та виробництва по всій Україні.</p>
-          </div>
+          {values.map((v) => (
+            <div className="info-card" key={v.title}>
+              <div className="info-card__icon">
+                <Icon name={v.icon} />
+              </div>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </div>
+          ))}
         </div>
 
         <div className="content">

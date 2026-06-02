@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/components/CartContext";
 import { products, formatPrice, getCategory } from "@/lib/products";
+import Icon from "@/components/Icon";
 
 export default function CartPage() {
   const { items, setQty, remove, total, clear } = useCart();
@@ -27,7 +28,9 @@ export default function CartPage() {
     return (
       <div className="container">
         <div className="empty" style={{ margin: "48px 0" }}>
-          <div className="empty__icon">✅</div>
+          <div className="empty__icon">
+            <Icon name="check" />
+          </div>
           <h2>Дякуємо за замовлення!</h2>
           <p>
             Ваше замовлення прийнято. Менеджер зв'яжеться з вами найближчим часом
@@ -47,7 +50,9 @@ export default function CartPage() {
     return (
       <div className="container">
         <div className="empty" style={{ margin: "48px 0" }}>
-          <div className="empty__icon">🛒</div>
+          <div className="empty__icon">
+            <Icon name="drop" />
+          </div>
           <h2>Кошик порожній</h2>
           <p>Додайте товари з каталогу, щоб оформити замовлення.</p>
           <div style={{ marginTop: 16 }}>
@@ -77,8 +82,10 @@ export default function CartPage() {
                 const cat = getCategory(product.category);
                 return (
                   <div className="cart-row" key={product.id}>
-                    <div className="cart-row__media">💧</div>
-                    <div>
+                    <div className="cart-row__media">
+                      <Icon name={cat?.icon ?? "drop"} />
+                    </div>
+                    <div className="cart-row__info">
                       <Link
                         href={`/catalog/${product.slug}`}
                         className="cart-row__name"
@@ -166,8 +173,12 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="note">
-                💡 Це демо-оформлення. Замовлення поки не відправляється на сервер
-                — обробка платежів та збереження заявок буде підключено пізніше.
+                <Icon name="sparkle" />
+                <span>
+                  Це демо-оформлення. Замовлення поки не відправляється на
+                  сервер — обробку платежів та збереження заявок буде підключено
+                  пізніше.
+                </span>
               </div>
               <div style={{ marginTop: 18, maxWidth: 280 }}>
                 <button type="submit" className="btn btn--lg">

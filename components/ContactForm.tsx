@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Icon from "./Icon";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -13,8 +14,11 @@ export default function ContactForm() {
   if (sent) {
     return (
       <div className="note">
-        ✅ Дякуємо! Ваше повідомлення надіслано (демо). Менеджер зв'яжеться з
-        вами найближчим часом.
+        <Icon name="check" />
+        <span>
+          Дякуємо! Ваше повідомлення надіслано (демо). Менеджер зв'яжеться з вами
+          найближчим часом.
+        </span>
       </div>
     );
   }

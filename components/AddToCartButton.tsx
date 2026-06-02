@@ -2,15 +2,18 @@
 
 import { useState } from "react";
 import { useCart } from "./CartContext";
+import Icon from "./Icon";
 
 export default function AddToCartButton({
   id,
   disabled = false,
   large = false,
+  block = true,
 }: {
   id: string;
   disabled?: boolean;
   large?: boolean;
+  block?: boolean;
 }) {
   const { add } = useCart();
   const [added, setAdded] = useState(false);
@@ -21,20 +24,39 @@ export default function AddToCartButton({
     setTimeout(() => setAdded(false), 1500);
   }
 
+  const cls = [
+    "btn",
+    large ? "btn--lg" : "btn--sm",
+    block ? "btn--block" : "",
+    added ? "btn--added" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   if (disabled) {
     return (
-      <button className={`btn btn--ghost${large ? " btn--lg" : ""}`} disabled>
+      <button
+        className={`btn btn--ghost${large ? " btn--lg" : " btn--sm"}${
+          block ? " btn--block" : ""
+        }`}
+        disabled
+      >
         Немає в наявності
       </button>
     );
   }
 
   return (
-    <button
-      className={`btn${large ? " btn--lg" : ""}${added ? " btn--added" : ""}`}
-      onClick={handleClick}
-    >
-      {added ? "✓ Додано" : "У кошик"}
+    <button className={cls} onClick={handleClick}>
+      {added ? (
+        <>
+          <Icon name="check" /> Додано
+        </>
+      ) : (
+        <>
+          <Icon name="drop" /> У кошик
+        </>
+      )}
     </button>
   );
 }

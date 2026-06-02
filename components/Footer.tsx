@@ -1,19 +1,22 @@
 import Link from "next/link";
+import Icon from "./Icon";
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer__inner">
+      <div className="footer__inner">
         <div className="footer__col">
-          <div className="logo logo--footer">
-            <span className="logo__drop">💧</span>
+          <div className="logo">
+            <span className="logo__mark">
+              <Icon name="drop" />
+            </span>
             <span className="logo__text">
               Eco<strong>soft</strong>
             </span>
           </div>
           <p className="footer__about">
-            Системи очищення води для дому, офісу та виробництва. Чиста вода —
-            щодня.
+            Системи очищення води для дому, квартири, офісу та виробництва.
+            Підбираємо рішення під вашу воду та встановлюємо під ключ.
           </p>
         </div>
 
@@ -21,17 +24,41 @@ export default function Footer() {
           <h4>Навігація</h4>
           <Link href="/catalog">Каталог</Link>
           <Link href="/about">Про нас</Link>
-          <Link href="/terms">Умови праці</Link>
+          <Link href="/terms">Оплата і доставка</Link>
           <Link href="/contacts">Контакти</Link>
         </div>
 
         <div className="footer__col">
+          <h4>Рішення</h4>
+          <Link href="/catalog?category=reverse-osmosis">Зворотний осмос</Link>
+          <Link href="/catalog?category=filter-jugs">Фільтри-глечики</Link>
+          <Link href="/catalog?category=mainline-filters">
+            Магістральні фільтри
+          </Link>
+          <Link href="/catalog?category=softeners">Пом'якшення води</Link>
+        </div>
+
+        <div className="footer__col">
           <h4>Контакти</h4>
-          <a href="tel:+380443334455">+38 (044) 333-44-55</a>
-          <a href="mailto:info@ecosoft.example">info@ecosoft.example</a>
-          <span>м. Київ, вул. Прикладна, 1</span>
+          <a href="tel:+380800000000">
+            <Icon name="phone" />
+            0 800 00 00 00
+          </a>
+          <a href="mailto:info@ecosoft.ua">
+            <Icon name="mail" />
+            info@ecosoft.ua
+          </a>
+          <span>
+            <Icon name="pin" />
+            Київ, Україна
+          </span>
+          <span>
+            <Icon name="clock" />
+            Пн–Пт 9:00–18:00
+          </span>
         </div>
       </div>
+
       <div className="footer__bottom">
         <div className="container">
           © {new Date().getFullYear()} Ecosoft. Усі права захищено.

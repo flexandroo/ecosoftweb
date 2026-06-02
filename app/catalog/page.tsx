@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories, products, getCategory } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import Icon from "@/components/Icon";
 
 export const metadata = {
   title: "Каталог",
@@ -51,8 +52,14 @@ export default function CatalogPage({
           <div>
             {list.length === 0 ? (
               <div className="empty">
-                <div className="empty__icon">🔍</div>
-                <p>Товарів у цій категорії поки немає.</p>
+                <div className="empty__icon">
+                  <Icon name="drop" />
+                </div>
+                <h2>Товари незабаром</h2>
+                <p>
+                  Цю категорію ми наповнюємо. Зверніться за консультацією — ми
+                  підкажемо потрібне рішення.
+                </p>
               </div>
             ) : (
               <div className="grid">

@@ -1,7 +1,10 @@
+import type { IconName } from "@/components/Icon";
+
 export type Category = {
   slug: string;
   title: string;
   description: string;
+  icon: IconName;
 };
 
 export type Product = {
@@ -24,24 +27,42 @@ export const categories: Category[] = [
     title: "Системи зворотного осмосу",
     description:
       "Багатоступеневе очищення води до рівня питної. Видаляють до 99,8% домішок, солей, бактерій і вірусів.",
+    icon: "osmosis",
   },
   {
     slug: "filter-jugs",
     title: "Фільтри-глечики",
     description:
       "Компактне рішення для квартири та офісу. Покращують смак і пом'якшують воду без підключення до водопроводу.",
+    icon: "jug",
   },
   {
     slug: "mainline-filters",
     title: "Магістральні фільтри",
     description:
       "Очищення води на вході у квартиру чи будинок. Захищають побутову техніку від механічних домішок, іржі та хлору.",
+    icon: "filter",
   },
   {
     slug: "softeners",
     title: "Системи пом'якшення",
     description:
       "Усувають жорсткість води, запобігають утворенню накипу та подовжують термін служби техніки.",
+    icon: "softener",
+  },
+  {
+    slug: "cartridges",
+    title: "Картриджі та змінні елементи",
+    description:
+      "Оригінальні картриджі та мембрани Ecosoft для своєчасної заміни й стабільної якості очищення.",
+    icon: "cartridge",
+  },
+  {
+    slug: "accessories",
+    title: "Аксесуари",
+    description:
+      "Крани, конектори, корпуси та комплектуючі для монтажу й обслуговування систем водопідготовки.",
+    icon: "accessory",
   },
 ];
 
