@@ -562,37 +562,195 @@ p {
   color: var(--aqua);
 }
 
-/* hero visual — glass composition */
+/* hero visual — animated equipment scene */
 .hero__visual {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 360px;
+  min-height: 380px;
 }
-.hero__orb {
+.hero__stage {
   position: relative;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: var(--grad-hero);
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 0.92;
   display: grid;
   place-items: center;
-  color: #fff;
-  box-shadow: var(--sh-lg), inset 0 -20px 60px rgba(10, 45, 82, 0.35),
-    inset 0 20px 40px rgba(255, 255, 255, 0.25);
+  border-radius: 28px;
+  background: radial-gradient(
+      120% 120% at 30% 18%,
+      rgba(255, 255, 255, 0.9),
+      rgba(233, 244, 252, 0.55) 55%,
+      rgba(215, 235, 248, 0.35) 100%
+    );
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+  isolation: isolate;
 }
-.hero__orb svg {
-  width: 130px;
-  height: 130px;
-  opacity: 0.95;
-  filter: drop-shadow(0 8px 16px rgba(10, 45, 82, 0.35));
+.hero__device {
+  position: relative;
+  z-index: 2;
+  width: 78%;
+  height: auto;
+  filter: drop-shadow(0 18px 30px rgba(10, 45, 82, 0.12));
+  animation: hero-float 6s ease-in-out infinite;
 }
-.hero__orb::after {
-  content: "";
+.hero__glow {
   position: absolute;
-  inset: 12px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  filter: blur(26px);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero__glow--1 {
+  width: 200px;
+  height: 200px;
+  top: -30px;
+  right: -20px;
+  background: radial-gradient(circle, rgba(0, 173, 239, 0.45), transparent 70%);
+  animation: hero-pulse 7s ease-in-out infinite;
+}
+.hero__glow--2 {
+  width: 170px;
+  height: 170px;
+  bottom: -20px;
+  left: -10px;
+  background: radial-gradient(circle, rgba(20, 196, 214, 0.4), transparent 70%);
+  animation: hero-pulse 9s ease-in-out infinite 1s;
+}
+.bubble {
+  position: absolute;
+  bottom: -24px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgba(255, 255, 255, 0.95),
+    rgba(0, 173, 239, 0.25) 70%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  z-index: 3;
+  opacity: 0;
+  animation: hero-bubble 7s ease-in infinite;
+}
+.bubble--1 {
+  width: 14px;
+  height: 14px;
+  left: 16%;
+  animation-delay: 0s;
+}
+.bubble--2 {
+  width: 9px;
+  height: 9px;
+  left: 32%;
+  animation-delay: 1.6s;
+}
+.bubble--3 {
+  width: 18px;
+  height: 18px;
+  left: 50%;
+  animation-delay: 0.8s;
+}
+.bubble--4 {
+  width: 11px;
+  height: 11px;
+  left: 66%;
+  animation-delay: 2.6s;
+}
+.bubble--5 {
+  width: 7px;
+  height: 7px;
+  left: 78%;
+  animation-delay: 1.2s;
+}
+.bubble--6 {
+  width: 13px;
+  height: 13px;
+  left: 88%;
+  animation-delay: 3.4s;
+}
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes hero-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.12);
+  }
+}
+@keyframes hero-bubble {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.7);
+  }
+  12% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-340px) scale(1);
+  }
+}
+
+/* primary CTA attention pointer */
+.hero__cta {
+  position: relative;
+  animation: hero-cta-pulse 2.6s ease-in-out infinite;
+}
+.hero__cta-pointer {
+  display: inline-grid;
+  place-items: center;
+  margin-left: 2px;
+  animation: hero-cta-nudge 1.4s ease-in-out infinite;
+}
+.hero__cta-pointer svg {
+  width: 18px;
+  height: 18px;
+}
+@keyframes hero-cta-pulse {
+  0% {
+    box-shadow: var(--sh-md), 0 0 0 0 rgba(0, 173, 239, 0.45);
+  }
+  70% {
+    box-shadow: var(--sh-md), 0 0 0 14px rgba(0, 173, 239, 0);
+  }
+  100% {
+    box-shadow: var(--sh-md), 0 0 0 0 rgba(0, 173, 239, 0);
+  }
+}
+@keyframes hero-cta-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__device,
+  .hero__glow,
+  .bubble,
+  .hero__cta,
+  .hero__cta-pointer {
+    animation: none !important;
+  }
+  .bubble {
+    opacity: 0;
+  }
 }
 .glass-card {
   position: absolute;
@@ -1628,13 +1786,8 @@ p {
   .stats {
     grid-template-columns: 1fr;
   }
-  .hero__orb {
-    width: 230px;
-    height: 230px;
-  }
-  .hero__orb svg {
-    width: 100px;
-    height: 100px;
+  .hero__stage {
+    max-width: 320px;
   }
   .glass-card--tl {
     left: 0;

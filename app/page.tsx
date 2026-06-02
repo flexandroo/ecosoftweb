@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories, products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
+import HeroVisual from "@/components/HeroVisual";
 import Icon, { IconName } from "@/components/Icon";
 
 const benefits: { icon: IconName; title: string; text: string }[] = [
@@ -60,17 +61,19 @@ export default function HomePage() {
               <span className="accent">під ваш дім</span>
             </h1>
             <p className="hero__lead">
-              Фільтри та системи Ecosoft для питної води, захисту техніки та
-              комплексного очищення. Допоможемо обрати рішення під вашу воду,
-              житло та потреби.
+              Експертний підбір фільтрів Ecosoft під аналіз вашої води — для
+              питної води, захисту техніки та комплексного очищення дому.
             </p>
             <div className="hero__actions">
-              <Link href="/#select" className="btn btn--lg">
+              <Link href="/#select" className="btn btn--lg hero__cta">
                 <Icon name="sparkle" />
                 Підібрати систему
+                <span className="hero__cta-pointer" aria-hidden="true">
+                  <Icon name="arrow" />
+                </span>
               </Link>
               <Link href="/catalog" className="btn btn--lg btn--secondary">
-                Перейти до каталогу
+                Каталог
               </Link>
             </div>
             <div className="hero__trust">
@@ -88,25 +91,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero__visual">
-            <div className="hero__orb">
-              <Icon name="drop" />
-            </div>
-            <div className="glass-card glass-card--tl">
-              <Icon name="shield" />
-              <div>
-                <div className="gc__num">99,8%</div>
-                <div className="gc__label">очищення води</div>
-              </div>
-            </div>
-            <div className="glass-card glass-card--br">
-              <Icon name="award" />
-              <div>
-                <div className="gc__num">20+</div>
-                <div className="gc__label">років досвіду</div>
-              </div>
-            </div>
-          </div>
+          <HeroVisual />
         </div>
       </section>
 
