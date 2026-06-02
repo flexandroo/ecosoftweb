@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { categories, products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
-import HeroVisual from "@/components/HeroVisual";
+import HeroSlider from "@/components/HeroSlider";
 import Reveal from "@/components/Reveal";
 import WaveDivider from "@/components/WaveDivider";
 import SystemQuiz from "@/components/SystemQuiz";
@@ -56,52 +56,8 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="hero">
-        <div className="container hero__inner">
-          <div className="hero__content">
-            <span className="eyebrow">
-              <Icon name="sparkle" size={16} />
-              Експерти з очищення води з 2003 року
-            </span>
-            <h1>
-              Підберемо систему очищення води{" "}
-              <span className="accent">під ваш дім</span>
-            </h1>
-            <p className="hero__lead">
-              Експертний підбір фільтрів Ecosoft під аналіз вашої води — для
-              питної води, захисту техніки та комплексного очищення дому.
-            </p>
-            <div className="hero__actions">
-              <Link href="/#select" className="btn btn--lg hero__cta">
-                <Icon name="sparkle" />
-                Підібрати систему
-                <span className="hero__cta-pointer" aria-hidden="true">
-                  <Icon name="arrow" />
-                </span>
-              </Link>
-              <Link href="/catalog" className="btn btn--lg btn--secondary">
-                Каталог
-              </Link>
-            </div>
-            <div className="hero__trust">
-              <span className="hero__trust-item">
-                <Icon name="check" />1 000 000+ клієнтів
-              </span>
-              <span className="hero__trust-item">
-                <Icon name="check" />
-                Власне виробництво
-              </span>
-              <span className="hero__trust-item">
-                <Icon name="check" />
-                Гарантія та сервіс
-              </span>
-            </div>
-          </div>
-
-          <HeroVisual />
-        </div>
-      </section>
+      {/* HERO SLIDER */}
+      <HeroSlider />
 
       {/* BENEFITS */}
       <section className="section">
