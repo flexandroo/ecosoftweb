@@ -5,12 +5,12 @@
 
 :root {
   /* --- Brand colors --- */
-  --primary: #2282f3; /* Ecosoft blue — main accent / CTA */
-  --primary-600: #1872dd;
-  --primary-700: #135fbd;
-  --primary-900: #0b2b54; /* deep navy — dark sections / footer */
-  --aqua: #19b6d8; /* secondary accent */
-  --aqua-soft: #45c9e6;
+  --primary: #00adef; /* Ecosoft cyan — main accent / CTA */
+  --primary-600: #0098d4;
+  --primary-700: #0182b5;
+  --primary-900: #073850; /* deep navy — dark sections / footer */
+  --aqua: #14c4d6; /* secondary accent */
+  --aqua-soft: #45d2e0;
 
   --sky-50: #f4fafe;
   --sky-100: #e9f4fc;
@@ -30,9 +30,9 @@
   --danger: #c4453b;
 
   /* --- Gradients --- */
-  --grad-hero: linear-gradient(160deg, #0f4d9e 0%, #1c75e6 55%, #2f93f7 100%);
+  --grad-hero: linear-gradient(160deg, #075b96 0%, #0a98d6 55%, #16bdec 100%);
   --grad-sky: linear-gradient(180deg, #f4fafe 0%, #e9f4fc 100%);
-  --grad-deep: linear-gradient(165deg, #0b2b54 0%, #0d4276 100%);
+  --grad-deep: linear-gradient(165deg, #073850 0%, #0a5578 100%);
   --grad-media: linear-gradient(160deg, #e9f4fc 0%, #d2ecf6 100%);
 
   /* --- Radii --- */
@@ -43,8 +43,8 @@
 
   /* --- Shadows --- */
   --sh-xs: 0 1px 2px rgba(14, 36, 56, 0.06);
-  --sh-sm: 0 4px 14px rgba(34, 130, 243, 0.08);
-  --sh-md: 0 12px 30px rgba(34, 130, 243, 0.12);
+  --sh-sm: 0 4px 14px rgba(0, 173, 239, 0.09);
+  --sh-md: 0 12px 30px rgba(0, 173, 239, 0.13);
   --sh-lg: 0 26px 60px rgba(8, 46, 80, 0.16);
 
   /* --- Layout --- */
@@ -365,6 +365,7 @@ p {
   flex: 0 0 auto;
 }
 .logo__img--chip {
+  box-sizing: content-box;
   height: 30px;
   padding: 9px 14px;
   background: #fff;
@@ -510,7 +511,7 @@ p {
   left: -100px;
   background: radial-gradient(
     circle at center,
-    rgba(34, 130, 243, 0.24),
+    rgba(0, 173, 239, 0.26),
     transparent 70%
   );
 }
@@ -1276,7 +1277,7 @@ p {
 .field select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(34, 130, 243, 0.14);
+  box-shadow: 0 0 0 4px rgba(0, 173, 239, 0.16);
 }
 .field input:invalid:not(:placeholder-shown) {
   border-color: var(--danger);

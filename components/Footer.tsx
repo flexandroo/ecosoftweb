@@ -11,8 +11,8 @@ export default function Footer() {
             <Image
               src="/ecosoft-logo.png"
               alt="Ecosoft"
-              width={801}
-              height={301}
+              width={900}
+              height={226}
               className="logo__img logo__img--chip"
             />
           </div>
