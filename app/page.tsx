@@ -2,6 +2,9 @@ import Link from "next/link";
 import { categories, products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import HeroVisual from "@/components/HeroVisual";
+import Reveal from "@/components/Reveal";
+import WaveDivider from "@/components/WaveDivider";
+import SystemQuiz from "@/components/SystemQuiz";
 import Icon, { IconName } from "@/components/Icon";
 
 const benefits: { icon: IconName; title: string; text: string }[] = [
@@ -24,6 +27,11 @@ const benefits: { icon: IconName; title: string; text: string }[] = [
     icon: "headset",
     title: "Експертна консультація",
     text: "Безкоштовно підберемо рішення під аналіз вашої води.",
+  },
+  {
+    icon: "drop",
+    title: "Підбір за аналізом води",
+    text: "Враховуємо склад води, щоб система працювала максимально ефективно.",
   },
 ];
 
@@ -99,14 +107,14 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className="features">
-            {benefits.map((b) => (
-              <div className="feature" key={b.title}>
+            {benefits.map((b, i) => (
+              <Reveal className="feature" delay={i * 70} key={b.title}>
                 <div className="feature__icon">
                   <Icon name={b.icon} />
                 </div>
                 <h3>{b.title}</h3>
                 <p>{b.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -115,15 +123,15 @@ export default function HomePage() {
       {/* SOLUTIONS */}
       <section className="section section--tight">
         <div className="container">
-          <div className="section__head">
+          <Reveal className="section__head">
             <span className="eyebrow">
               <Icon name="drop" size={16} />
               Рішення
             </span>
             <h2 style={{ marginTop: 14 }}>Рішення для фільтрації води</h2>
             <p>Оберіть напрям під ваше житло та якість води</p>
-          </div>
-          <div className="cats">
+          </Reveal>
+          <Reveal className="cats">
             {solutions.map((cat) => (
               <Link
                 key={cat.slug}
@@ -141,26 +149,26 @@ export default function HomePage() {
                 </span>
               </Link>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FEATURED PRODUCTS */}
       <section className="section section--tight">
         <div className="container">
-          <div className="section__head">
+          <Reveal className="section__head">
             <span className="eyebrow">
               <Icon name="star" size={16} />
               Популярне
             </span>
             <h2 style={{ marginTop: 14 }}>Рекомендовані системи</h2>
             <p>Найпопулярніші рішення для дому та квартири</p>
-          </div>
-          <div className="grid">
+          </Reveal>
+          <Reveal className="grid">
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
-          </div>
+          </Reveal>
           <div style={{ textAlign: "center", marginTop: 40 }}>
             <Link href="/catalog" className="btn btn--lg btn--outline">
               Усі товари каталогу
@@ -174,35 +182,38 @@ export default function HomePage() {
       <section className="section section--tight" id="select">
         <div className="container">
           <div className="select">
-            <div className="select__head">
-              <span className="eyebrow">
-                <Icon name="headset" size={16} />
-                Підбір системи
-              </span>
-              <h2>Підбір системи професіоналами Ecosoft</h2>
-              <p>
-                Не знаєте, який фільтр потрібен саме вам? Враховуємо аналіз води,
-                кількість людей і тип житла — квартира, будинок або офіс — і
-                пропонуємо готове рішення.
-              </p>
-            </div>
-            <div className="select__steps">
-              {steps.map((s, i) => (
-                <div className="step" key={s.title}>
-                  <div className="step__num">{i + 1}</div>
-                  <h3>{s.title}</h3>
-                  <p>{s.text}</p>
+            <span className="fx-blobs" aria-hidden="true" />
+            <span className="fx-noise" aria-hidden="true" />
+            <div className="select__grid">
+              <div className="select__head">
+                <span className="eyebrow">
+                  <Icon name="sparkle" size={16} />
+                  Підбір за 1 хвилину
+                </span>
+                <h2>Підберіть систему за 1 хвилину</h2>
+                <p>
+                  Дайте відповідь на 3 короткі питання — і ми порекомендуємо
+                  оптимальне рішення під ваше житло, джерело та якість води.
+                </p>
+                <div className="select__steps select__steps--compact">
+                  {steps.map((s, i) => (
+                    <div className="step" key={s.title}>
+                      <div className="step__num">{i + 1}</div>
+                      <div>
+                        <h3>{s.title}</h3>
+                        <p>{s.text}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div className="select__actions">
-              <Link href="/contacts" className="btn btn--lg">
-                <Icon name="headset" />
-                Отримати консультацію
-              </Link>
-              <Link href="/catalog" className="btn btn--lg btn--secondary">
-                Переглянути каталог
-              </Link>
+                <div className="select__actions">
+                  <Link href="/contacts" className="btn btn--lg btn--secondary">
+                    <Icon name="headset" />
+                    Або отримати консультацію
+                  </Link>
+                </div>
+              </div>
+              <SystemQuiz />
             </div>
           </div>
         </div>
@@ -212,16 +223,20 @@ export default function HomePage() {
       <section className="section section--tight">
         <div className="container">
           <div className="cta-band">
+            <span className="fx-blobs fx-blobs--dark" aria-hidden="true" />
+            <span className="fx-noise" aria-hidden="true" />
+            <WaveDivider className="cta-band__wave" flip />
             <div className="cta-band__text">
-              <h2>Чиста вода у вашому домі вже сьогодні</h2>
+              <h2>Не знаєте, яка система потрібна?</h2>
               <p>
-                Залиште заявку — підберемо систему під вашу воду та встановимо
-                під ключ.
+                Підберемо рішення під вашу воду, житло та потреби — з доставкою
+                по Україні та монтажем під ключ.
               </p>
             </div>
             <div className="cta-band__actions">
-              <Link href="/contacts" className="btn btn--lg btn--light">
-                Залишити заявку
+              <Link href="/#select" className="btn btn--lg btn--light">
+                <Icon name="sparkle" />
+                Підібрати систему
               </Link>
               <a href="tel:+380800000000" className="btn btn--lg btn--on-dark">
                 <Icon name="phone" />0 800 00 00 00
