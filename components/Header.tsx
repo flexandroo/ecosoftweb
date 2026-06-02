@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "./CartContext";
@@ -29,13 +30,15 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container header__inner">
-        <Link href="/" className="logo">
-          <span className="logo__mark">
-            <Icon name="drop" />
-          </span>
-          <span className="logo__text">
-            Eco<strong>soft</strong>
-          </span>
+        <Link href="/" className="logo" aria-label="Ecosoft — на головну">
+          <Image
+            src="/ecosoft-logo.png"
+            alt="Ecosoft"
+            width={801}
+            height={301}
+            className="logo__img"
+            priority
+          />
         </Link>
 
         <nav className="nav">

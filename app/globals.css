@@ -5,12 +5,12 @@
 
 :root {
   /* --- Brand colors --- */
-  --primary: #0a66c2; /* deep blue — main accent / CTA */
-  --primary-600: #0959aa;
-  --primary-700: #074a8f;
-  --primary-900: #0a2d52; /* dark sections / footer */
-  --aqua: #18b6cf; /* secondary accent */
-  --aqua-soft: #38c5da;
+  --primary: #2282f3; /* Ecosoft blue — main accent / CTA */
+  --primary-600: #1872dd;
+  --primary-700: #135fbd;
+  --primary-900: #0b2b54; /* deep navy — dark sections / footer */
+  --aqua: #19b6d8; /* secondary accent */
+  --aqua-soft: #45c9e6;
 
   --sky-50: #f4fafe;
   --sky-100: #e9f4fc;
@@ -30,9 +30,9 @@
   --danger: #c4453b;
 
   /* --- Gradients --- */
-  --grad-hero: linear-gradient(160deg, #0a66c2 0%, #1391c4 55%, #18b6cf 100%);
+  --grad-hero: linear-gradient(160deg, #0f4d9e 0%, #1c75e6 55%, #2f93f7 100%);
   --grad-sky: linear-gradient(180deg, #f4fafe 0%, #e9f4fc 100%);
-  --grad-deep: linear-gradient(165deg, #0a2d52 0%, #0a3f72 100%);
+  --grad-deep: linear-gradient(165deg, #0b2b54 0%, #0d4276 100%);
   --grad-media: linear-gradient(160deg, #e9f4fc 0%, #d2ecf6 100%);
 
   /* --- Radii --- */
@@ -43,9 +43,9 @@
 
   /* --- Shadows --- */
   --sh-xs: 0 1px 2px rgba(14, 36, 56, 0.06);
-  --sh-sm: 0 4px 14px rgba(10, 102, 194, 0.07);
-  --sh-md: 0 12px 30px rgba(10, 102, 194, 0.1);
-  --sh-lg: 0 26px 60px rgba(10, 45, 82, 0.16);
+  --sh-sm: 0 4px 14px rgba(34, 130, 243, 0.08);
+  --sh-md: 0 12px 30px rgba(34, 130, 243, 0.12);
+  --sh-lg: 0 26px 60px rgba(8, 46, 80, 0.16);
 
   /* --- Layout --- */
   --container: 1200px;
@@ -335,6 +335,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  flex: 0 0 auto;
   font-size: 23px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -356,6 +357,19 @@ p {
 }
 .logo__text strong {
   color: var(--primary);
+}
+.logo__img {
+  display: block;
+  height: 34px;
+  width: auto;
+  flex: 0 0 auto;
+}
+.logo__img--chip {
+  height: 30px;
+  padding: 9px 14px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--sh-sm);
 }
 .nav {
   display: flex;
@@ -496,7 +510,7 @@ p {
   left: -100px;
   background: radial-gradient(
     circle at center,
-    rgba(10, 102, 194, 0.22),
+    rgba(34, 130, 243, 0.24),
     transparent 70%
   );
 }
@@ -1262,7 +1276,7 @@ p {
 .field select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(10, 102, 194, 0.12);
+  box-shadow: 0 0 0 4px rgba(34, 130, 243, 0.14);
 }
 .field input:invalid:not(:placeholder-shown) {
   border-color: var(--danger);

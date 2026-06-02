@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Icon from "./Icon";
 
 export default function Footer() {
@@ -7,12 +8,13 @@ export default function Footer() {
       <div className="footer__inner">
         <div className="footer__col">
           <div className="logo">
-            <span className="logo__mark">
-              <Icon name="drop" />
-            </span>
-            <span className="logo__text">
-              Eco<strong>soft</strong>
-            </span>
+            <Image
+              src="/ecosoft-logo.png"
+              alt="Ecosoft"
+              width={801}
+              height={301}
+              className="logo__img logo__img--chip"
+            />
           </div>
           <p className="footer__about">
             Системи очищення води для дому, квартири, офісу та виробництва.
