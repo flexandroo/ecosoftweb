@@ -979,7 +979,7 @@ p {
   display: grid;
   place-items: center;
   height: 184px;
-  background: #fff;
+  background: var(--grad-sky);
   color: var(--primary);
 }
 .card__media svg {
@@ -3561,7 +3561,7 @@ p {
   display: grid;
   place-items: center;
   height: 210px;
-  background: #fff;
+  background: var(--grad-sky);
   color: var(--primary);
   overflow: hidden;
 }
