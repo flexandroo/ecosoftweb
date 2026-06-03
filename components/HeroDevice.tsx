@@ -7,8 +7,8 @@ import Image from "next/image";
 // /public to add or swap shots — the rotation adapts automatically.
 const slides = [
   "/hero-device.png",
-  "/hero-device-2.png",
-  "/hero-device-3.png",
+  "/hero-device-2.webp",
+  "/hero-device-3.webp",
 ];
 
 const INTERVAL = 5000;
