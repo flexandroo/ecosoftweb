@@ -979,7 +979,7 @@ p {
   display: grid;
   place-items: center;
   height: 184px;
-  background: var(--grad-media);
+  background: #fff;
   color: var(--primary);
 }
 .card__media svg {
@@ -992,7 +992,6 @@ p {
   height: 100%;
   object-fit: contain;
   padding: 16px;
-  mix-blend-mode: multiply;
   transition: transform 0.3s ease;
 }
 .card:hover .card__img {
@@ -3562,7 +3561,7 @@ p {
   display: grid;
   place-items: center;
   height: 210px;
-  background: var(--grad-media);
+  background: #fff;
   color: var(--primary);
   overflow: hidden;
 }
@@ -3573,7 +3572,6 @@ p {
   height: 100%;
   object-fit: contain;
   padding: 18px;
-  mix-blend-mode: multiply;
   transition: transform 0.35s var(--ease);
 }
 .fcard:hover .fcard__img {
