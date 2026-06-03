@@ -4,6 +4,7 @@ import {
   products,
   getCategory,
   getSubcategory,
+  productInCategory,
 } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import Icon from "@/components/Icon";
@@ -23,11 +24,9 @@ export default function CatalogPage({
   const subcategory =
     activeCat && activeSub ? getSubcategory(activeCat, activeSub) : undefined;
 
-  const list = products.filter((p) => {
-    if (activeCat && p.category !== activeCat) return false;
-    if (activeSub && p.subcategory !== activeSub) return false;
-    return true;
-  });
+  const list = products.filter((p) =>
+    productInCategory(p, activeCat, activeSub)
+  );
 
   const heading = subcategory
     ? subcategory.title

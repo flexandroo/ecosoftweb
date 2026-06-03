@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   getProduct,
@@ -31,7 +32,19 @@ export default function ProductPage({
     <div className="container">
       <div className="product">
         <div className="product__media">
-          <Icon name={category?.icon ?? "drop"} />
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={564}
+              height={564}
+              priority
+              className="product__img"
+              sizes="(max-width: 800px) 100vw, 480px"
+            />
+          ) : (
+            <Icon name={category?.icon ?? "drop"} />
+          )}
         </div>
         <div className="product__info">
           <div className="breadcrumbs">
@@ -64,7 +77,12 @@ export default function ProductPage({
             )}
           </div>
 
-          <p className="product__desc">{product.description}</p>
+          <div className="product__desc">
+            {product.description.split("\n").map(
+              (line, i) =>
+                line.trim() && <p key={i}>{line}</p>
+            )}
+          </div>
 
           <ul className="product__features">
             {product.features.map((f) => (

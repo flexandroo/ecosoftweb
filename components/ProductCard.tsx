@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Product, formatPrice } from "@/lib/products";
 import AddToCartButton from "./AddToCartButton";
 import Icon from "./Icon";
@@ -16,7 +17,18 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="card">
       <Link href={`/catalog/${product.slug}`} className="card__media">
-        <Icon name="drop" />
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={350}
+            height={350}
+            className="card__img"
+            sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 300px"
+          />
+        ) : (
+          <Icon name="drop" />
+        )}
         <div className="card__badges">
           {product.badge ? (
             <span className={badgeClass(product.badge)}>{product.badge}</span>
