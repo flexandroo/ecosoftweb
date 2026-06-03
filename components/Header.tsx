@@ -8,10 +8,10 @@ import { useCart } from "./CartContext";
 import Icon from "./Icon";
 
 const nav = [
-  { href: "/", label: "Головна" },
   { href: "/catalog", label: "Каталог" },
-  { href: "/about", label: "Про нас" },
-  { href: "/terms", label: "Оплата і доставка" },
+  { href: "/catalog?category=reverse-osmosis", label: "Для квартири" },
+  { href: "/catalog?category=filtration-systems", label: "Для будинку" },
+  { href: "/#service", label: "Сервіс" },
   { href: "/contacts", label: "Контакти" },
 ];
 
@@ -19,16 +19,29 @@ export default function Header() {
   const pathname = usePathname();
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isActive = (href: string) => {
+    const base = href.split("?")[0].split("#")[0];
+    if (base === "/catalog" && href.includes("?")) return false;
+    if (base === "/") return pathname === "/";
+    if (!base) return false;
+    return pathname === base || pathname.startsWith(base + "/");
+  };
 
   return (
-    <header className="header">
+    <header className={`header${scrolled ? " header--scrolled" : ""}`}>
       <div className="container header__inner">
         <Link href="/" className="logo" aria-label="Ecosoft — на головну">
           <Image
@@ -56,13 +69,16 @@ export default function Header() {
         </nav>
 
         <div className="header__actions">
-          <Link href="/#select" className="btn btn--sm header__cta">
+          <a href="tel:+380800000000" className="header__phone">
+            <Icon name="phone" size={18} />
+            <span>0 800 00 00 00</span>
+          </a>
+          <Link href="/#quiz" className="btn btn--sm header__cta">
             <Icon name="sparkle" />
             Підібрати систему
           </Link>
           <Link href="/cart" className="cart-button" aria-label="Кошик">
-            <Icon name="drop" />
-            <span className="cart-button__label">Кошик</span>
+            <Icon name="jug" size={20} />
             {count > 0 && <span className="cart-button__badge">{count}</span>}
           </Link>
           <button
@@ -89,7 +105,7 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/#select" className="btn btn--block mobile-nav__cta">
+            <Link href="/#quiz" className="btn btn--block mobile-nav__cta">
               <Icon name="sparkle" />
               Підібрати систему
             </Link>

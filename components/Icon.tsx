@@ -23,7 +23,14 @@ export type IconName =
   | "check"
   | "star"
   | "sparkle"
-  | "menu";
+  | "menu"
+  | "home"
+  | "building"
+  | "question"
+  | "kettle"
+  | "wave"
+  | "grain"
+  | "flask";
 
 const paths: Record<IconName, JSX.Element> = {
   shield: (
@@ -135,6 +142,56 @@ const paths: Record<IconName, JSX.Element> = {
     <path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6L12 3z" />
   ),
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
+  home: (
+    <>
+      <path d="M4 11l8-6.5 8 6.5" />
+      <path d="M6 10v9h12v-9" />
+      <path d="M10 19v-5h4v5" />
+    </>
+  ),
+  building: (
+    <>
+      <rect x="6" y="3" width="12" height="18" rx="1.5" />
+      <path d="M9.5 7h1M13.5 7h1M9.5 11h1M13.5 11h1M9.5 15h1M13.5 15h1" />
+      <path d="M10.5 21v-3h3v3" />
+    </>
+  ),
+  question: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.2 9.3a2.8 2.8 0 015.4 1c0 1.9-2.6 2.3-2.6 3.9" />
+      <path d="M12 17.4h.01" />
+    </>
+  ),
+  kettle: (
+    <>
+      <path d="M6 10h11a3 3 0 013 3v1a5 5 0 01-5 5H8a3 3 0 01-3-3v-4a2 2 0 011-2z" />
+      <path d="M6 10l-2-3h6" />
+      <path d="M18 13h2" />
+    </>
+  ),
+  wave: (
+    <>
+      <path d="M3 9c2 0 2.5-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9" />
+      <path d="M3 15c2 0 2.5-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15" />
+    </>
+  ),
+  grain: (
+    <>
+      <circle cx="7" cy="8" r="1.4" />
+      <circle cx="13" cy="6.5" r="1.4" />
+      <circle cx="17" cy="10" r="1.4" />
+      <circle cx="9.5" cy="13" r="1.4" />
+      <circle cx="15" cy="15.5" r="1.4" />
+      <circle cx="7.5" cy="17.5" r="1.4" />
+    </>
+  ),
+  flask: (
+    <>
+      <path d="M9 3h6M10 3v6l-4.5 8a2 2 0 001.8 3h9.4a2 2 0 001.8-3L14 9V3" />
+      <path d="M7.5 15h9" />
+    </>
+  ),
 };
 
 export default function Icon({

@@ -9,11 +9,13 @@ export default function AddToCartButton({
   disabled = false,
   large = false,
   block = true,
+  variant = "solid",
 }: {
   id: string;
   disabled?: boolean;
   large?: boolean;
   block?: boolean;
+  variant?: "solid" | "outline";
 }) {
   const { add } = useCart();
   const [added, setAdded] = useState(false);
@@ -26,6 +28,7 @@ export default function AddToCartButton({
 
   const cls = [
     "btn",
+    variant === "outline" && !added ? "btn--outline" : "",
     large ? "btn--lg" : "btn--sm",
     block ? "btn--block" : "",
     added ? "btn--added" : "",

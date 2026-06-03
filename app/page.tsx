@@ -1,52 +1,150 @@
 import Link from "next/link";
 import { products } from "@/lib/products";
-import ProductCard from "@/components/ProductCard";
-import HeroSlider from "@/components/HeroSlider";
+import FeaturedProductCard from "@/components/FeaturedProductCard";
+import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
-import WaveDivider from "@/components/WaveDivider";
 import SystemQuiz from "@/components/SystemQuiz";
 import Icon, { IconName } from "@/components/Icon";
 
-const benefits: { icon: IconName; title: string; text: string }[] = [
+type Scenario = {
+  icon: IconName;
+  title: string;
+  text: string;
+  fits: string[];
+  cta: string;
+  href: string;
+  strong?: boolean;
+};
+
+const scenarios: Scenario[] = [
   {
-    icon: "shield",
-    title: "Гарантія якості",
-    text: "Сертифікована продукція та офіційна гарантія на все обладнання.",
+    icon: "building",
+    title: "Квартира",
+    text: "Компактні системи під мийку для питної води, кави, чаю та щоденного приготування їжі.",
+    fits: [
+      "вода з міського водопроводу",
+      "потрібна чиста питна вода",
+      "мало місця під мийкою",
+    ],
+    cta: "Рішення для квартири",
+    href: "/catalog?category=reverse-osmosis",
   },
   {
-    icon: "truck",
-    title: "Доставка по Україні",
-    text: "Відправлення Новою поштою у день оформлення замовлення.",
+    icon: "home",
+    title: "Приватний будинок",
+    text: "Комплексне очищення води для всіх кранів, сантехніки, бойлера та побутової техніки.",
+    fits: [
+      "вода зі свердловини або колодязя",
+      "є залізо, жорсткість, запах або наліт",
+      "потрібна система на весь будинок",
+    ],
+    cta: "Рішення для будинку",
+    href: "/catalog?category=filtration-systems",
   },
   {
-    icon: "wrench",
-    title: "Монтаж під ключ",
-    text: "Професійне встановлення та сервісне обслуговування систем.",
-  },
-  {
-    icon: "headset",
-    title: "Експертна консультація",
-    text: "Безкоштовно підберемо рішення під аналіз вашої води.",
-  },
-  {
-    icon: "drop",
-    title: "Підбір за аналізом води",
-    text: "Враховуємо склад води, щоб система працювала максимально ефективно.",
+    icon: "question",
+    title: "Не знаю, що обрати",
+    text: "Опишіть вашу воду або надішліть аналіз — спеціаліст підкаже, яка система підійде саме вам.",
+    fits: [
+      "немає аналізу води",
+      "незрозуміло, яка система потрібна",
+      "хочете уникнути помилки при виборі",
+    ],
+    cta: "Отримати консультацію",
+    href: "/contacts",
+    strong: true,
   },
 ];
 
-const steps: { title: string; text: string }[] = [
+type ProblemCard = {
+  icon: IconName;
+  title: string;
+  text: string;
+  href: string;
+};
+
+const problems: ProblemCard[] = [
   {
-    title: "Розкажіть про воду",
-    text: "Тип житла, кількість мешканців та особливості води — централізована, свердловина чи колодязь.",
+    icon: "kettle",
+    title: "Накип на чайнику та техніці",
+    text: "Жорстка вода залишає білий наліт і скорочує строк служби техніки.",
+    href: "/catalog?category=filtration-systems&subcategory=fs-softening",
   },
   {
-    title: "Отримайте рекомендацію",
-    text: "Спеціаліст Ecosoft підбере оптимальну систему під ваші потреби та бюджет.",
+    icon: "drop",
+    title: "Рудий наліт і залізо",
+    text: "Іржаві плями на сантехніці та жовтуватий колір води.",
+    href: "/catalog?category=filtration-systems&subcategory=fs-iron-hardness",
   },
   {
-    title: "Замовте з монтажем",
-    text: "Доставимо та встановимо систему під ключ, навчимо користуватися й обслуговувати.",
+    icon: "wave",
+    title: "Запах або присмак води",
+    text: "Хлор, сірководень чи сторонній присмак у питній воді.",
+    href: "/catalog?category=filtration-systems&subcategory=fs-chlorine",
+  },
+  {
+    icon: "grain",
+    title: "Пісок і механічні домішки",
+    text: "Каламутність та осад, що псують воду й сантехніку.",
+    href: "/catalog?category=mainline-filters",
+  },
+  {
+    icon: "softener",
+    title: "Жорстка вода",
+    text: "Сухість шкіри, накип і перевитрата мийних засобів.",
+    href: "/catalog?category=filtration-systems&subcategory=fs-softening",
+  },
+  {
+    icon: "jug",
+    title: "Потрібна чиста питна вода",
+    text: "Смачна та безпечна вода для пиття й приготування їжі.",
+    href: "/catalog?category=reverse-osmosis",
+  },
+];
+
+const benefits: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "flask",
+    title: "Підбір не «на око»",
+    text: "Враховуємо аналіз води, тип житла, кількість людей і вашу задачу, щоб система працювала стабільно.",
+  },
+  {
+    icon: "shield",
+    title: "Офіційне обладнання Ecosoft",
+    text: "Працюємо із сертифікованими системами та комплектуючими, а не випадковими рішеннями.",
+  },
+  {
+    icon: "wrench",
+    title: "Монтаж без зайвого клопоту",
+    text: "Доставимо, змонтуємо, налаштуємо систему і пояснимо, як нею користуватися.",
+  },
+  {
+    icon: "headset",
+    title: "Сервіс після встановлення",
+    text: "Допоможемо з обслуговуванням, заміною картриджів і підтримкою системи після покупки.",
+  },
+  {
+    icon: "drop",
+    title: "Рішення для різної води",
+    text: "Підбираємо системи для міського водопроводу, свердловини, колодязя, квартири, будинку або бізнесу.",
+  },
+];
+
+const serviceSteps: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "sparkle",
+    title: "Підбір системи",
+    text: "Визначаємо рішення під вашу воду, житло та задачу.",
+  },
+  {
+    icon: "truck",
+    title: "Доставка і монтаж",
+    text: "Привеземо, встановимо й налаштуємо систему під ключ.",
+  },
+  {
+    icon: "wrench",
+    title: "Регулярний сервіс",
+    text: "Нагадаємо про заміну картриджів і підтримаємо систему.",
   },
 ];
 
@@ -55,25 +153,107 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO SLIDER */}
-      <HeroSlider />
+      <Hero />
+
+      {/* SCENARIO CARDS */}
+      <section className="section" id="scenarios">
+        <div className="container">
+          <Reveal className="section__head">
+            <span className="eyebrow">
+              <Icon name="sparkle" size={16} />
+              Простий вибір
+            </span>
+            <h2 style={{ marginTop: 12 }}>Оберіть вашу ситуацію</h2>
+            <p>Не треба розбиратися у фільтрах — оберіть, що вам ближче.</p>
+          </Reveal>
+
+          <div className="scenarios">
+            {scenarios.map((s, i) => (
+              <Reveal
+                key={s.title}
+                className={`scenario${s.strong ? " scenario--accent" : ""}`}
+                delay={i * 80}
+              >
+                <div className="scenario__icon">
+                  <Icon name={s.icon} size={28} />
+                </div>
+                <h3 className="scenario__title">{s.title}</h3>
+                <p className="scenario__text">{s.text}</p>
+                <ul className="scenario__fits">
+                  {s.fits.map((f) => (
+                    <li key={f}>
+                      <Icon name="check" size={15} />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={s.href}
+                  className={`btn btn--block scenario__cta${
+                    s.strong ? "" : " btn--outline"
+                  }`}
+                >
+                  {s.cta}
+                  <Icon name="arrow" size={18} />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WATER PROBLEMS */}
+      <section className="section section--tight" id="problems">
+        <div className="container">
+          <Reveal className="section__head">
+            <span className="eyebrow">
+              <Icon name="drop" size={16} />
+              Швидкий пошук
+            </span>
+            <h2 style={{ marginTop: 12 }}>Яку проблему потрібно вирішити?</h2>
+            <p>Оберіть те, що турбує — покажемо відповідні рішення.</p>
+          </Reveal>
+
+          <div className="problems">
+            {problems.map((p, i) => (
+              <Reveal key={p.title} className="problem" delay={i * 50}>
+                <Link href={p.href} className="problem__link">
+                  <span className="problem__icon">
+                    <Icon name={p.icon} size={22} />
+                  </span>
+                  <span className="problem__text">
+                    <span className="problem__title">{p.title}</span>
+                    <span className="problem__desc">{p.text}</span>
+                  </span>
+                  <Icon name="arrow" size={18} className="problem__arrow" />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* FEATURED PRODUCTS */}
-      <section className="section section--compact">
+      <section className="section section--tight">
         <div className="container">
-          <Reveal className="section__head section__head--compact">
+          <Reveal className="section__head">
             <span className="eyebrow">
               <Icon name="star" size={16} />
               Популярне
             </span>
-            <h2 style={{ marginTop: 10 }}>Рекомендовані системи</h2>
-            <p>Найпопулярніші рішення для дому та квартири</p>
+            <h2 style={{ marginTop: 12 }}>Популярні рішення для дому</h2>
+            <p>
+              Зібрали системи, які найчастіше обирають для квартир, будинків і
+              щоденного використання.
+            </p>
           </Reveal>
-          <Reveal className="grid grid--compact">
+
+          <div className="fgrid">
             {featured.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <FeaturedProductCard key={p.id} product={p} />
             ))}
-          </Reveal>
+          </div>
+
           <div className="section__cta">
             <Link href="/catalog" className="btn btn--lg btn--outline">
               Усі товари каталогу
@@ -83,43 +263,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* EXPERT SELECTION */}
-      <section className="section section--tight" id="select">
+      {/* QUIZ */}
+      <section className="section section--tight" id="quiz">
         <div className="container">
-          <div className="select">
+          <div className="quiz-block">
             <span className="fx-blobs" aria-hidden="true" />
             <span className="fx-noise" aria-hidden="true" />
-            <div className="select__grid">
-              <div className="select__head">
-                <span className="eyebrow">
-                  <Icon name="sparkle" size={16} />
-                  Підбір за 1 хвилину
-                </span>
-                <h2>Підберіть систему за 1 хвилину</h2>
-                <p>
-                  Дайте відповідь на 3 короткі питання — і ми порекомендуємо
-                  оптимальне рішення під ваше житло, джерело та якість води.
-                </p>
-                <div className="select__steps select__steps--compact">
-                  {steps.map((s, i) => (
-                    <div className="step" key={s.title}>
-                      <div className="step__num">{i + 1}</div>
-                      <div>
-                        <h3>{s.title}</h3>
-                        <p>{s.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="select__actions">
-                  <Link href="/contacts" className="btn btn--lg btn--secondary">
-                    <Icon name="headset" />
-                    Або отримати консультацію
-                  </Link>
-                </div>
-              </div>
-              <SystemQuiz />
+            <div className="quiz-block__head">
+              <span className="eyebrow">
+                <Icon name="sparkle" size={16} />
+                Підбір за 1 хвилину
+              </span>
+              <h2>Підберіть систему без технічних знань</h2>
+              <p>
+                Відповідайте на кілька простих питань — ми підкажемо, яке
+                рішення підходить саме вам.
+              </p>
+              <ul className="quiz-block__points">
+                <li>
+                  <Icon name="check" size={16} />
+                  Без технічних термінів
+                </li>
+                <li>
+                  <Icon name="check" size={16} />
+                  Враховуємо житло та джерело води
+                </li>
+                <li>
+                  <Icon name="check" size={16} />
+                  Готова рекомендація одразу
+                </li>
+              </ul>
             </div>
+            <SystemQuiz />
           </div>
         </div>
       </section>
@@ -127,11 +302,21 @@ export default function HomePage() {
       {/* BENEFITS */}
       <section className="section section--tight">
         <div className="container">
-          <div className="features">
+          <Reveal className="section__head">
+            <span className="eyebrow">
+              <Icon name="shield" size={16} />
+              Чому Ecosoft
+            </span>
+            <h2 style={{ marginTop: 12 }}>
+              Чому варто підбирати систему з Ecosoft
+            </h2>
+          </Reveal>
+
+          <div className="benefits">
             {benefits.map((b, i) => (
-              <Reveal className="feature" delay={i * 70} key={b.title}>
-                <div className="feature__icon">
-                  <Icon name={b.icon} />
+              <Reveal className="benefit" delay={i * 60} key={b.title}>
+                <div className="benefit__icon">
+                  <Icon name={b.icon} size={24} />
                 </div>
                 <h3>{b.title}</h3>
                 <p>{b.text}</p>
@@ -141,32 +326,79 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA BAND */}
+      {/* INSTALL & SERVICE */}
+      <section className="section section--tight" id="service">
+        <div className="container">
+          <div className="service">
+            <div className="service__head">
+              <span className="eyebrow">
+                <Icon name="wrench" size={16} />
+                Монтаж і сервіс
+              </span>
+              <h2>
+                Встановлення і сервіс — не залишаємо вас самих після покупки
+              </h2>
+              <p>
+                Після підбору системи спеціалісти допоможуть з монтажем,
+                налаштуванням і подальшим обслуговуванням. Вам не потрібно
+                самостійно розбиратися в картриджах, підключеннях і регламенті
+                заміни.
+              </p>
+              <Link href="/contacts" className="btn btn--lg">
+                <Icon name="headset" />
+                Запитати про монтаж
+              </Link>
+            </div>
+            <ol className="service__steps">
+              {serviceSteps.map((s, i) => (
+                <li className="service-step" key={s.title}>
+                  <span className="service-step__num">{i + 1}</span>
+                  <span className="service-step__icon">
+                    <Icon name={s.icon} size={22} />
+                  </span>
+                  <span className="service-step__body">
+                    <span className="service-step__title">{s.title}</span>
+                    <span className="service-step__text">{s.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
       <section className="section section--tight">
         <div className="container">
-          <div className="cta-band">
+          <div className="final-cta">
             <span className="fx-blobs fx-blobs--dark" aria-hidden="true" />
             <span className="fx-noise" aria-hidden="true" />
-            <WaveDivider className="cta-band__wave" flip />
-            <div className="cta-band__text">
-              <h2>Не знаєте, яка система потрібна?</h2>
+            <div className="final-cta__text">
+              <h2>Не знаєте, з чого почати?</h2>
               <p>
-                Підберемо рішення під вашу воду, житло та потреби — з доставкою
-                по Україні та монтажем під ключ.
+                Опишіть вашу воду, тип житла або надішліть аналіз — ми підкажемо,
+                яка система підійде саме вам.
               </p>
             </div>
-            <div className="cta-band__actions">
-              <Link href="/#select" className="btn btn--lg btn--light">
-                <Icon name="sparkle" />
-                Підібрати систему
+            <div className="final-cta__actions">
+              <Link href="/contacts" className="btn btn--lg btn--light">
+                <Icon name="headset" />
+                Отримати консультацію
               </Link>
-              <a href="tel:+380800000000" className="btn btn--lg btn--on-dark">
-                <Icon name="phone" />0 800 00 00 00
-              </a>
+              <Link href="/catalog" className="btn btn--lg btn--on-dark">
+                Перейти до каталогу
+                <Icon name="arrow" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
+
+      {/* MOBILE STICKY CTA */}
+      <Link href="/#quiz" className="sticky-cta">
+        <Icon name="sparkle" size={18} />
+        Підібрати систему
+      </Link>
     </>
   );
 }

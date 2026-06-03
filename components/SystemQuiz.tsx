@@ -21,20 +21,20 @@ type Step = {
 const steps: Step[] = [
   {
     key: "place",
-    title: "Де плануєте очищати воду?",
+    title: "Де потрібне очищення?",
     subtitle: "Це визначає тип і продуктивність системи",
     options: [
       {
         value: "apartment",
         label: "Квартира",
         hint: "Компактні рішення під мийку",
-        icon: "drop",
+        icon: "building",
       },
       {
         value: "house",
         label: "Приватний будинок",
         hint: "Комплексне очищення дому",
-        icon: "shield",
+        icon: "home",
       },
       {
         value: "office",
@@ -46,12 +46,12 @@ const steps: Step[] = [
   },
   {
     key: "source",
-    title: "Звідки надходить вода?",
+    title: "Яке джерело води?",
     subtitle: "Джерело впливає на ступінь очищення",
     options: [
       {
         value: "central",
-        label: "Центральний водопровід",
+        label: "Міський водопровід",
         hint: "Хлор, домішки, накип",
         icon: "filter",
       },
@@ -67,36 +67,79 @@ const steps: Step[] = [
         hint: "Механічні домішки, бактерії",
         icon: "osmosis",
       },
+      {
+        value: "unknown",
+        label: "Не знаю",
+        hint: "Підкажемо за аналізом води",
+        icon: "question",
+      },
     ],
   },
   {
     key: "goal",
-    title: "Що для вас найважливіше?",
+    title: "Що не так з водою?",
     subtitle: "Підберемо рішення під головну задачу",
     options: [
       {
-        value: "drinking",
-        label: "Чиста питна вода",
-        hint: "Смак, безпека для родини",
+        value: "scale",
+        label: "Накип",
+        hint: "Бойлер, чайник, техніка",
+        icon: "kettle",
+      },
+      {
+        value: "smell",
+        label: "Запах або присмак",
+        hint: "Хлор, сірководень, присмак",
+        icon: "wave",
+      },
+      {
+        value: "iron",
+        label: "Рудий наліт",
+        hint: "Залізо у воді",
         icon: "drop",
       },
       {
-        value: "scale",
-        label: "Захист техніки від накипу",
-        hint: "Бойлер, пральна машина, котел",
-        icon: "softener",
+        value: "sand",
+        label: "Пісок або механічні домішки",
+        hint: "Каламутність, осад",
+        icon: "grain",
       },
       {
-        value: "whole",
-        label: "Очищення на вході в дім",
-        hint: "Захист усієї сантехніки",
-        icon: "filter",
-      },
-      {
-        value: "budget",
-        label: "Економне рішення",
-        hint: "Без підключення до води",
+        value: "drinking",
+        label: "Хочу просто питну воду",
+        hint: "Смак і безпека для родини",
         icon: "jug",
+      },
+      {
+        value: "analysis",
+        label: "Є аналіз води",
+        hint: "Підберемо за показниками",
+        icon: "flask",
+      },
+    ],
+  },
+  {
+    key: "people",
+    title: "Скільки людей користуються водою?",
+    subtitle: "Впливає на продуктивність системи",
+    options: [
+      {
+        value: "1-2",
+        label: "1–2 людини",
+        hint: "Компактна продуктивність",
+        icon: "drop",
+      },
+      {
+        value: "3-4",
+        label: "3–4 людини",
+        hint: "Оптимально для сім'ї",
+        icon: "shield",
+      },
+      {
+        value: "5+",
+        label: "5 і більше",
+        hint: "Підвищена продуктивність",
+        icon: "award",
       },
     ],
   },
@@ -111,26 +154,53 @@ type Recommendation = {
 
 function recommend(answers: Record<string, string>): Recommendation {
   const goal = answers.goal;
+  const place = answers.place;
+
   if (goal === "scale") {
     return {
       category: "filtration-systems",
       subcategory: "fs-softening",
-      title: "Системи пом'якшення",
+      title: "Системи пом'якшення води",
       text: "Усунуть жорсткість і захистять бойлер, котел та пральну машину від накипу.",
     };
   }
-  if (goal === "whole") {
+  if (goal === "iron") {
+    return {
+      category: "filtration-systems",
+      subcategory: "fs-iron-hardness",
+      title: "Системи від заліза та твердості",
+      text: "Прибирають рудий наліт, залізо та жорсткість, щоб вода була чистою у всіх кранах.",
+    };
+  }
+  if (goal === "smell") {
+    return {
+      category: "filtration-systems",
+      subcategory: "fs-chlorine",
+      title: "Очищення від хлору та запаху",
+      text: "Усувають хлор, сірководень і сторонній присмак, повертаючи воді природний смак.",
+    };
+  }
+  if (goal === "sand") {
     return {
       category: "mainline-filters",
       title: "Магістральні фільтри",
-      text: "Очищують воду на вході та захищають усю сантехніку від механічних домішок, іржі та хлору.",
+      text: "Затримують пісок, іржу та механічні домішки на вході та захищають усю сантехніку.",
     };
   }
-  if (goal === "budget") {
+  if (goal === "analysis") {
     return {
-      category: "flow-filters",
-      title: "Проточні фільтри",
-      text: "Просте й доступне рішення для смачної питної води під мийку.",
+      category: "filtration-systems",
+      title: "Підбір за аналізом води",
+      text: "За показниками аналізу підберемо систему, яка вирішить саме вашу задачу. Залиште заявку — і спеціаліст порадить рішення.",
+    };
+  }
+
+  // drinking water (default goal) — depends on where
+  if (place === "house") {
+    return {
+      category: "reverse-osmosis",
+      title: "Зворотний осмос для будинку",
+      text: "Багатоступеневе очищення до рівня питної води для всієї родини — видаляє до 99,8% домішок.",
     };
   }
   return {
