@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories, products } from "@/lib/products";
+import { products } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import HeroSlider from "@/components/HeroSlider";
 import Reveal from "@/components/Reveal";
@@ -52,65 +52,14 @@ const steps: { title: string; text: string }[] = [
 
 export default function HomePage() {
   const featured = products.filter((p) => p.badge).slice(0, 4);
-  const solutions = categories;
 
   return (
     <>
       {/* HERO SLIDER */}
       <HeroSlider />
 
-      {/* BENEFITS */}
-      <section className="section">
-        <div className="container">
-          <div className="features">
-            {benefits.map((b, i) => (
-              <Reveal className="feature" delay={i * 70} key={b.title}>
-                <div className="feature__icon">
-                  <Icon name={b.icon} />
-                </div>
-                <h3>{b.title}</h3>
-                <p>{b.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SOLUTIONS */}
-      <section className="section section--tight">
-        <div className="container">
-          <Reveal className="section__head">
-            <span className="eyebrow">
-              <Icon name="drop" size={16} />
-              Рішення
-            </span>
-            <h2 style={{ marginTop: 14 }}>Рішення для фільтрації води</h2>
-            <p>Оберіть напрям під ваше житло та якість води</p>
-          </Reveal>
-          <Reveal className="cats">
-            {solutions.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/catalog?category=${cat.slug}`}
-                className="cat-tile"
-              >
-                <div className="cat-tile__icon">
-                  <Icon name={cat.icon} />
-                </div>
-                <h3>{cat.title}</h3>
-                <p>{cat.description}</p>
-                <span className="cat-tile__more">
-                  Детальніше
-                  <Icon name="arrow" />
-                </span>
-              </Link>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
       {/* FEATURED PRODUCTS */}
-      <section className="section section--tight">
+      <section className="section">
         <div className="container">
           <Reveal className="section__head">
             <span className="eyebrow">
@@ -171,6 +120,23 @@ export default function HomePage() {
               </div>
               <SystemQuiz />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BENEFITS */}
+      <section className="section section--tight">
+        <div className="container">
+          <div className="features">
+            {benefits.map((b, i) => (
+              <Reveal className="feature" delay={i * 70} key={b.title}>
+                <div className="feature__icon">
+                  <Icon name={b.icon} />
+                </div>
+                <h3>{b.title}</h3>
+                <p>{b.text}</p>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
