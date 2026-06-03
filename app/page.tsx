@@ -59,22 +59,22 @@ export default function HomePage() {
       <HeroSlider />
 
       {/* FEATURED PRODUCTS */}
-      <section className="section">
+      <section className="section section--compact">
         <div className="container">
-          <Reveal className="section__head">
+          <Reveal className="section__head section__head--compact">
             <span className="eyebrow">
               <Icon name="star" size={16} />
               Популярне
             </span>
-            <h2 style={{ marginTop: 14 }}>Рекомендовані системи</h2>
+            <h2 style={{ marginTop: 10 }}>Рекомендовані системи</h2>
             <p>Найпопулярніші рішення для дому та квартири</p>
           </Reveal>
-          <Reveal className="grid">
+          <Reveal className="grid grid--compact">
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </Reveal>
-          <div style={{ textAlign: "center", marginTop: 40 }}>
+          <div className="section__cta">
             <Link href="/catalog" className="btn btn--lg btn--outline">
               Усі товари каталогу
               <Icon name="arrow" />

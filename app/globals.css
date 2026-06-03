@@ -141,6 +141,37 @@ p {
   font-size: 18px;
 }
 
+/* Compact section — tuned to fit within the first screen, scales with
+   viewport height so it adapts across monitor sizes. */
+.section--compact {
+  padding-top: clamp(18px, 3.2vh, 44px);
+  padding-bottom: clamp(28px, 4.5vh, 64px);
+}
+.section__head--compact {
+  margin-bottom: clamp(16px, 2.6vh, 36px);
+}
+.section__head--compact h2 {
+  font-size: clamp(24px, 3vw, 32px);
+}
+.section__head--compact p {
+  font-size: clamp(14px, 1.6vw, 17px);
+}
+.section__cta {
+  text-align: center;
+  margin-top: clamp(20px, 3vh, 40px);
+}
+/* Shorter media + denser body so cards take less vertical space */
+.grid--compact .card__media {
+  height: clamp(120px, 15vh, 184px);
+}
+.grid--compact .card__body {
+  gap: 9px;
+  padding: 16px 18px;
+}
+.grid--compact .card__specs {
+  gap: 5px;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
