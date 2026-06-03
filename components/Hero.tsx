@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import Icon from "./Icon";
+import HeroDevice from "./HeroDevice";
 
 const trust = [
   "1 000 000+ клієнтів",
@@ -55,15 +55,7 @@ export default function Hero() {
         <div className="hero2__visual" aria-hidden="true">
           <div className="hero2__stage">
             <span className="hero2__stage-glow" />
-            <Image
-              className="hero2__device"
-              src="/hero-device.png"
-              alt=""
-              width={564}
-              height={564}
-              priority
-              sizes="(max-width: 960px) 0px, 460px"
-            />
+            <HeroDevice />
             <span className="hero2__chip hero2__chip--1">
               <span className="hero2__chip-icon">
                 <Icon name="shield" size={20} />
