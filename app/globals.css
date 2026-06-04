@@ -4920,7 +4920,7 @@ p {
 }
 
 /* ============================================================
-   WATER TREATMENT SCHEME (animated, interactive SVG)
+   WATER TREATMENT SCHEME — semi-realistic edition
    ============================================================ */
 .wts {
   position: relative;
@@ -4931,96 +4931,283 @@ p {
   display: block;
   max-width: 100%;
   overflow: visible;
+  font-family: inherit;
 }
 
-/* Pipes */
-.wts-pipes use {
+/* ---------- Pipes (multi-layer stack) ---------- */
+.wts-pipe {
   fill: none;
-  stroke: #c9dbe9;
-  stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
-/* Split node */
-.wts-split {
-  fill: var(--primary);
-  stroke: #fff;
+.wts-pipe-shell {
+  stroke: #b4cfe1;
+  stroke-width: 18;
+  filter: drop-shadow(0 2px 3px rgba(20, 60, 90, 0.18));
+}
+.wts-pipe-cavity {
+  stroke: #f1f8fc;
+  stroke-width: 14;
+}
+.wts-pipe-water {
+  stroke: #79c5e4;
+  stroke-width: 10;
+  opacity: 0.65;
+}
+.wts-pipe-water.wts-pipe--main {
+  stroke: #7ec7e6;
+}
+.wts-pipe-water.wts-pipe--household {
+  stroke: #84cbe6;
+}
+.wts-pipe-water.wts-pipe--ro {
+  stroke: #5ab1d1;
+}
+.wts-pipe-water.wts-pipe--tap {
+  stroke: #2f95bf;
+}
+.wts-pipe-current {
+  stroke: #ffffff;
+  stroke-width: 3;
+  opacity: 0.85;
+  stroke-dasharray: 10 22;
+  animation: wts-current 1.6s linear infinite;
+}
+.wts-pipe-current.wts-pipe--household {
+  animation-duration: 1.4s;
+}
+.wts-pipe-current.wts-pipe--ro {
+  animation-duration: 1.9s;
+  opacity: 0.7;
+}
+.wts-pipe-current.wts-pipe--tap {
+  animation-duration: 1.1s;
+  stroke-dasharray: 6 14;
+}
+/* Thin upper highlight for a tube-like reflection */
+.wts-pipe-gloss {
+  stroke: rgba(255, 255, 255, 0.55);
   stroke-width: 2;
+  stroke-dasharray: 1 0;
+  /* drawn on top, runs straight through the middle — gives a subtle
+     inner sparkle while reading as part of the tube */
+  opacity: 0.45;
 }
 
-/* Nodes (filters, RO, tap, etc.) */
+@keyframes wts-current {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+/* T-fitting where the main pipe splits */
+.wts-fitting__ring {
+  fill: #e5eff6;
+  stroke: #98b6c9;
+  stroke-width: 1.6;
+  filter: drop-shadow(0 1px 2px rgba(20, 60, 90, 0.18));
+}
+.wts-fitting__hub {
+  fill: #4a6779;
+}
+
+/* ---------- Animated droplets / bubbles ---------- */
+.wts-drop {
+  fill: #1e9bcd;
+  filter: drop-shadow(0 0 3px rgba(30, 155, 205, 0.55));
+}
+.wts-drop--main {
+  fill: #1f9bcc;
+}
+.wts-drop--household {
+  fill: #1e8ec3;
+}
+.wts-drop--ro {
+  fill: #1f7faa;
+}
+.wts-drop--tap {
+  fill: #0d6a96;
+}
+.wts-bubble {
+  fill: #ffffff;
+  opacity: 0.75;
+}
+
+/* ---------- Element styling ---------- */
 .wts-node {
   cursor: pointer;
   outline: none;
-}
-.wts-node rect,
-.wts-node circle:not(.wts-icon-dot) {
-  fill: #ffffff;
-  stroke: #9dbcd1;
-  stroke-width: 2;
-  transition: stroke 0.2s ease, fill 0.2s ease,
-    filter 0.2s ease;
-}
-.wts-node line {
-  stroke: #b9cfdf;
-  stroke-width: 1.6;
 }
 .wts-node text {
   font-size: 14px;
   font-weight: 600;
   fill: var(--ink);
   pointer-events: none;
-  font-family: inherit;
 }
-.wts-node .wts-icon {
+.wts-display-text {
+  font-size: 9px;
+  font-weight: 700;
+  fill: #cfe9f6;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+/* Generic plastic shell (input box, RO cabinet, house, tap base, etc.) */
+.wts-shell {
+  fill: #ffffff;
+  stroke: #98b6c9;
+  stroke-width: 1.8;
+  transition: stroke 0.2s ease, filter 0.2s ease;
+}
+.wts-shell--glass {
+  fill: url(#wts-glass);
+  stroke: #7c9cb1;
+}
+.wts-shell--column {
+  fill: url(#wts-glass-tall);
+  stroke: #7c9cb1;
+  stroke-width: 2;
+}
+.wts-shell--cabinet {
+  fill: url(#wts-cabinet);
+  stroke: #8aa5b7;
+}
+
+/* Caps / mounting brackets / metal trim */
+.wts-cap-fill {
+  fill: url(#wts-cap);
+  stroke: #3c5667;
+  stroke-width: 1.2;
+}
+.wts-bracket {
+  fill: #aabbc8;
+  stroke: #7a8f9e;
+  stroke-width: 1;
+}
+.wts-metal {
+  fill: url(#wts-cap-light);
+  stroke: #6f8a9d;
+  stroke-width: 1;
+}
+.wts-port {
+  fill: #6f8a9d;
+  stroke: #46606f;
+  stroke-width: 0.8;
+}
+.wts-base {
+  fill: #7c9cb1;
+  opacity: 0.55;
+}
+
+/* Pressure-release button on housings */
+.wts-button {
+  fill: #d34a4a;
+  stroke: #7d2222;
+  stroke-width: 0.8;
+}
+
+/* Media (cartridge / sand) silhouette inside cylinders */
+.wts-media {
+  fill: url(#wts-water-fill);
+  opacity: 0.55;
+}
+.wts-media--column {
+  fill: #d6c69e;
+  opacity: 0.6;
+}
+
+/* Horizontal banding to hint at depth */
+.wts-band {
+  stroke: #b6cad8;
+  stroke-width: 1.4;
+  opacity: 0.7;
+}
+
+/* Display + LEDs on column valve head */
+.wts-display {
+  fill: #2c4a5d;
+  stroke: #14283a;
+  stroke-width: 0.8;
+}
+.wts-led {
+  fill: #c9dbe9;
+}
+.wts-led--green {
+  fill: #4cd07a;
+  filter: drop-shadow(0 0 3px rgba(76, 208, 122, 0.65));
+}
+.wts-led--blue {
+  fill: #4cb6ef;
+  filter: drop-shadow(0 0 3px rgba(76, 182, 239, 0.65));
+}
+
+/* RO cartridges */
+.wts-cartridge {
+  fill: #cddfeb;
+  stroke: #7a98ad;
+  stroke-width: 1;
+}
+
+/* Icons inside the end-point cards */
+.wts-icon {
   fill: none;
   stroke: var(--primary);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.wts-node .wts-icon-dot {
-  fill: var(--primary);
-  stroke: none;
+.wts-icon-soft {
+  fill: none;
+  stroke: #5ab4dd;
+  stroke-width: 1.6;
+  stroke-linecap: round;
 }
-.wts-node .wts-cap {
-  fill: #e8f1f8;
-  stroke: #9dbcd1;
+.wts-icon--metal {
+  fill: url(#wts-cap-light);
+  stroke: #3c5667;
+  stroke-width: 1;
+}
+.wts-stream {
+  stroke: #2196d1;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.85;
+  animation: wts-drip 1s linear infinite;
+}
+@keyframes wts-drip {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.55; }
+}
+.wts-glass-water {
+  fill: #79c5e4;
+  opacity: 0.7;
 }
 
-/* Hover / focus highlight */
-.wts-node:hover rect,
-.wts-node.is-active rect,
-.wts-node:focus-visible rect {
-  fill: var(--sky-100);
+/* ---------- Hover / focus highlight on nodes ---------- */
+.wts-node:hover .wts-shell,
+.wts-node.is-active .wts-shell,
+.wts-node:focus-visible .wts-shell {
   stroke: var(--primary);
-  filter: drop-shadow(0 4px 10px rgba(0, 122, 173, 0.18));
+  filter: drop-shadow(0 6px 14px rgba(0, 122, 173, 0.22));
 }
-.wts-node:hover .wts-cap,
-.wts-node.is-active .wts-cap,
-.wts-node:focus-visible .wts-cap {
-  fill: #d6e8f3;
+.wts-node:hover .wts-shell--glass,
+.wts-node.is-active .wts-shell--glass,
+.wts-node:focus-visible .wts-shell--glass,
+.wts-node:hover .wts-shell--column,
+.wts-node.is-active .wts-shell--column,
+.wts-node:focus-visible .wts-shell--column,
+.wts-node:hover .wts-shell--cabinet,
+.wts-node.is-active .wts-shell--cabinet,
+.wts-node:focus-visible .wts-shell--cabinet {
+  stroke: var(--primary);
 }
-
-/* Animated water droplets */
-.wts-drop {
-  fill: var(--primary);
-}
-.wts-drop--main {
-  fill: #2196d1;
-}
-.wts-drop--household {
-  fill: #5ab4dd;
-}
-.wts-drop--ro {
-  fill: #1f7faa;
-}
-.wts-drop--tap {
-  fill: #0b6189;
+.wts-node:hover .wts-cap-fill,
+.wts-node.is-active .wts-cap-fill,
+.wts-node:focus-visible .wts-cap-fill {
+  stroke: var(--primary);
 }
 
-/* Tooltip card under the SVG */
+/* ---------- Tooltip card ---------- */
 .wts-tooltip {
   margin-top: 18px;
   padding: 16px 20px;
@@ -5056,5 +5243,15 @@ p {
 @media (max-width: 560px) {
   .wts-node text {
     font-size: 16px;
+  }
+  .wts-display-text {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wts-pipe-current,
+  .wts-stream {
+    animation: none;
   }
 }
