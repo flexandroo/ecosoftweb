@@ -30,7 +30,8 @@ export type IconName =
   | "kettle"
   | "wave"
   | "grain"
-  | "flask";
+  | "flask"
+  | "grid";
 
 const paths: Record<IconName, JSX.Element> = {
   shield: (
@@ -190,6 +191,14 @@ const paths: Record<IconName, JSX.Element> = {
     <>
       <path d="M9 3h6M10 3v6l-4.5 8a2 2 0 001.8 3h9.4a2 2 0 001.8-3L14 9V3" />
       <path d="M7.5 15h9" />
+    </>
+  ),
+  grid: (
+    <>
+      <rect x="4" y="4" width="7" height="7" rx="1.6" />
+      <rect x="13" y="4" width="7" height="7" rx="1.6" />
+      <rect x="4" y="13" width="7" height="7" rx="1.6" />
+      <rect x="13" y="13" width="7" height="7" rx="1.6" />
     </>
   ),
 };

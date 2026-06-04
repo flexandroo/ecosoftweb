@@ -2,9 +2,18 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Product, Category, formatPrice } from "@/lib/products";
+import Image from "next/image";
+import { Product, Category } from "@/lib/products";
 import ProductCard from "./ProductCard";
-import Icon from "./Icon";
+import Icon, { IconName } from "./Icon";
+
+type CatMeta = {
+  slug: string;
+  title: string;
+  icon: IconName;
+  count: number;
+  image: string | null;
+};
 
 // Facets derived from the short "характеристики" shown on each product card.
 // We normalise the free-text feature strings into a handful of meaningful
@@ -57,14 +66,21 @@ function productFacetKeys(p: Product): Set<string> {
 export default function CatalogView({
   products,
   categories,
+  catMeta,
+  totalCount,
   activeCat,
   activeSub,
 }: {
   products: Product[];
   categories: Category[];
+  catMeta: CatMeta[];
+  totalCount: number;
   activeCat?: string;
   activeSub?: string;
 }) {
+  const activeCategory = activeCat
+    ? categories.find((c) => c.slug === activeCat)
+    : undefined;
   const [selFeatures, setSelFeatures] = useState<Set<string>>(new Set());
   const [selPrice, setSelPrice] = useState<Set<string>>(new Set());
   const [inStockOnly, setInStockOnly] = useState(false);
@@ -136,49 +152,82 @@ export default function CatalogView({
   }
 
   return (
-    <div className="catalog">
-      <aside className="filters">
-        <h3>Категорії</h3>
-        <Link href="/catalog" className={!activeCat ? "active" : ""}>
-          Усі товари
+    <>
+      {/* Category strip — image + title + count cards */}
+      <nav className="catstrip" aria-label="Категорії">
+        <Link
+          href="/catalog"
+          className={`catcard${!activeCat ? " is-active" : ""}`}
+        >
+          <span className="catcard__media catcard__media--all">
+            <Icon name="grid" size={26} />
+          </span>
+          <span className="catcard__title">Всі категорії</span>
+          <span className="catcard__count">{totalCount}</span>
         </Link>
-        {categories.map((cat) => {
-          const catActive = activeCat === cat.slug;
-          return (
-            <div className="filters__group" key={cat.slug}>
-              <Link
-                href={`/catalog?category=${cat.slug}`}
-                className={catActive && !activeSub ? "active" : ""}
-              >
-                {cat.title}
-              </Link>
-              {catActive && cat.subcategories.length > 0 && (
-                <div className="filters__sub">
-                  {cat.subcategories.map((sub) => (
-                    <Link
-                      key={sub.slug}
-                      href={`/catalog?category=${cat.slug}&subcategory=${sub.slug}`}
-                      className={activeSub === sub.slug ? "active" : ""}
-                    >
-                      {sub.title}
-                    </Link>
-                  ))}
-                </div>
+        {catMeta.map((c) => (
+          <Link
+            key={c.slug}
+            href={`/catalog?category=${c.slug}`}
+            className={`catcard${activeCat === c.slug ? " is-active" : ""}`}
+          >
+            <span className="catcard__media">
+              {c.image ? (
+                <Image
+                  src={c.image}
+                  alt=""
+                  width={104}
+                  height={76}
+                  className="catcard__img"
+                  sizes="120px"
+                />
+              ) : (
+                <Icon name={c.icon} size={30} />
               )}
-            </div>
-          );
-        })}
+            </span>
+            <span className="catcard__title">{c.title}</span>
+            <span className="catcard__count">{c.count}</span>
+          </Link>
+        ))}
+      </nav>
 
-        {(availFeatures.length > 0 || availPrice.length > 0) && (
-          <div className="facets">
-            <div className="facets__top">
-              <h3>Фільтри</h3>
-              {anyFilter && (
-                <button type="button" className="facets__reset" onClick={reset}>
-                  Скинути
-                </button>
-              )}
-            </div>
+      {/* Subcategory chips for the active category */}
+      {activeCategory && activeCategory.subcategories.length > 0 && (
+        <div className="subchips">
+          <Link
+            href={`/catalog?category=${activeCat}`}
+            className={!activeSub ? "is-active" : ""}
+          >
+            Усі
+          </Link>
+          {activeCategory.subcategories.map((sub) => (
+            <Link
+              key={sub.slug}
+              href={`/catalog?category=${activeCat}&subcategory=${sub.slug}`}
+              className={activeSub === sub.slug ? "is-active" : ""}
+            >
+              {sub.title}
+            </Link>
+          ))}
+        </div>
+      )}
+
+      <div className="catalog">
+        <aside className="filters">
+          {(availFeatures.length > 0 || availPrice.length > 0) && (
+            <div className="facets facets--top">
+              <div className="facets__top">
+                <h3>Фільтри</h3>
+                {anyFilter && (
+                  <button
+                    type="button"
+                    className="facets__reset"
+                    onClick={reset}
+                  >
+                    Скинути
+                  </button>
+                )}
+              </div>
 
             {availFeatures.length > 0 && (
               <div className="facet">
@@ -269,6 +318,7 @@ export default function CatalogView({
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }

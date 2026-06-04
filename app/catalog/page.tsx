@@ -26,6 +26,18 @@ export default function CatalogPage({
     productInCategory(p, activeCat, activeSub)
   );
 
+  // Category strip metadata: product count + a representative photo per category.
+  const catMeta = categories.map((cat) => {
+    const inCat = products.filter((p) => productInCategory(p, cat.slug));
+    return {
+      slug: cat.slug,
+      title: cat.title,
+      icon: cat.icon,
+      count: inCat.length,
+      image: inCat.find((p) => p.image)?.image ?? null,
+    };
+  });
+
   const heading = subcategory
     ? subcategory.title
     : category
@@ -50,6 +62,8 @@ export default function CatalogPage({
         <CatalogView
           products={list}
           categories={categories}
+          catMeta={catMeta}
+          totalCount={products.length}
           activeCat={activeCat}
           activeSub={activeSub}
         />
