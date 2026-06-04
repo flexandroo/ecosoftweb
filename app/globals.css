@@ -1101,7 +1101,7 @@ p {
   height: 100%;
   object-fit: contain;
   padding: 20px;
-  filter: brightness(0.9);
+  mix-blend-mode: darken;
   transition: transform 0.3s ease;
 }
 .card:hover .card__img {
@@ -1387,7 +1387,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0.95);
+  mix-blend-mode: darken;
 }
 .catcard__media--all {
   width: 64px;
@@ -3930,7 +3930,7 @@ p {
   height: 100%;
   object-fit: contain;
   padding: 18px;
-  filter: brightness(0.9);
+  mix-blend-mode: darken;
   transition: transform 0.35s var(--ease);
 }
 .fcard:hover .fcard__img {
