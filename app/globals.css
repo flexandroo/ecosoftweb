@@ -1349,16 +1349,17 @@ p {
 }
 .catcard {
   flex: 0 0 auto;
-  width: 132px;
+  width: 158px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 8px;
-  padding: 14px 10px 12px;
+  padding: 16px 14px 14px;
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: var(--r);
+  overflow: hidden;
   scroll-snap-align: start;
   transition: border-color 0.16s, box-shadow 0.16s, transform 0.16s;
 }
@@ -1372,16 +1373,19 @@ p {
   box-shadow: 0 0 0 1px var(--primary);
 }
 .catcard__media {
+  position: relative;
   width: 100%;
-  height: 76px;
+  height: 84px;
   display: grid;
   place-items: center;
   color: var(--primary);
+  overflow: hidden;
 }
 .catcard__img {
-  width: auto;
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  max-width: 100%;
   object-fit: contain;
   filter: brightness(0.95);
 }
