@@ -3,10 +3,9 @@ import Icon from "./Icon";
 import HeroDevice from "./HeroDevice";
 
 const trust = [
-  "1 000 000+ клієнтів",
-  "Власне виробництво",
-  "Гарантія та сервіс",
-  "З 2003 року",
+  "Безкоштовна консультація",
+  "Підбір за аналізом води",
+  "Монтаж під ключ",
 ];
 
 export default function Hero() {
@@ -37,10 +36,6 @@ export default function Hero() {
               Отримати консультацію
             </Link>
           </div>
-
-          <p className="hero2__micro">
-            Безкоштовна консультація · Підбір за аналізом води · Монтаж під ключ
-          </p>
 
           <ul className="hero2__trust">
             {trust.map((t) => (
