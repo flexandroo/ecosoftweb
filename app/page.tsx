@@ -4,57 +4,8 @@ import FeaturedProductCard from "@/components/FeaturedProductCard";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import SystemQuiz from "@/components/SystemQuiz";
+import BenefitsCarousel from "@/components/BenefitsCarousel";
 import Icon, { IconName } from "@/components/Icon";
-
-type Scenario = {
-  icon: IconName;
-  title: string;
-  text: string;
-  fits: string[];
-  cta: string;
-  href: string;
-  strong?: boolean;
-};
-
-const scenarios: Scenario[] = [
-  {
-    icon: "building",
-    title: "Квартира",
-    text: "Компактні системи під мийку для питної води, кави, чаю та щоденного приготування їжі.",
-    fits: [
-      "вода з міського водопроводу",
-      "потрібна чиста питна вода",
-      "мало місця під мийкою",
-    ],
-    cta: "Рішення для квартири",
-    href: "/catalog?category=reverse-osmosis",
-  },
-  {
-    icon: "home",
-    title: "Приватний будинок",
-    text: "Комплексне очищення води для всіх кранів, сантехніки, бойлера та побутової техніки.",
-    fits: [
-      "вода зі свердловини або колодязя",
-      "є залізо, жорсткість, запах або наліт",
-      "потрібна система на весь будинок",
-    ],
-    cta: "Рішення для будинку",
-    href: "/catalog?category=filtration-systems",
-  },
-  {
-    icon: "question",
-    title: "Не знаю, що обрати",
-    text: "Опишіть вашу воду або надішліть аналіз — спеціаліст підкаже, яка система підійде саме вам.",
-    fits: [
-      "немає аналізу води",
-      "незрозуміло, яка система потрібна",
-      "хочете уникнути помилки при виборі",
-    ],
-    cta: "Отримати консультацію",
-    href: "/contacts",
-    strong: true,
-  },
-];
 
 type ProblemCard = {
   icon: IconName;
@@ -155,63 +106,13 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* SCENARIO CARDS */}
-      <section className="section" id="scenarios">
-        <div className="container">
-          <Reveal className="section__head">
-            <span className="eyebrow">
-              <Icon name="sparkle" size={16} />
-              Простий вибір
-            </span>
-            <h2 style={{ marginTop: 12 }}>Оберіть вашу ситуацію</h2>
-            <p>Не треба розбиратися у фільтрах — оберіть, що вам ближче.</p>
-          </Reveal>
-
-          <div className="scenarios">
-            {scenarios.map((s, i) => (
-              <Reveal
-                key={s.title}
-                className={`scenario${s.strong ? " scenario--accent" : ""}`}
-                delay={i * 80}
-              >
-                <div className="scenario__icon">
-                  <Icon name={s.icon} size={28} />
-                </div>
-                <h3 className="scenario__title">{s.title}</h3>
-                <p className="scenario__text">{s.text}</p>
-                <ul className="scenario__fits">
-                  {s.fits.map((f) => (
-                    <li key={f}>
-                      <Icon name="check" size={15} />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={s.href}
-                  className={`btn btn--block scenario__cta${
-                    s.strong ? "" : " btn--outline"
-                  }`}
-                >
-                  {s.cta}
-                  <Icon name="arrow" size={18} />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* WATER PROBLEMS */}
       <section className="section section--tight" id="problems">
         <div className="container">
           <Reveal className="section__head">
-            <span className="eyebrow">
-              <Icon name="drop" size={16} />
-              Швидкий пошук
-            </span>
-            <h2 style={{ marginTop: 12 }}>Яку проблему потрібно вирішити?</h2>
-            <p>Оберіть те, що турбує — покажемо відповідні рішення.</p>
+            <h2 style={{ marginTop: 12 }}>
+              Оберіть те, що турбує — покажемо відповідні рішення.
+            </h2>
           </Reveal>
 
           <div className="problems">
@@ -237,10 +138,6 @@ export default function HomePage() {
       <section className="section section--tight">
         <div className="container">
           <Reveal className="section__head">
-            <span className="eyebrow">
-              <Icon name="star" size={16} />
-              Популярне
-            </span>
             <h2 style={{ marginTop: 12 }}>Популярні рішення для дому</h2>
             <p>
               Зібрали системи, які найчастіше обирають для квартир, будинків і
@@ -270,10 +167,6 @@ export default function HomePage() {
             <span className="fx-blobs" aria-hidden="true" />
             <span className="fx-noise" aria-hidden="true" />
             <div className="quiz-block__head">
-              <span className="eyebrow">
-                <Icon name="sparkle" size={16} />
-                Підбір за 1 хвилину
-              </span>
               <h2>Підберіть систему без технічних знань</h2>
               <p>
                 Відповідайте на кілька простих питань — ми підкажемо, яке
@@ -303,26 +196,12 @@ export default function HomePage() {
       <section className="section section--tight">
         <div className="container">
           <Reveal className="section__head">
-            <span className="eyebrow">
-              <Icon name="shield" size={16} />
-              Чому Ecosoft
-            </span>
             <h2 style={{ marginTop: 12 }}>
               Чому варто підбирати систему з Ecosoft
             </h2>
           </Reveal>
 
-          <div className="benefits">
-            {benefits.map((b, i) => (
-              <Reveal className="benefit" delay={i * 60} key={b.title}>
-                <div className="benefit__icon">
-                  <Icon name={b.icon} size={24} />
-                </div>
-                <h3>{b.title}</h3>
-                <p>{b.text}</p>
-              </Reveal>
-            ))}
-          </div>
+          <BenefitsCarousel items={benefits} />
         </div>
       </section>
 
@@ -331,10 +210,6 @@ export default function HomePage() {
         <div className="container">
           <div className="service">
             <div className="service__head">
-              <span className="eyebrow">
-                <Icon name="wrench" size={16} />
-                Монтаж і сервіс
-              </span>
               <h2>
                 Встановлення і сервіс — не залишаємо вас самих після покупки
               </h2>

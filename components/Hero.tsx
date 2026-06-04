@@ -16,10 +16,6 @@ export default function Hero() {
       <span className="hero2__halo" aria-hidden="true" />
       <div className="container hero2__inner">
         <div className="hero2__content">
-          <span className="hero2__eyebrow">
-            <Icon name="sparkle" size={16} />
-            Експертний підбір систем очищення води
-          </span>
           <h1 className="hero2__title">
             Підберемо систему очищення води під ваш дім
           </h1>
@@ -35,6 +31,10 @@ export default function Hero() {
             </Link>
             <Link href="/catalog" className="btn btn--lg btn--outline">
               Подивитися готові рішення
+            </Link>
+            <Link href="/contacts" className="btn btn--lg btn--outline">
+              <Icon name="headset" />
+              Отримати консультацію
             </Link>
           </div>
 
