@@ -6,15 +6,16 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartContext";
 import Icon from "./Icon";
+import QuizLink from "./QuizLink";
 
 type NavLink = { href: string; label: string };
 type NavGroup = { label: string; children: NavLink[] };
 type NavItem = NavLink | NavGroup;
 
 const nav: NavItem[] = [
+  { href: "/", label: "Головна" },
   { href: "/catalog", label: "Каталог" },
   { href: "/schemes", label: "Схеми" },
-  { href: "/#service", label: "Сервіс" },
   { href: "/delivery-payment", label: "Доставка і оплата" },
   { href: "/returns-exchange", label: "Повернення та обмін" },
   { href: "/about", label: "Про нас" },
@@ -150,10 +151,10 @@ export default function Header() {
             <Icon name="phone" size={18} />
             <span>0 800 00 00 00</span>
           </a>
-          <Link href="/#quiz" className="btn btn--sm header__cta">
+          <QuizLink className="btn btn--sm header__cta">
             <Icon name="sparkle" />
             Підібрати систему
-          </Link>
+          </QuizLink>
           <Link href="/cart" className="cart-button" aria-label="Кошик">
             <Icon name="jug" size={20} />
             {count > 0 && <span className="cart-button__badge">{count}</span>}
@@ -204,10 +205,10 @@ export default function Header() {
                 </Link>
               );
             })}
-            <Link href="/#quiz" className="btn btn--block mobile-nav__cta">
+            <QuizLink className="btn btn--block mobile-nav__cta">
               <Icon name="sparkle" />
               Підібрати систему
-            </Link>
+            </QuizLink>
           </div>
         </nav>
       )}

@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import SystemQuiz from "@/components/SystemQuiz";
 import BenefitsCarousel from "@/components/BenefitsCarousel";
+import QuizLink from "@/components/QuizLink";
 import Icon, { IconName } from "@/components/Icon";
 
 type ProblemCard = {
@@ -270,10 +271,10 @@ export default function HomePage() {
       </section>
 
       {/* MOBILE STICKY CTA */}
-      <Link href="/#quiz" className="sticky-cta">
+      <QuizLink className="sticky-cta">
         <Icon name="sparkle" size={18} />
         Підібрати систему
-      </Link>
+      </QuizLink>
     </>
   );
 }

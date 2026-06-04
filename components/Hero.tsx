@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Icon from "./Icon";
 import HeroDevice from "./HeroDevice";
+import QuizLink from "./QuizLink";
 
 const trust = [
   "Безкоштовна консультація",
@@ -24,10 +25,10 @@ export default function Hero() {
           </p>
 
           <div className="hero2__actions">
-            <Link href="/#quiz" className="btn btn--lg">
+            <QuizLink className="btn btn--lg">
               <Icon name="sparkle" />
               Отримати підбір системи
-            </Link>
+            </QuizLink>
             <Link href="/catalog" className="btn btn--lg btn--outline">
               Подивитися готові рішення
             </Link>
