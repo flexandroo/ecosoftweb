@@ -48,8 +48,8 @@
   --sh-lg: 0 26px 60px rgba(8, 46, 80, 0.16);
 
   /* --- Layout --- */
-  --container: 1200px;
-  --gutter: 24px;
+  --container: 100%;
+  --gutter: clamp(20px, 3vw, 56px);
   --section-y: 96px;
 
   --font: var(--font-inter), "Segoe UI", system-ui, -apple-system, Roboto,
