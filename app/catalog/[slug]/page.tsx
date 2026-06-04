@@ -5,13 +5,29 @@ import {
   getCategory,
   getSubcategory,
   products,
-  formatPrice,
 } from "@/lib/products";
 import { getProductDetails } from "@/lib/product-details";
-import AddToCartButton from "@/components/AddToCartButton";
-import ProductGallery from "@/components/ProductGallery";
-import ProductDetails from "@/components/ProductDetails";
-import Icon from "@/components/Icon";
+import {
+  getProductTemplate,
+  pickKeySpecs,
+  splitSections,
+  parseInclusion,
+} from "@/lib/product-template";
+
+import ProductHero from "@/components/ProductHero";
+import ProductFitBlock from "@/components/ProductFitBlock";
+import ProductKeyBenefits from "@/components/ProductKeyBenefits";
+import ProductProblemBlock from "@/components/ProductProblemBlock";
+import ProductHowItWorks from "@/components/ProductHowItWorks";
+import ProductMainSpecs from "@/components/ProductMainSpecs";
+import ProductAllSpecsAccordion from "@/components/ProductAllSpecsAccordion";
+import ProductIncludedSet from "@/components/ProductIncludedSet";
+import ProductMaintenanceBlock from "@/components/ProductMaintenanceBlock";
+import ProductDocuments from "@/components/ProductDocuments";
+import ProductReviews from "@/components/ProductReviews";
+import ProductConsultationCTA from "@/components/ProductConsultationCTA";
+import ProductExtraAccordion from "@/components/ProductExtraAccordion";
+import MobileStickyProductCTA from "@/components/MobileStickyProductCTA";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -32,13 +48,27 @@ export default function ProductPage({
 }) {
   const product = getProduct(params.slug);
   if (!product) notFound();
+
   const details = getProductDetails(product.slug);
   const images = details?.images ?? [];
   const labels = details?.labels ?? [];
+  const specs = details?.specs ?? [];
+  const sections = details?.sections ?? [];
+  const documents = details?.documents ?? [];
+  const reviews = details?.reviews ?? [];
+  const reviewCount = details?.reviewCount ?? 0;
+  const description = details?.description ?? "";
+
   const category = getCategory(product.category);
   const subcategory = product.subcategory
     ? getSubcategory(product.category, product.subcategory)
     : undefined;
+
+  const template = getProductTemplate(product);
+  const keyHighlights = pickKeySpecs(specs, template.keySpecNames).slice(0, 4);
+  const mainSpecs = pickKeySpecs(specs, template.keySpecNames);
+  const groups = splitSections(sections);
+  const inclusion = parseInclusion(specs);
 
   return (
     <div className="container">
@@ -64,98 +94,62 @@ export default function ProductPage({
         )}
       </div>
 
-      <div className="pdp">
-        <ProductGallery images={images} name={product.name} />
+      <ProductHero
+        product={product}
+        images={images}
+        labels={labels}
+        subtitle={template.subtitle}
+        keyHighlights={keyHighlights}
+      />
 
-        <div className="pdp__buy">
-          {(product.badge || labels.length > 0) && (
-            <div className="pdp__labels">
-              {product.badge && (
-                <span className="pdp__label pdp__label--badge">
-                  {product.badge}
-                </span>
-              )}
-              {labels
-                .filter((l) => l !== product.badge)
-                .slice(0, 4)
-                .map((l) => (
-                  <span className="pdp__label" key={l}>
-                    {l}
-                  </span>
-                ))}
-            </div>
-          )}
+      <ProductFitBlock fits={template.fits} notFits={template.notFits} />
 
-          <h1 className="pdp__title">{product.name}</h1>
+      <ProductKeyBenefits features={product.features} />
 
-          <div className="pdp__meta">
-            <span>
-              Код: <strong>{product.sku}</strong>
-            </span>
-            {product.brand && (
-              <span>
-                Бренд: <strong>{product.brand}</strong>
-              </span>
-            )}
-            <span
-              className={`stock ${product.inStock ? "stock--in" : "stock--out"}`}
-            >
-              <Icon name={product.inStock ? "check" : "arrow"} size={16} />
-              {product.inStock ? "В наявності" : "Немає в наявності"}
-            </span>
-          </div>
+      <ProductProblemBlock items={template.problems} />
 
-          <div className="pdp__price">
-            <span className="pdp__price-now">{formatPrice(product.price)}</span>
-            {product.oldPrice && (
-              <span className="pdp__price-old">
-                {formatPrice(product.oldPrice)}
-              </span>
-            )}
-          </div>
+      <ProductHowItWorks
+        steps={
+          // Prefer data section text → split into steps as paragraphs;
+          // fall back to the per-category template steps.
+          template.howItWorks
+        }
+        fallbackText={groups.howItWorks?.body}
+      />
 
-          <div className="pdp__cta">
-            <AddToCartButton id={product.id} disabled={!product.inStock} large />
-          </div>
+      <ProductMainSpecs items={mainSpecs} />
 
-          {product.features.length > 0 && (
-            <ul className="pdp__features">
-              {product.features.map((f) => (
-                <li key={f}>
-                  <Icon name="check" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          )}
+      <ProductAllSpecsAccordion specs={specs} />
 
-          <div className="pdp__trust">
-            <span>
-              <Icon name="truck" size={18} />
-              Доставка по Україні
-            </span>
-            <span>
-              <Icon name="wrench" size={18} />
-              Монтаж під ключ
-            </span>
-            <span>
-              <Icon name="headset" size={18} />
-              Консультація
-            </span>
-          </div>
-        </div>
-      </div>
+      <ProductIncludedSet items={inclusion} />
 
-      {details && (
-        <ProductDetails
-          description={details.description}
-          specs={details.specs}
-          sections={details.sections}
-          documents={details.documents}
-          reviews={details.reviews}
-          reviewCount={details.reviewCount}
-        />
-      )}
+      <ProductConsultationCTA variant="soft" />
+
+      <ProductMaintenanceBlock
+        text={template.maintenance}
+        sourceText={groups.maintenance?.body}
+      />
+
+      <ProductDocuments documents={documents} />
+
+      <ProductExtraAccordion
+        description={description}
+        extras={[
+          ...(groups.warranty ? [groups.warranty] : []),
+          ...(groups.keyFeatures ? [groups.keyFeatures] : []),
+          ...groups.other,
+        ]}
+      />
+
+      <ProductReviews reviews={reviews} reviewCount={reviewCount} />
+
+      <ProductConsultationCTA variant="dark" />
+
+      <MobileStickyProductCTA
+        id={product.id}
+        price={product.price}
+        inStock={product.inStock}
+      />
     </div>
   );
 }

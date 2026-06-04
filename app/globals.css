@@ -4117,3 +4117,617 @@ p {
     transform: none;
   }
 }
+
+/* ============================================================
+   PDP REDESIGN — user-friendly product page
+   ============================================================ */
+
+/* Make buy column sticky on desktop; gallery scrolls naturally */
+@media (min-width: 961px) {
+  .pdp {
+    align-items: start;
+  }
+  .pdp__buy {
+    position: sticky;
+    top: 96px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .pdp .gallery {
+    position: static;
+  }
+}
+
+/* Buy column — new bits */
+.pdp__subtitle {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--body);
+  margin: -6px 0 18px;
+}
+.pdp__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+  margin-bottom: 22px;
+}
+.pdp__cta-secondary {
+  justify-content: center;
+}
+.pdp__cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 4px 2px;
+}
+.pdp__cta-link:hover {
+  text-decoration: underline;
+}
+.pdp__highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #fff;
+  overflow: hidden;
+}
+.pdp__highlights li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.pdp__highlights li:last-child {
+  border-bottom: 0;
+}
+.pdp__highlights-name {
+  color: var(--muted);
+}
+.pdp__highlights-value {
+  color: var(--ink);
+  font-weight: 600;
+  text-align: right;
+}
+.pdp__trust {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+}
+
+/* Section frame shared by every PDP block */
+.pdp-section {
+  padding: 36px 0;
+  border-top: 1px solid var(--line);
+}
+.pdp-section:first-of-type {
+  border-top: 0;
+}
+.pdp-section__head {
+  margin-bottom: 22px;
+}
+.pdp-section__head h2 {
+  font-size: clamp(22px, 2.4vw, 28px);
+  margin: 0 0 6px;
+}
+.pdp-section__head p {
+  color: var(--muted);
+  font-size: 15px;
+  margin: 0;
+}
+.pdp-section__count {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+.pdp-section__prose {
+  max-width: 760px;
+}
+
+/* Fit / Not-fit */
+.pdp-fit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.pdp-fit__col {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  padding: 24px 26px;
+  box-shadow: var(--sh-soft);
+}
+.pdp-fit__col h3 {
+  font-size: 17px;
+  margin: 0 0 14px;
+}
+.pdp-fit__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pdp-fit__col li {
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.5;
+}
+.pdp-fit__col li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pdp-fit__col--yes li svg {
+  color: var(--ok);
+}
+.pdp-fit__col--no li svg {
+  color: var(--muted);
+  transform: rotate(-45deg);
+}
+
+/* Key benefits cards */
+.pdp-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.pdp-benefit {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  padding: 22px 22px 20px;
+  box-shadow: var(--sh-soft);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+.pdp-benefit:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-card);
+  border-color: var(--line-strong);
+}
+.pdp-benefit__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--sky-100);
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.pdp-benefit h3 {
+  font-size: 16px;
+  margin: 0 0 6px;
+  line-height: 1.35;
+}
+.pdp-benefit p {
+  font-size: 14px;
+  color: var(--body);
+  margin: 0;
+}
+
+/* Problems grid */
+.pdp-problems {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.pdp-problem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 16px 18px;
+  box-shadow: var(--sh-soft);
+}
+.pdp-problem__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--sky-100);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.pdp-problem__text {
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* How it works steps */
+.pdp-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.pdp-step {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 22px 20px;
+  box-shadow: var(--sh-soft);
+}
+.pdp-step__num {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.pdp-step__body h3 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+.pdp-step__body p {
+  font-size: 14px;
+  color: var(--body);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Main specs cards */
+.pdp-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.pdp-spec {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
+}
+.pdp-spec:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+.pdp-spec:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+.pdp-spec__name {
+  color: var(--muted);
+}
+.pdp-spec__value {
+  color: var(--ink);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* All specs toggle */
+.pdp-allspecs {
+  margin-top: 18px;
+}
+.pdp-allspecs__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.pdp-allspecs__toggle:hover {
+  border-color: var(--primary);
+}
+.pdp-allspecs__toggle svg {
+  color: var(--primary);
+  transition: transform 0.2s;
+}
+.pdp-allspecs__toggle[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+.pdp-allspecs__table {
+  margin-top: 14px;
+}
+
+/* Inclusion list */
+.pdp-included {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 22px;
+}
+.pdp-included li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  font-size: 15px;
+  color: var(--ink);
+  text-transform: capitalize;
+}
+.pdp-included__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--sky-100);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Maintenance block */
+.pdp-maintenance {
+  display: flex;
+  gap: 18px;
+  background: var(--sky-100);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  padding: 22px 26px;
+}
+.pdp-maintenance__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.pdp-maintenance .prose p {
+  font-size: 15px;
+}
+
+/* Documents */
+.pdp-docs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.pdp-doc {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14.5px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pdp-doc:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+.pdp-doc__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--sky-100);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.pdp-doc__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pdp-doc__arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* Trust list (fallback when no reviews) */
+.pdp-trustlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.pdp-trustlist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+.pdp-trustlist li svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Consultation CTA block */
+.pdp-cta-block {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--sky-100);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  padding: clamp(28px, 4vw, 44px);
+}
+.pdp-cta-block--dark {
+  background: linear-gradient(135deg, var(--primary), #1f6fa3);
+  border-color: transparent;
+  color: #fff;
+}
+.pdp-cta-block__text h2 {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 2.4vw, 28px);
+}
+.pdp-cta-block__text p {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--body);
+  line-height: 1.55;
+}
+.pdp-cta-block--dark .pdp-cta-block__text p {
+  color: rgba(255, 255, 255, 0.88);
+}
+.pdp-cta-block__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pdp-cta-block__actions .btn {
+  justify-content: center;
+}
+
+/* Mobile sticky bottom purchase bar */
+.pdp-sticky {
+  display: none;
+}
+@media (max-width: 760px) {
+  .pdp-sticky {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    padding: 10px 14px env(safe-area-inset-bottom, 10px);
+    background: #fff;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -8px 24px rgba(15, 38, 64, 0.06);
+  }
+  .pdp-sticky__price {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    flex-shrink: 0;
+  }
+  .pdp-sticky__price-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .pdp-sticky__price-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .pdp-sticky__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .pdp-sticky__icon-btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+}
+
+/* Responsive PDP */
+@media (max-width: 960px) {
+  .pdp {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pdp__buy {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  .pdp-benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pdp-cta-block {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .pdp-fit,
+  .pdp-problems,
+  .pdp-specs,
+  .pdp-included,
+  .pdp-docs {
+    grid-template-columns: 1fr;
+  }
+  .pdp-spec:nth-child(odd) {
+    border-right: 0;
+  }
+  .pdp-spec {
+    border-bottom: 1px solid var(--line);
+  }
+  .pdp-spec:last-child {
+    border-bottom: 0;
+  }
+  .pdp__trust {
+    grid-template-columns: 1fr;
+  }
+  .pdp-maintenance {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pdp-benefits {
+    grid-template-columns: 1fr;
+  }
+  /* avoid sticky CTA covering content at the very bottom */
+  .pdp-cta-block + * {
+    margin-bottom: 80px;
+  }
+}
