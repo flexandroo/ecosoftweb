@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Icon, { IconName } from "@/components/Icon";
+import WaterTreatmentScheme from "@/components/ui/water-treatment-scheme";
 
 export const metadata = {
   title: "Схеми очищення води",
@@ -118,6 +119,17 @@ export default function SchemesPage() {
           </Link>
         </div>
       </header>
+
+      <section className="schemes__interactive">
+        <div className="schemes__interactive-head">
+          <h2>Як працює система очищення води</h2>
+          <p>
+            Наведіть або торкніться елемента схеми, щоб побачити коротке
+            пояснення кожного етапу.
+          </p>
+        </div>
+        <WaterTreatmentScheme />
+      </section>
 
       <div className="schemes__list">
         {schemes.map((s) => (

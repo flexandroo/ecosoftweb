@@ -4759,6 +4759,28 @@ p {
   gap: 12px;
   justify-content: center;
 }
+.schemes__interactive {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  padding: clamp(24px, 3vw, 36px);
+  box-shadow: var(--sh-soft);
+  margin-bottom: 36px;
+}
+.schemes__interactive-head {
+  margin-bottom: 22px;
+  text-align: center;
+}
+.schemes__interactive-head h2 {
+  font-size: clamp(22px, 2.6vw, 28px);
+  margin: 0 0 6px;
+}
+.schemes__interactive-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
 .schemes__list {
   display: grid;
   gap: 22px;
@@ -4894,5 +4916,145 @@ p {
   .scheme__body,
   .schemes__cta {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   WATER TREATMENT SCHEME (animated, interactive SVG)
+   ============================================================ */
+.wts {
+  position: relative;
+}
+.wts__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* Pipes */
+.wts-pipes use {
+  fill: none;
+  stroke: #c9dbe9;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Split node */
+.wts-split {
+  fill: var(--primary);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+/* Nodes (filters, RO, tap, etc.) */
+.wts-node {
+  cursor: pointer;
+  outline: none;
+}
+.wts-node rect,
+.wts-node circle:not(.wts-icon-dot) {
+  fill: #ffffff;
+  stroke: #9dbcd1;
+  stroke-width: 2;
+  transition: stroke 0.2s ease, fill 0.2s ease,
+    filter 0.2s ease;
+}
+.wts-node line {
+  stroke: #b9cfdf;
+  stroke-width: 1.6;
+}
+.wts-node text {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--ink);
+  pointer-events: none;
+  font-family: inherit;
+}
+.wts-node .wts-icon {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wts-node .wts-icon-dot {
+  fill: var(--primary);
+  stroke: none;
+}
+.wts-node .wts-cap {
+  fill: #e8f1f8;
+  stroke: #9dbcd1;
+}
+
+/* Hover / focus highlight */
+.wts-node:hover rect,
+.wts-node.is-active rect,
+.wts-node:focus-visible rect {
+  fill: var(--sky-100);
+  stroke: var(--primary);
+  filter: drop-shadow(0 4px 10px rgba(0, 122, 173, 0.18));
+}
+.wts-node:hover .wts-cap,
+.wts-node.is-active .wts-cap,
+.wts-node:focus-visible .wts-cap {
+  fill: #d6e8f3;
+}
+
+/* Animated water droplets */
+.wts-drop {
+  fill: var(--primary);
+}
+.wts-drop--main {
+  fill: #2196d1;
+}
+.wts-drop--household {
+  fill: #5ab4dd;
+}
+.wts-drop--ro {
+  fill: #1f7faa;
+}
+.wts-drop--tap {
+  fill: #0b6189;
+}
+
+/* Tooltip card under the SVG */
+.wts-tooltip {
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: var(--sky-100);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.wts-tooltip.is-visible {
+  background: #fff;
+  border-color: var(--primary);
+  box-shadow: var(--sh-soft);
+}
+.wts-tooltip h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--ink);
+}
+.wts-tooltip p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--body);
+  line-height: 1.55;
+}
+.wts-tooltip__hint {
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .wts-node text {
+    font-size: 16px;
   }
 }
