@@ -11,6 +11,7 @@ const nav = [
   { href: "/catalog", label: "Каталог" },
   { href: "/catalog?category=reverse-osmosis", label: "Для квартири" },
   { href: "/catalog?category=filtration-systems", label: "Для будинку" },
+  { href: "/schemes", label: "Схеми" },
   { href: "/#service", label: "Сервіс" },
   { href: "/contacts", label: "Контакти" },
 ];
