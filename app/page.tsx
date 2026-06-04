@@ -138,7 +138,7 @@ export default function HomePage() {
       <section className="section section--tight">
         <div className="container">
           <Reveal className="section__head">
-            <h2 style={{ marginTop: 12 }}>Популярні рішення для дому</h2>
+            <h2 style={{ marginTop: 12 }}>Популярні рішення для питної води</h2>
             <p>
               Зібрали системи, які найчастіше обирають для квартир, будинків і
               щоденного використання.
