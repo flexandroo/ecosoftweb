@@ -5183,6 +5183,20 @@ p {
   opacity: 0.7;
 }
 
+/* Real-photo node (column, etc.) */
+.wts-photo {
+  filter: drop-shadow(0 6px 10px rgba(20, 40, 60, 0.2));
+  transition: filter 0.2s ease, transform 0.2s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.wts-node:hover .wts-photo,
+.wts-node.is-active .wts-photo,
+.wts-node:focus-visible .wts-photo {
+  filter: drop-shadow(0 10px 18px rgba(0, 122, 173, 0.4));
+  transform: translateY(-2px);
+}
+
 /* ---------- Hover / focus highlight on nodes ---------- */
 .wts-node:hover .wts-shell,
 .wts-node.is-active .wts-shell,

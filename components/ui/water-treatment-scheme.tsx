@@ -375,50 +375,17 @@ export function WaterTreatmentScheme({
           )}
         </g>
 
-        {/* Колонний фільтр */}
-        <g {...nodeAttrs("column")} filter="url(#wts-shadow)">
-          {/* bypass / inlet stubs on the valve head */}
-          <rect x={394} y={62} width={10} height={12} rx={2} className="wts-port" />
-          <rect x={516} y={62} width={10} height={12} rx={2} className="wts-port" />
-          {/* control valve head */}
-          <rect x={398} y={50} width={124} height={42} rx={10} className="wts-cap-fill" />
-          {/* display */}
-          <rect x={412} y={60} width={42} height={22} rx={3} className="wts-display" />
-          <text x={433} y={75} textAnchor="middle" className="wts-display-text">
-            AUTO
-          </text>
-          {/* indicator lights */}
-          <circle cx={478} cy={66} r={3} className="wts-led wts-led--green" />
-          <circle cx={494} cy={66} r={3} className="wts-led wts-led--blue" />
-          <circle cx={510} cy={66} r={3} className="wts-led" />
-          {/* column body — tall capsule with subtle gradient */}
-          <path
-            className="wts-shell wts-shell--column"
-            d="M 408 92
-               Q 398 92 398 102
-               V 318
-               Q 398 328 408 328
-               H 512
-               Q 522 328 522 318
-               V 102
-               Q 522 92 512 92 Z"
+        {/* Колонний фільтр — real product photo */}
+        <g {...nodeAttrs("column")}>
+          <image
+            href="/wts-column.png"
+            x={406}
+            y={40}
+            width={108}
+            height={294}
+            preserveAspectRatio="xMidYMid meet"
+            className="wts-photo"
           />
-          {/* media layer inside (sand/carbon visualisation) */}
-          <path
-            className="wts-media wts-media--column"
-            d="M 408 130
-               H 512
-               V 300
-               Q 512 308 504 308
-               H 416
-               Q 408 308 408 300 Z"
-          />
-          {/* horizontal level lines */}
-          <line x1={400} y1={150} x2={520} y2={150} className="wts-band" />
-          <line x1={400} y1={210} x2={520} y2={210} className="wts-band" />
-          <line x1={400} y1={270} x2={520} y2={270} className="wts-band" />
-          {/* base ring */}
-          <ellipse cx={460} cy={332} rx={66} ry={6} className="wts-base" />
           {showLabels && (
             <text x={460} y={358} textAnchor="middle">
               Колонний фільтр
