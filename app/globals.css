@@ -368,6 +368,9 @@ p {
   align-items: center;
   gap: 28px;
   height: 74px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .header__phone {
   display: inline-flex;
@@ -3355,6 +3358,9 @@ p {
   gap: 56px;
   align-items: center;
   padding: clamp(48px, 8vh, 92px) 0 clamp(44px, 7vh, 84px);
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero2__eyebrow {
   display: inline-flex;

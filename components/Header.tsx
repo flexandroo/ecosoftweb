@@ -13,18 +13,11 @@ type NavItem = NavLink | NavGroup;
 
 const nav: NavItem[] = [
   { href: "/catalog", label: "Каталог" },
-  { href: "/catalog?category=reverse-osmosis", label: "Для квартири" },
-  { href: "/catalog?category=filtration-systems", label: "Для будинку" },
   { href: "/schemes", label: "Схеми" },
   { href: "/#service", label: "Сервіс" },
-  {
-    label: "Інформація",
-    children: [
-      { href: "/delivery-payment", label: "Доставка і оплата" },
-      { href: "/returns-exchange", label: "Повернення та обмін" },
-      { href: "/about", label: "Про нас" },
-    ],
-  },
+  { href: "/delivery-payment", label: "Доставка і оплата" },
+  { href: "/returns-exchange", label: "Повернення та обмін" },
+  { href: "/about", label: "Про нас" },
   { href: "/contacts", label: "Контакти" },
 ];
 
