@@ -448,6 +448,99 @@ p {
   color: var(--primary);
   background: var(--sky-100);
 }
+
+/* Nav dropdown group */
+.nav__group {
+  position: relative;
+}
+.nav__group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+.nav__caret {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+.nav__group-toggle.is-open .nav__caret {
+  transform: rotate(-90deg);
+  opacity: 1;
+}
+.nav__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-md);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 60;
+  animation: nav-dropdown-in 0.15s ease;
+}
+@keyframes nav-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.nav__dropdown-link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--body);
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.nav__dropdown-link:hover {
+  background: var(--sky-100);
+  color: var(--primary);
+}
+.nav__dropdown-link--active {
+  background: var(--sky-100);
+  color: var(--primary);
+}
+
+/* Mobile sub-group rendering for the same dropdown */
+.mobile-nav__group {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0 4px;
+}
+.mobile-nav__group-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 6px 4px 4px;
+}
+.mobile-nav__link--sub {
+  border-bottom: 0;
+  padding: 11px 4px 11px 16px;
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--body);
+}
+.mobile-nav__link--sub.mobile-nav__link--active {
+  color: var(--primary);
+}
+
 .header__actions {
   display: flex;
   align-items: center;
@@ -2022,6 +2115,29 @@ p {
   color: var(--primary);
 }
 
+/* gentle note block under info-grid (used on info pages) */
+.info-note {
+  margin: 40px 0 64px;
+  padding: 28px 32px;
+  background: var(--sky-100);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.info-note p {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--body);
+  line-height: 1.55;
+}
+.info-note__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 /* stat cards */
 .stats {
   display: grid;
@@ -2179,6 +2295,13 @@ p {
   }
   .stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1180px) {
+  .nav__link {
+    padding: 9px 10px;
+    font-size: 14.5px;
   }
 }
 
