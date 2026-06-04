@@ -380,7 +380,16 @@ p {
   font-size: 15px;
   color: var(--ink);
   padding: 8px 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: color 0.15s;
+}
+.header__phone span {
+  white-space: nowrap;
+}
+.header__cta {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .header__phone svg {
   color: var(--primary);
@@ -441,6 +450,7 @@ p {
   color: var(--body);
   font-size: 15px;
   font-weight: 500;
+  white-space: nowrap;
   transition: background 0.15s, color 0.15s;
 }
 .nav__link:hover {
@@ -2305,6 +2315,12 @@ p {
   .nav__link {
     padding: 9px 10px;
     font-size: 14.5px;
+  }
+  .header__inner {
+    gap: 18px;
+  }
+  .header__phone {
+    display: none;
   }
 }
 
