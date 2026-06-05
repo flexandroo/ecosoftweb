@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product, formatPrice } from "@/lib/products";
+import { localizeImage } from "@/lib/local-images";
 import AddToCartButton from "./AddToCartButton";
 import Icon from "./Icon";
 
@@ -42,7 +43,7 @@ export default function FeaturedProductCard({ product }: { product: Product }) {
       <Link href={href} className="fcard__media">
         {product.image ? (
           <Image
-            src={product.image}
+            src={localizeImage(product.image)!}
             alt={product.name}
             width={400}
             height={400}

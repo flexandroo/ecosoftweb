@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { localizeImage } from "@/lib/local-images";
 import Icon from "./Icon";
 
 export default function ProductGallery({
@@ -12,7 +13,7 @@ export default function ProductGallery({
   name: string;
 }) {
   const [active, setActive] = useState(0);
-  const gallery = images.filter(Boolean);
+  const gallery = images.filter(Boolean).map((u) => localizeImage(u)!);
 
   if (gallery.length === 0) {
     return (
