@@ -6017,3 +6017,144 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   CATALOG — CATEGORY INTRO
+   ============================================================ */
+.catintro {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.9fr;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  padding: 28px;
+  box-shadow: var(--sh-soft);
+  margin: 28px 0 40px;
+}
+.catintro__main h2 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  margin: 0 0 10px;
+}
+.catintro__main p {
+  font-size: 15.5px;
+  color: var(--body);
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.catintro__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.catintro__bullets li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14.5px;
+  color: var(--body);
+  line-height: 1.5;
+}
+.catintro__bullets li svg {
+  color: var(--ok);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.catintro__lineups h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+.catintro__lineups ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.catintro__lineups li {
+  background: var(--sky-100);
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.catintro__lineup-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.catintro__lineup-for {
+  font-size: 13.5px;
+  color: var(--body);
+  line-height: 1.45;
+}
+.catintro__aside {
+  background: linear-gradient(160deg, var(--sky-100), #d4ebf6);
+  border-radius: var(--r-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+.catintro__aside p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* Audience badge on catalog cards */
+.card__audience {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  color: var(--primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+  z-index: 1;
+  box-shadow: var(--sh-xs);
+}
+
+@media (max-width: 1080px) {
+  .catintro {
+    grid-template-columns: 1fr 1fr;
+  }
+  .catintro__aside {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .catintro__aside .btn {
+    width: auto;
+    flex: 0 0 auto;
+  }
+}
+@media (max-width: 760px) {
+  .catintro {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+  .catintro__aside {
+    flex-direction: column;
+  }
+  .catintro__aside .btn {
+    width: 100%;
+  }
+}

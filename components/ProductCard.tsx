@@ -14,7 +14,29 @@ function badgeClass(badge: string): string {
   return "badge";
 }
 
+function audience(product: Product): string | null {
+  switch (product.category) {
+    case "reverse-osmosis":
+    case "flow-filters":
+      return "Питна вода";
+    case "filtration-systems":
+      return "Для будинку";
+    case "mainline-filters":
+      return "На вході води";
+    case "ro-cartridges":
+    case "mainline-cartridges":
+      return "Картридж";
+    case "filter-media":
+      return "Засипка / реагент";
+    case "horeca":
+      return "Для бізнесу";
+    default:
+      return null;
+  }
+}
+
 export default function ProductCard({ product }: { product: Product }) {
+  const aud = audience(product);
   return (
     <article className="card">
       <Link href={`/catalog/${product.slug}`} className="card__media">
@@ -31,6 +53,7 @@ export default function ProductCard({ product }: { product: Product }) {
         ) : (
           <Icon name="drop" />
         )}
+        {aud && <span className="card__audience">{aud}</span>}
         <div className="card__badges">
           {product.badge ? (
             <span className={badgeClass(product.badge)}>{product.badge}</span>

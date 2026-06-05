@@ -6,6 +6,7 @@ import {
   productInCategory,
 } from "@/lib/products";
 import CatalogView from "@/components/CatalogView";
+import CategoryIntro from "@/components/CategoryIntro";
 
 export const metadata = {
   title: "Каталог",
@@ -59,6 +60,7 @@ export default function CatalogPage({
       </div>
 
       <div className="container">
+        <CategoryIntro categorySlug={activeCat} />
         <CatalogView
           products={list}
           categories={categories}
