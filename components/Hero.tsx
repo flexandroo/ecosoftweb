@@ -4,9 +4,10 @@ import HeroDevice from "./HeroDevice";
 import QuizLink from "./QuizLink";
 
 const trust = [
-  "Безкоштовна консультація",
+  "Очищення до 99,8%",
   "Підбір за аналізом води",
   "Монтаж під ключ",
+  "Сервісне обслуговування",
 ];
 
 export default function Hero() {
@@ -20,17 +21,18 @@ export default function Hero() {
             Підберемо систему очищення води під ваш дім
           </h1>
           <p className="hero2__lead">
-            Допомагаємо обрати, встановити та обслуговувати системи очищення
-            води для квартири, будинку, офісу або свердловини.
+            Аналізуємо якість води, підбираємо обладнання Ecosoft, виконуємо
+            монтаж і сервісне обслуговування для квартири, будинку, офісу або
+            свердловини.
           </p>
 
           <div className="hero2__actions">
             <QuizLink className="btn btn--lg">
               <Icon name="sparkle" />
-              Отримати підбір системи
+              Підібрати систему
             </QuizLink>
             <Link href="/catalog" className="btn btn--lg btn--outline">
-              Подивитися готові рішення
+              Переглянути каталог
             </Link>
             <Link href="/contacts" className="btn btn--lg btn--outline">
               <Icon name="headset" />
