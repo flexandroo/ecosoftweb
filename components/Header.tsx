@@ -147,9 +147,9 @@ export default function Header() {
         </nav>
 
         <div className="header__actions">
-          <a href="tel:+380800000000" className="header__phone">
+          <a href="tel:+380800301525" className="header__phone">
             <Icon name="phone" size={18} />
-            <span>0 800 00 00 00</span>
+            <span>0 800 30 15 25</span>
           </a>
           <QuizLink className="btn btn--sm header__cta">
             <Icon name="sparkle" />

@@ -16,11 +16,11 @@ import {
 import { spawn } from "node:child_process";
 import path from "node:path";
 import https from "node:https";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { createRequire } from "node:module";
 
-const sharp = (
-  await import("C:/Users/Admin/AppData/Local/Temp/node_modules/sharp")
-).default;
+const require = createRequire(import.meta.url);
+const sharp = require("C:/Users/Admin/AppData/Local/Temp/node_modules/sharp");
 
 const __filename = fileURLToPath(import.meta.url);
 const ROOT = path.resolve(path.dirname(__filename), "..");

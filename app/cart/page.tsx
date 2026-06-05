@@ -147,7 +147,7 @@ export default function CartPage() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="ваш@email.com"
                   />
                 </div>
                 <div className="field">
