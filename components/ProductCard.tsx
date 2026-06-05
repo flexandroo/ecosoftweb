@@ -23,6 +23,7 @@ export default function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             width={350}
             height={350}
+            quality={90}
             className="card__img"
             sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 300px"
           />

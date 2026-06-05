@@ -36,6 +36,7 @@ export default function ProductGallery({
           width={600}
           height={600}
           priority
+          quality={92}
           className="gallery__img"
           sizes="(max-width: 800px) 100vw, 480px"
         />
@@ -59,6 +60,7 @@ export default function ProductGallery({
                 alt=""
                 width={80}
                 height={80}
+                quality={90}
                 className="gallery__thumb-img"
                 sizes="80px"
               />

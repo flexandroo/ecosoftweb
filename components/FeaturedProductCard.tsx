@@ -46,6 +46,7 @@ export default function FeaturedProductCard({ product }: { product: Product }) {
             alt={product.name}
             width={400}
             height={400}
+            quality={92}
             className="fcard__img"
             sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 320px"
           />
