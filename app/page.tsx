@@ -84,25 +84,11 @@ const scenarios: Scenario[] = [
     href: "/catalog?category=filtration-systems",
   },
   {
-    icon: "drop",
-    title: "Для питної води",
-    text: "Окрема система під мийку — для пиття, кави, чаю та приготування їжі.",
-    picks: "Зворотний осмос Standard, Absolute, PURE",
-    href: "/catalog?category=reverse-osmosis",
-  },
-  {
     icon: "osmosis",
-    title: "Для свердловини",
-    text: "Жорстка вода з підвищеним залізом, манганом і органікою — потрібна підготовка.",
+    title: "Для свердловини або колодязя",
+    text: "Власне джерело: зазвичай вода жорстка, з підвищеним залізом, манганом і органікою.",
     picks: "Знезалізнення, пом'якшення, осмос для пиття",
     href: "/catalog?category=filtration-systems&subcategory=fs-iron-hardness",
-  },
-  {
-    icon: "softener",
-    title: "Для жорсткої води",
-    text: "Накип у чайнику, бойлері, на сантехніці, мильні розводи на склі.",
-    picks: "Пом'якшувач, антинакипний картридж",
-    href: "/catalog?category=filtration-systems&subcategory=fs-softening",
   },
   {
     icon: "award",
@@ -247,8 +233,11 @@ export default function HomePage() {
       <section className="section section--tight" id="scenarios">
         <div className="container">
           <Reveal className="section__head">
-            <h2 style={{ marginTop: 12 }}>Сценарії використання</h2>
-            <p>Оберіть ваш випадок — підкажемо, які системи зазвичай беруть.</p>
+            <h2 style={{ marginTop: 12 }}>А під який об'єкт потрібна система?</h2>
+            <p>
+              Оберіть тип житла — підкажемо, які системи Ecosoft зазвичай беруть
+              для нього.
+            </p>
           </Reveal>
 
           <div className="scenarios-grid">
