@@ -6158,3 +6158,42 @@ p {
     width: 100%;
   }
 }
+
+/* ============================================================
+   PDP — WHY THIS MODEL
+   ============================================================ */
+.pdp-why {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.pdp-why li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  font-size: 14.5px;
+  color: var(--body);
+  line-height: 1.5;
+}
+.pdp-why__icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--sky-100);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .pdp-why {
+    grid-template-columns: 1fr;
+  }
+}

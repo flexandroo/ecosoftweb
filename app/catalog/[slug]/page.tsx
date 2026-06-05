@@ -27,7 +27,9 @@ import ProductDocuments from "@/components/ProductDocuments";
 import ProductReviews from "@/components/ProductReviews";
 import ProductConsultationCTA from "@/components/ProductConsultationCTA";
 import ProductExtraAccordion from "@/components/ProductExtraAccordion";
+import ProductWhyThisModel from "@/components/ProductWhyThisModel";
 import MobileStickyProductCTA from "@/components/MobileStickyProductCTA";
+import FAQ from "@/components/FAQ";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -106,6 +108,8 @@ export default function ProductPage({
 
       <ProductKeyBenefits features={product.features} />
 
+      <ProductWhyThisModel reasons={template.whyThisModel} />
+
       <ProductProblemBlock items={template.problems} />
 
       <ProductHowItWorks
@@ -140,6 +144,12 @@ export default function ProductPage({
           ...groups.other,
         ]}
       />
+
+      {template.faq.length > 0 && (
+        <section className="pdp-section">
+          <FAQ items={template.faq} title="Поширені запитання" />
+        </section>
+      )}
 
       <ProductReviews reviews={reviews} reviewCount={reviewCount} />
 
