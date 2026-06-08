@@ -405,6 +405,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* TRUST */}
+      <section className="section section--tight" id="trust">
+        <div className="container">
+          <Reveal className="section__head">
+            <h2 style={{ marginTop: 12 }}>Чому нам можна довіряти</h2>
+            <p>
+              Що саме ми робимо інакше — щоб ви не залишилися сам на сам зі
+              своєю системою.
+            </p>
+          </Reveal>
+
+          <div className="trust-grid">
+            {[
+              {
+                icon: "shield" as const,
+                title: "Офіційне обладнання Ecosoft",
+                text: "Працюємо з повним каталогом виробника й оригінальними картриджами — а не випадковими аналогами.",
+              },
+              {
+                icon: "flask" as const,
+                title: "Підбираємо не на око",
+                text: "Дивимося на ваш аналіз води, тип житла, кількість людей і санвузлів — і тільки потім пропонуємо систему.",
+              },
+              {
+                icon: "question" as const,
+                title: "Пояснюємо простими словами",
+                text: "Різниця між лінійками, навіщо мінералізатор, як часто міняти картриджі — без технічного перевантаження.",
+              },
+              {
+                icon: "wrench" as const,
+                title: "Монтуємо та налаштовуємо",
+                text: "Привозимо, підключаємо, перевіряємо тиск і регламент. Передаємо систему вам у роботу, а не в коробках.",
+              },
+              {
+                icon: "headset" as const,
+                title: "Допомагаємо після покупки",
+                text: "Нагадаємо про заміну картриджів і регенерацію, виїдемо на сервіс, підкажемо, якщо щось змінилося у воді.",
+              },
+            ].map((b, i) => (
+              <Reveal className="trust-card" key={b.title} delay={i * 40}>
+                <span className="trust-card__icon">
+                  <Icon name={b.icon} size={22} />
+                </span>
+                <h3>{b.title}</h3>
+                <p>{b.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="section section--tight" id="faq">
         <div className="container">
