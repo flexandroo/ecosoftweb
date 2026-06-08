@@ -6007,3 +6007,73 @@ p {
   text-decoration: underline;
 }
 .review__more:hover { color: var(--primary-700); }
+
+/* ============================================================
+   DELIVERY & PAYMENT — extras
+   ============================================================ */
+
+/* "Bare" content block — just a heading + optional lead without
+   the white card wrapping. Used to label a following grid. */
+.content--bare {
+  background: transparent;
+  border: 0;
+  padding: 32px 0 12px;
+  box-shadow: none;
+}
+.content--bare h2 {
+  margin: 0 0 6px;
+}
+
+/* Requisites cards — corporate bank/legal details */
+.req-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin: 20px 0 48px;
+}
+.req-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 26px 28px;
+  box-shadow: var(--sh-xs);
+}
+.req-card__legal {
+  margin: 0 0 18px;
+  font-size: 17px;
+  color: var(--ink);
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--sky-100);
+}
+.req-card__rows {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.req-card__row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 14px;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.req-card__row dt {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+.req-card__row dd {
+  margin: 0;
+  color: var(--ink);
+  word-break: break-word;
+}
+@media (max-width: 760px) {
+  .req-grid {
+    grid-template-columns: 1fr;
+  }
+  .req-card__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
