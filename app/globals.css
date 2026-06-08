@@ -5530,6 +5530,9 @@ p {
   gap: 18px;
   counter-reset: hwwsteps;
 }
+.howwework--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 .howwework__step {
   position: relative;
   background: #fff;
@@ -5862,6 +5865,9 @@ p {
   grid-template-columns: repeat(5, 1fr);
   gap: 18px;
 }
+.trust-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 .trust-card {
   display: flex;
   flex-direction: column;
@@ -5902,10 +5908,12 @@ p {
 }
 @media (max-width: 1180px) {
   .trust-grid { grid-template-columns: repeat(3, 1fr); }
+  .trust-grid--4 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 760px) {
   .trust-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
   .trust-grid { grid-template-columns: 1fr; }
+  .trust-grid--4 { grid-template-columns: 1fr; }
 }
