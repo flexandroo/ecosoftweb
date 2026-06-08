@@ -74,7 +74,6 @@ export default function Footer() {
         <div className="footer__col">
           <h4>Сайт</h4>
           <Link href="/">Головна</Link>
-          <Link href="/schemes">Схеми очищення</Link>
           <Link href="/about">Про нас</Link>
           <Link href="/contacts">Контакти</Link>
         </div>
