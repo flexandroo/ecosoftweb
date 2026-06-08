@@ -13,8 +13,8 @@ export default function ProductConsultationCTA({
         <div className="pdp-cta-block__text">
           <h2>Не впевнені, що товар підійде?</h2>
           <p>
-            Залиште заявку — допоможемо підібрати рішення під вашу воду,
-            приміщення та бюджет.
+            Опишіть воду або надішліть аналіз — підкажемо, чи ця модель
+            підходить саме вам.
           </p>
         </div>
         <div className="pdp-cta-block__actions">
@@ -33,15 +33,6 @@ export default function ProductConsultationCTA({
           >
             <Icon name="flask" />
             Надіслати аналіз води
-          </Link>
-          <Link
-            href="/#quiz"
-            className={`btn btn--lg ${
-              isDark ? "btn--on-dark" : "btn--outline"
-            }`}
-          >
-            <Icon name="sparkle" />
-            Підібрати систему
           </Link>
         </div>
       </div>

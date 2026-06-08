@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Icon from "./Icon";
 
 export default function ProductMaintenanceBlock({
@@ -5,7 +6,6 @@ export default function ProductMaintenanceBlock({
   sourceText,
 }: {
   text: string;
-  /** Real maintenance section from product data, if any. */
   sourceText?: string;
 }) {
   const body = sourceText && sourceText.trim() ? sourceText : text;
@@ -23,10 +23,16 @@ export default function ProductMaintenanceBlock({
         <span className="pdp-maintenance__icon">
           <Icon name="wrench" size={22} />
         </span>
-        <div className="prose">
-          {lines.map((l, i) => (
-            <p key={i}>{l}</p>
-          ))}
+        <div className="pdp-maintenance__body">
+          <div className="prose">
+            {lines.map((l, i) => (
+              <p key={i}>{l}</p>
+            ))}
+          </div>
+          <Link href="/contacts" className="btn btn--outline pdp-maintenance__cta">
+            <Icon name="headset" size={16} />
+            Замовити обслуговування
+          </Link>
         </div>
       </div>
     </section>

@@ -11,8 +11,7 @@ export default function ProductProblemBlock({
   return (
     <section className="pdp-section">
       <div className="pdp-section__head">
-        <h2>Яку проблему вирішує</h2>
-        <p>Найчастіші ситуації, у яких допомагає цей товар.</p>
+        <h2>Що вирішує</h2>
       </div>
       <div className="pdp-problems">
         {items.map((p, i) => (

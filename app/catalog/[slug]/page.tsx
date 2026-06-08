@@ -16,18 +16,15 @@ import {
 
 import ProductHero from "@/components/ProductHero";
 import ProductFitBlock from "@/components/ProductFitBlock";
-import ProductKeyBenefits from "@/components/ProductKeyBenefits";
 import ProductProblemBlock from "@/components/ProductProblemBlock";
+import ProductKeyBenefits from "@/components/ProductKeyBenefits";
 import ProductHowItWorks from "@/components/ProductHowItWorks";
 import ProductMainSpecs from "@/components/ProductMainSpecs";
 import ProductAllSpecsAccordion from "@/components/ProductAllSpecsAccordion";
-import ProductIncludedSet from "@/components/ProductIncludedSet";
 import ProductMaintenanceBlock from "@/components/ProductMaintenanceBlock";
-import ProductDocuments from "@/components/ProductDocuments";
+import ProductTabs from "@/components/ProductTabs";
 import ProductReviews from "@/components/ProductReviews";
 import ProductConsultationCTA from "@/components/ProductConsultationCTA";
-import ProductExtraAccordion from "@/components/ProductExtraAccordion";
-import ProductWhyThisModel from "@/components/ProductWhyThisModel";
 import MobileStickyProductCTA from "@/components/MobileStickyProductCTA";
 import FAQ from "@/components/FAQ";
 
@@ -42,6 +39,16 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
     description: product?.shortDescription,
   };
 }
+
+/* ----------------------------------------------------------------- */
+/*  PDP composition is intentionally short — 10 sections, no         */
+/*  duplicate CTAs, supplementary material lives behind the tabs:    */
+/*                                                                   */
+/*    Hero → Fit → Що вирішує → Чому ця модель → Як це працює →      */
+/*    Основні характеристики (+ accordion) → Обслуговування →        */
+/*    Tabs (Комплект · Документи · Гарантія · Опис) →                */
+/*    FAQ → Reviews(compact) → Final CTA → Mobile sticky.            */
+/* ----------------------------------------------------------------- */
 
 export default function ProductPage({
   params,
@@ -96,6 +103,7 @@ export default function ProductPage({
         )}
       </div>
 
+      {/* 1 — Hero */}
       <ProductHero
         product={product}
         images={images}
@@ -104,55 +112,50 @@ export default function ProductPage({
         keyHighlights={keyHighlights}
       />
 
+      {/* 2 — Кому підходить */}
       <ProductFitBlock fits={template.fits} notFits={template.notFits} />
 
-      <ProductKeyBenefits features={product.features} />
-
-      <ProductWhyThisModel reasons={template.whyThisModel} />
-
+      {/* 3 — Що вирішує */}
       <ProductProblemBlock items={template.problems} />
 
+      {/* 4 — Чому варто обрати цю модель */}
+      <ProductKeyBenefits items={template.keyBenefits} />
+
+      {/* 5 — Як це працює */}
       <ProductHowItWorks
-        steps={
-          // Prefer data section text → split into steps as paragraphs;
-          // fall back to the per-category template steps.
-          template.howItWorks
-        }
+        steps={template.howItWorks}
         fallbackText={groups.howItWorks?.body}
       />
 
+      {/* 6 — Основні характеристики + Усі характеристики */}
       <ProductMainSpecs items={mainSpecs} />
-
       <ProductAllSpecsAccordion specs={specs} />
 
-      <ProductIncludedSet items={inclusion} />
-
-      <ProductConsultationCTA variant="soft" />
-
+      {/* 7 — Обслуговування */}
       <ProductMaintenanceBlock
         text={template.maintenance}
         sourceText={groups.maintenance?.body}
       />
 
-      <ProductDocuments documents={documents} />
-
-      <ProductExtraAccordion
+      {/* 8 — Tabs (Комплект · Документи · Гарантія · Опис) */}
+      <ProductTabs
+        inclusion={inclusion}
+        documents={documents}
         description={description}
-        extras={[
-          ...(groups.warranty ? [groups.warranty] : []),
-          ...(groups.keyFeatures ? [groups.keyFeatures] : []),
-          ...groups.other,
-        ]}
+        groups={groups}
       />
 
+      {/* 9 — FAQ (per bundle, hidden when empty) */}
       {template.faq.length > 0 && (
         <section className="pdp-section">
           <FAQ items={template.faq} title="Поширені запитання" />
         </section>
       )}
 
+      {/* 10 — Reviews (compact, hidden when empty) */}
       <ProductReviews reviews={reviews} reviewCount={reviewCount} />
 
+      {/* Final CTA */}
       <ProductConsultationCTA variant="dark" />
 
       <MobileStickyProductCTA

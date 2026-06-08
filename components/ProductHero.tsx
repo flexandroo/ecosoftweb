@@ -73,11 +73,7 @@ export default function ProductHero({
           <AddToCartButton id={product.id} disabled={!product.inStock} large />
           <Link href="/contacts" className="btn btn--lg btn--outline pdp__cta-secondary">
             <Icon name="headset" />
-            Підібрати з консультантом
-          </Link>
-          <Link href="/contacts" className="pdp__cta-link">
-            Не впевнені, чи підійде? Напишіть нам
-            <Icon name="arrow" size={16} />
+            Проконсультуватися
           </Link>
         </div>
 
