@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Icon from "./Icon";
-import type { DocumentLink, Section } from "@/lib/products";
+import RichText from "./RichText";
+import type { DocumentLink } from "@/lib/products";
 import type { SectionGroups } from "@/lib/product-template";
 
 type Props = {
@@ -11,20 +12,6 @@ type Props = {
   description: string;
   groups: SectionGroups;
 };
-
-function Paragraphs({ text }: { text: string }) {
-  return (
-    <>
-      {text
-        .split("\n")
-        .map((l) => l.trim())
-        .filter(Boolean)
-        .map((line, i) => (
-          <p key={i}>{line}</p>
-        ))}
-    </>
-  );
-}
 
 /**
  * Consolidates the supplementary blocks of the PDP into one tabbed
@@ -67,8 +54,8 @@ export default function ProductTabs({
         render: () => (
           <>
             {groups.instructions && (
-              <div className="prose" style={{ marginBottom: 16 }}>
-                <Paragraphs text={groups.instructions.body} />
+              <div style={{ marginBottom: 18 }}>
+                <RichText text={groups.instructions.body} />
               </div>
             )}
             {documents.length > 0 && (
@@ -99,11 +86,7 @@ export default function ProductTabs({
       list.push({
         id: "warranty",
         label: "Гарантія",
-        render: () => (
-          <div className="prose">
-            <Paragraphs text={groups.warranty!.body} />
-          </div>
-        ),
+        render: () => <RichText text={groups.warranty!.body} />,
       });
     }
 
@@ -112,18 +95,18 @@ export default function ProductTabs({
         id: "desc",
         label: "Опис",
         render: () => (
-          <div className="prose">
-            {description.trim() && <Paragraphs text={description} />}
+          <div className="rich-stack">
+            {description.trim() && <RichText text={description} />}
             {groups.keyFeatures && (
-              <>
-                <h3>{groups.keyFeatures.title}</h3>
-                <Paragraphs text={groups.keyFeatures.body} />
-              </>
+              <div>
+                <h3 className="rich__sec-h">{groups.keyFeatures.title}</h3>
+                <RichText text={groups.keyFeatures.body} />
+              </div>
             )}
             {groups.other.map((s) => (
               <div key={s.title}>
-                <h3>{s.title}</h3>
-                <Paragraphs text={s.body} />
+                <h3 className="rich__sec-h">{s.title}</h3>
+                <RichText text={s.body} />
               </div>
             ))}
           </div>

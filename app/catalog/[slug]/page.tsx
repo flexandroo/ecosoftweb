@@ -133,7 +133,9 @@ export default function ProductPage({
 
       {/* 7 — Обслуговування */}
       <ProductMaintenanceBlock
-        text={template.maintenance}
+        intro={template.maintenance}
+        schedule={template.maintenanceSchedule}
+        important={template.maintenanceImportant}
         sourceText={groups.maintenance?.body}
       />
 
