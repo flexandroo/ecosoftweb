@@ -23,7 +23,6 @@ import ProductMainSpecs from "@/components/ProductMainSpecs";
 import ProductAllSpecsAccordion from "@/components/ProductAllSpecsAccordion";
 import ProductMaintenanceBlock from "@/components/ProductMaintenanceBlock";
 import ProductTabs from "@/components/ProductTabs";
-import ProductReviews from "@/components/ProductReviews";
 import ProductConsultationCTA from "@/components/ProductConsultationCTA";
 import MobileStickyProductCTA from "@/components/MobileStickyProductCTA";
 import FAQ from "@/components/FAQ";
@@ -64,8 +63,6 @@ export default function ProductPage({
   const specs = details?.specs ?? [];
   const sections = details?.sections ?? [];
   const documents = details?.documents ?? [];
-  const reviews = details?.reviews ?? [];
-  const reviewCount = details?.reviewCount ?? 0;
   const description = details?.description ?? "";
 
   const category = getCategory(product.category);
@@ -153,9 +150,6 @@ export default function ProductPage({
           <FAQ items={template.faq} title="Поширені запитання" />
         </section>
       )}
-
-      {/* 10 — Reviews (compact, hidden when empty) */}
-      <ProductReviews reviews={reviews} reviewCount={reviewCount} />
 
       {/* Final CTA */}
       <ProductConsultationCTA variant="dark" />

@@ -1,178 +1,292 @@
 import Link from "next/link";
 import Icon, { IconName } from "@/components/Icon";
+import Reveal from "@/components/Reveal";
 
 export const metadata = {
   title: "Про нас",
   description:
-    "Ecosoft — підбір, монтаж і сервіс систем очищення води з 2003 року. Власне виробництво, рішення для квартир, будинків і бізнесу.",
+    "Підбираємо надійні системи очищення води Ecosoft для дому, бізнесу та комерційних об'єктів. Допомагаємо обрати, встановити та обслуговувати рішення під вашу воду.",
 };
 
-const stats = [
-  { num: "з 2003", label: "року на ринку водоочищення" },
-  { num: "1 000 000+", label: "клієнтів в Україні та за кордоном" },
-  { num: "99,8%", label: "ступінь очищення зворотним осмосом" },
-  { num: "176+", label: "моделей у каталозі" },
-];
+type Card = { icon: IconName; title: string; text: string };
 
-type Block = { icon: IconName; title: string; text: string };
-
-const whatWeDo: Block[] = [
+const audiences: Card[] = [
   {
-    icon: "flask",
-    title: "Підбираємо рішення",
-    text: "Аналізуємо якість води, тип житла, кількість мешканців і санвузлів. Жодних «універсальних» порад без розуміння вашої ситуації.",
+    icon: "building",
+    title: "Квартири",
+    text: "Компактні системи під мийку для пиття, готування та щоденних побутових потреб.",
   },
   {
-    icon: "osmosis",
-    title: "Продаємо обладнання Ecosoft",
-    text: "Працюємо з повним каталогом: зворотний осмос, проточні фільтри, магістральні корпуси, колонні системи, картриджі та засипки.",
-  },
-  {
-    icon: "wrench",
-    title: "Монтуємо під ключ",
-    text: "Доставляємо, підключаємо, налаштовуємо й пояснюємо, як користуватися. Ви отримуєте робочу систему, а не коробку з деталями.",
-  },
-  {
-    icon: "headset",
-    title: "Обслуговуємо",
-    text: "Нагадуємо про планову заміну картриджів, регенерацію засипок, виїжджаємо на сервіс і консультуємо весь термін експлуатації.",
-  },
-];
-
-const howWePick = [
-  "Запитуємо про джерело: міський водопровід, свердловина чи колодязь.",
-  "Дивимося на аналіз води — якщо немає, підкажемо, де і як його зробити.",
-  "Враховуємо тип житла, кількість мешканців і санвузлів.",
-  "Підбираємо етапи очищення: механіка → пом'якшення → знезалізнення → доочищення.",
-  "Пропонуємо 1–2 конкретні моделі з обґрунтуванням.",
-];
-
-const trust: Block[] = [
-  {
-    icon: "shield",
-    title: "Офіційна продукція Ecosoft",
-    text: "Сертифіковане обладнання та оригінальні картриджі — не випадкові аналоги.",
-  },
-  {
-    icon: "award",
-    title: "Власне виробництво",
-    text: "Контроль якості від мембрани й корпусу до фінальної збірки системи.",
+    icon: "home",
+    title: "Приватні будинки",
+    text: "Комплексне очищення на вході в будинок — захист сантехніки, бойлера й техніки.",
   },
   {
     icon: "gear",
-    title: "Гарантія від виробника",
-    text: "До 5 років на системи зворотного осмосу та колонні фільтри.",
+    title: "Офіси",
+    text: "Тиха фонова робота, стабільна вода для кави, чаю та кулерів у переговорних.",
   },
   {
-    icon: "truck",
-    title: "Доставка і монтаж по Україні",
-    text: "Працюємо у всіх регіонах — від однієї системи до проектного оснащення об'єкта.",
+    icon: "award",
+    title: "Кав'ярні та ресторани",
+    text: "Підготовка води під кавомашини, пароконвектомати й льодогенератори без сюрпризів.",
+  },
+  {
+    icon: "shield",
+    title: "Комерційні об'єкти",
+    text: "Готелі, торгові центри, медичні заклади — рішення з обліковим режимом і сервісом.",
+  },
+  {
+    icon: "wrench",
+    title: "Невеликі виробництва",
+    text: "Технологічна вода для процесів, де якість і стабільні параметри критично важливі.",
+  },
+];
+
+const reasons: Card[] = [
+  {
+    icon: "flask",
+    title: "Підбір під реальні умови",
+    text: "Дивимось на ваш аналіз води, тип об'єкта і сценарій використання — не пропонуємо «універсальних» систем.",
+  },
+  {
+    icon: "shield",
+    title: "Перевірене обладнання Ecosoft",
+    text: "Працюємо з оригінальними системами, мембранами та картриджами українського виробника з 1991 року.",
+  },
+  {
+    icon: "question",
+    title: "Просте пояснення без термінів",
+    text: "Різниця між лінійками, навіщо мінералізатор, як змінювати картриджі — людською мовою.",
+  },
+  {
+    icon: "headset",
+    title: "Підтримка після покупки",
+    text: "Нагадуємо про регламент, виїжджаємо на сервіс, допомагаємо з оригінальними змінними елементами.",
+  },
+];
+
+const steps = [
+  {
+    title: "Аналізуємо задачу",
+    text: "Тип об'єкта, джерело води, аналіз або опис проблеми — без цього не пропонуємо рішення.",
+  },
+  {
+    title: "Підбираємо рішення",
+    text: "Конкретна модель або зв'язка систем під вашу воду, кількість людей і санвузлів.",
+  },
+  {
+    title: "Пояснюємо різницю",
+    text: "Показуємо, чому саме ця конфігурація — і що вона дасть у щоденному використанні.",
+  },
+  {
+    title: "Підтримуємо після покупки",
+    text: "Монтаж, налаштування, регламент і сервіс — щоб система працювала роками.",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <>
-      <div className="page-head">
-        <div className="container">
-          <h1>Про компанію Ecosoft</h1>
-          <p>
-            Підбираємо, продаємо, монтуємо й обслуговуємо системи очищення води
-            для квартир, приватних будинків і бізнесу. З 2003 року.
-          </p>
+    <div className="about">
+      {/* Hero */}
+      <section className="about-hero">
+        <div className="container about-hero__inner">
+          <Reveal className="about-hero__content">
+            <span className="about-hero__eyebrow">Про нас</span>
+            <h1 className="about-hero__title">
+              Підбираємо надійні системи очищення води для дому, бізнесу та
+              комерційних об'єктів
+            </h1>
+            <p className="about-hero__lead">
+              Допомагаємо обрати правильну систему очищення води, виконуємо
+              монтаж і супроводжуємо її сервісно. Працюємо з обладнанням
+              українського виробника <strong>Ecosoft</strong>, який розвиває
+              напрямок водопідготовки з 1991 року.
+            </p>
+            <div className="about-hero__actions">
+              <Link href="/contacts" className="about-btn about-btn--primary">
+                <Icon name="headset" />
+                Отримати консультацію
+              </Link>
+            </div>
+          </Reveal>
+
+          <div className="about-hero__visual" aria-hidden="true">
+            <span className="about-hero__ring about-hero__ring--1" />
+            <span className="about-hero__ring about-hero__ring--2" />
+            <span className="about-hero__ring about-hero__ring--3" />
+            <span className="about-hero__drop">
+              <Icon name="drop" size={84} />
+            </span>
+          </div>
         </div>
-      </div>
+      </section>
 
       <div className="container">
-        <div className="stats">
-          {stats.map((s) => (
-            <div className="stat" key={s.label}>
-              <div className="stat__num">{s.num}</div>
-              <div className="stat__label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-
-        <section className="content">
-          <h2>Що ми робимо</h2>
-          <p>
-            Робота з водою починається не з товару, а із запиту: яка у вас вода,
-            яке житло, які проблеми треба прибрати. Тільки після цього починаємо
-            пропонувати конкретні системи. Це наш стандарт.
-          </p>
+        {/* Хто ми */}
+        <section className="about-section">
+          <Reveal className="about-section__head about-section__head--narrow">
+            <span className="about-eyebrow">Хто ми</span>
+            <h2>Партнер з підбору і сервісу систем Ecosoft</h2>
+          </Reveal>
+          <Reveal className="about-prose">
+            <p>
+              Ми не виробник, а команда, яка щодня допомагає клієнтам обрати
+              правильне обладнання для очищення води, привезти, встановити та
+              обслуговувати його. Наш фокус — не великий каталог заради
+              каталогу, а рішення, яке справді закриває проблему з водою у
+              конкретному об'єкті.
+            </p>
+            <p>
+              Працюємо з обладнанням{" "}
+              <strong>Ecosoft</strong> — українського виробника систем
+              водопідготовки, заснованого <strong>1991 року</strong>. У них
+              власне виробництво, сертифікація й сервісна мережа. Ми, своєю
+              чергою, відповідаємо за грамотний підбір, монтаж під ключ і
+              супровід після покупки.
+            </p>
+          </Reveal>
         </section>
 
-        <div className="info-grid info-grid--4">
-          {whatWeDo.map((b) => (
-            <div className="info-card" key={b.title}>
-              <div className="info-card__icon">
-                <Icon name={b.icon} />
-              </div>
-              <h3>{b.title}</h3>
-              <p>{b.text}</p>
-            </div>
-          ))}
-        </div>
+        {/* Для кого ми працюємо */}
+        <section className="about-section">
+          <Reveal className="about-section__head">
+            <span className="about-eyebrow">Для кого ми працюємо</span>
+            <h2>Шість типових сценаріїв</h2>
+            <p>
+              Кожен об'єкт має свої умови — джерело води, об'єм споживання,
+              задачі. Ми працюємо з усіма основними категоріями.
+            </p>
+          </Reveal>
 
-        <section className="content">
-          <h2>Як ми підбираємо рішення</h2>
-          <p>
-            Підбір не «на око», а від конкретних даних. Це робить систему
-            передбачуваною: правильні етапи очищення, реалістичний ресурс
-            картриджів, відсутність переплати за зайве обладнання.
-          </p>
-          <ol>
-            {howWePick.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="content">
-          <h2>Монтаж і сервіс</h2>
-          <p>
-            Привеземо систему, виконаємо монтаж і налаштування, пояснимо
-            регламент обслуговування. У більшості випадків монтаж займає від 1
-            до 4 годин. Далі — нагадування про заміну картриджів, регенерацію
-            засипок і виїзд сервісного спеціаліста за потреби.
-          </p>
-        </section>
-
-        <section className="content">
-          <h2>Чому обирають Ecosoft</h2>
-          <div
-            className="info-grid info-grid--4"
-            style={{ marginTop: 4, marginBottom: 0 }}
-          >
-            {trust.map((b) => (
-              <div className="info-card" key={b.title}>
-                <div className="info-card__icon">
-                  <Icon name={b.icon} />
-                </div>
-                <h3>{b.title}</h3>
-                <p>{b.text}</p>
-              </div>
+          <div className="about-grid about-grid--3">
+            {audiences.map((c, i) => (
+              <Reveal className="about-card" key={c.title} delay={i * 40}>
+                <span className="about-card__icon">
+                  <Icon name={c.icon} size={22} />
+                </span>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        <section className="info-note">
-          <p>
-            Хочете перевірити, яка система підходить саме вам? Опишіть джерело
-            води або надішліть аналіз — підкажемо рішення без зайвих витрат.
-          </p>
-          <div className="info-note__actions">
-            <Link href="/contacts" className="btn btn--lg">
-              <Icon name="headset" />
-              Отримати консультацію
-            </Link>
-            <Link href="/catalog" className="btn btn--lg btn--outline">
-              До каталогу
+        {/* Чому обирають нас */}
+        <section className="about-section">
+          <Reveal className="about-section__head">
+            <span className="about-eyebrow">Чому обирають нас</span>
+            <h2>Чотири причини довіряти підбір саме нам</h2>
+          </Reveal>
+
+          <div className="about-grid about-grid--4">
+            {reasons.map((c, i) => (
+              <Reveal className="about-card" key={c.title} delay={i * 40}>
+                <span className="about-card__icon">
+                  <Icon name={c.icon} size={22} />
+                </span>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Наш підхід */}
+        <section className="about-section">
+          <Reveal className="about-section__head">
+            <span className="about-eyebrow">Наш підхід</span>
+            <h2>Чотири кроки від запиту до сервісу</h2>
+          </Reveal>
+
+          <ol className="about-steps">
+            {steps.map((s, i) => (
+              <Reveal className="about-step" key={s.title} delay={i * 50}>
+                <span className="about-step__num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </section>
+
+        {/* Що для нас важливо */}
+        <section className="about-section">
+          <Reveal className="about-section__head about-section__head--narrow">
+            <span className="about-eyebrow">Що для нас важливо</span>
+            <h2>Якісна вода — це спокій, здоров'я і стабільність</h2>
+          </Reveal>
+          <Reveal className="about-values">
+            <div className="about-values__row">
+              <span className="about-values__icon">
+                <Icon name="shield" size={20} />
+              </span>
+              <div>
+                <h4>Комфорт у щоденному житті</h4>
+                <p>
+                  Смачна питна вода, відсутність накипу, м'якша шкіра після
+                  душу — речі, які помічаєш, коли вони перестають дратувати.
+                </p>
+              </div>
+            </div>
+            <div className="about-values__row">
+              <span className="about-values__icon">
+                <Icon name="drop" size={20} />
+              </span>
+              <div>
+                <h4>Здоров'я родини</h4>
+                <p>
+                  Вода, у якій ви впевнені, — для пиття, готування й купання
+                  дітей.
+                </p>
+              </div>
+            </div>
+            <div className="about-values__row">
+              <span className="about-values__icon">
+                <Icon name="gear" size={20} />
+              </span>
+              <div>
+                <h4>Захист обладнання</h4>
+                <p>
+                  Бойлер, посудомийна, кавомашина, сантехніка — все це служить
+                  довше, коли вода підготовлена.
+                </p>
+              </div>
+            </div>
+            <div className="about-values__row">
+              <span className="about-values__icon">
+                <Icon name="award" size={20} />
+              </span>
+              <div>
+                <h4>Стабільність для бізнесу</h4>
+                <p>
+                  Передбачувана якість води — це передбачуваний смак напоїв,
+                  ресурс техніки та задоволені гості.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Final CTA */}
+        <section className="about-cta">
+          <div className="about-cta__text">
+            <h2>Не знаєте, яка система підійде саме вам?</h2>
+            <p>
+              Залиште заявку — ми допоможемо підібрати рішення під вашу воду,
+              бюджет і тип об'єкта.
+            </p>
+          </div>
+          <div className="about-cta__actions">
+            <Link href="/contacts" className="about-btn about-btn--accent">
+              Підібрати систему очищення води
               <Icon name="arrow" />
             </Link>
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
