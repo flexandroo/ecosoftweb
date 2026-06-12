@@ -136,9 +136,7 @@ const faqItems: FAQItem[] = [
 export default function HomePage() {
   return (
     <>
-      <div className="container" style={{ marginTop: 28, marginBottom: 8 }}>
-        <HeroBanners />
-      </div>
+      <HeroBanners />
 
       {/* 2 — WATER PROBLEMS */}
       <section className="section section--tight" id="problems">
