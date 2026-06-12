@@ -2895,6 +2895,71 @@ textarea:focus-visible,
   }
 }
 
+/* Dark stats band — accent rhythm + social proof */
+.stats-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--grad-deep);
+  border-radius: var(--r-2xl);
+  padding: clamp(32px, 4vw, 52px) clamp(24px, 3vw, 48px);
+  box-shadow: var(--sh-lg);
+}
+.stats-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      120% 120% at 85% -10%,
+      rgba(0, 166, 214, 0.35),
+      transparent 55%
+    ),
+    radial-gradient(90% 90% at 0% 110%, rgba(0, 87, 184, 0.4), transparent 60%);
+  pointer-events: none;
+}
+.stats-band__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.stat-cell {
+  text-align: center;
+  padding: 6px 10px;
+}
+.stat-cell + .stat-cell {
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+.stat-cell__num {
+  font-family: var(--font-head);
+  font-size: clamp(1.9rem, 1.2rem + 2.2vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.stat-cell__label {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.4;
+  color: rgba(233, 245, 251, 0.78);
+}
+@media (max-width: 760px) {
+  .stats-band__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 12px;
+  }
+  .stat-cell:nth-child(odd) {
+    border-left: none;
+  }
+  .stat-cell:nth-child(3),
+  .stat-cell:nth-child(4) {
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+}
+
 /* ============================================================
    SOFT GRADIENT BLOBS + NOISE (decorative)
    ============================================================ */

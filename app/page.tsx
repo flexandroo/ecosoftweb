@@ -64,6 +64,13 @@ const problems: ProblemCard[] = [
   },
 ];
 
+const stats: { num: string; label: string }[] = [
+  { num: "1 000 000+", label: "встановлених систем Ecosoft" },
+  { num: "20+", label: "років на ринку водопідготовки" },
+  { num: "до 99,8%", label: "ступінь очищення води" },
+  { num: "100%", label: "офіційне обладнання та сервіс" },
+];
+
 const process: { icon: IconName; title: string; text: string }[] = [
   {
     icon: "flask",
@@ -250,6 +257,22 @@ export default function HomePage() {
               Підібрати систему
             </QuizLink>
           </div>
+        </div>
+      </section>
+
+      {/* 4.5 — STATS BAND (dark accent) */}
+      <section className="section section--tight">
+        <div className="container">
+          <Reveal className="stats-band">
+            <div className="stats-band__grid">
+              {stats.map((s) => (
+                <div className="stat-cell" key={s.label}>
+                  <span className="stat-cell__num">{s.num}</span>
+                  <span className="stat-cell__label">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
