@@ -15,9 +15,15 @@ type NavItem = NavLink | NavGroup;
 const nav: NavItem[] = [
   { href: "/", label: "Головна" },
   { href: "/catalog", label: "Каталог" },
-  { href: "/delivery-payment", label: "Доставка і оплата" },
-  { href: "/returns-exchange", label: "Повернення та обмін" },
-  { href: "/about", label: "Про нас" },
+  {
+    label: "Інформація",
+    children: [
+      { href: "/schemes", label: "Схеми монтажу" },
+      { href: "/delivery-payment", label: "Доставка і оплата" },
+      { href: "/returns-exchange", label: "Повернення та обмін" },
+      { href: "/about", label: "Про нас" },
+    ],
+  },
   { href: "/contacts", label: "Контакти" },
 ];
 

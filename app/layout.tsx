@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartContext";
 import Header from "@/components/Header";
@@ -9,6 +9,14 @@ const inter = Inter({
   subsets: ["latin", "cyrillic"],
   display: "swap",
   variable: "--font-inter",
+});
+
+// Display typeface for headings — geometric, premium, supports Cyrillic.
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="uk" className={inter.variable}>
+    <html lang="uk" className={`${inter.variable} ${manrope.variable}`}>
       <body>
         <CartProvider>
           <Header />
