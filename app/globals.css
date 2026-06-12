@@ -1664,6 +1664,7 @@ textarea:focus-visible,
   max-height: 480px;
   object-fit: contain;
   padding: 32px;
+  mix-blend-mode: darken;
 }
 .product__info h1 {
   font-size: clamp(28px, 3.5vw, 38px);
@@ -1676,10 +1677,12 @@ textarea:focus-visible,
   margin: 22px 0;
 }
 .product__price-now {
+  font-family: var(--font-head);
   font-size: 34px;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 .product__price-old {
   font-size: 20px;
@@ -1778,6 +1781,7 @@ textarea:focus-visible,
   border-radius: var(--r-lg);
   background: var(--grad-media);
   border: 1px solid var(--line);
+  box-shadow: var(--sh-soft);
   overflow: hidden;
 }
 .gallery__main--empty {
@@ -1793,6 +1797,7 @@ textarea:focus-visible,
   height: 100%;
   object-fit: contain;
   padding: 30px;
+  mix-blend-mode: darken;
 }
 .gallery__thumbs {
   display: flex;
@@ -1870,10 +1875,12 @@ textarea:focus-visible,
   margin-bottom: 20px;
 }
 .pdp__price-now {
+  font-family: var(--font-head);
   font-size: 36px;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 .pdp__price-old {
   font-size: 20px;
@@ -5397,9 +5404,11 @@ textarea:focus-visible,
     letter-spacing: 0.06em;
   }
   .pdp-sticky__price-value {
+    font-family: var(--font-head);
     font-size: 18px;
     font-weight: 800;
     color: var(--ink);
+    font-variant-numeric: tabular-nums;
   }
   .pdp-sticky__actions {
     display: flex;
