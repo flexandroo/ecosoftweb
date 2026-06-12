@@ -184,17 +184,41 @@ textarea:focus-visible,
 }
 
 .section__head {
-  max-width: 680px;
-  margin: 0 auto 48px;
+  max-width: 720px;
+  margin: 0 auto clamp(36px, 4vw, 56px);
   text-align: center;
 }
 .section__head h2 {
-  font-size: clamp(28px, 4vw, 36px);
-  margin-bottom: 12px;
+  font-size: var(--fs-h2);
+  margin-bottom: 14px;
 }
 .section__head p {
   color: var(--muted);
-  font-size: 18px;
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+}
+
+/* Editorial eyebrow / kicker above section titles */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px 7px 12px;
+  margin-bottom: 18px;
+  border-radius: var(--r-pill);
+  background: var(--sky-100);
+  border: 1px solid var(--line);
+  color: var(--primary-700);
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+.eyebrow svg {
+  width: 15px;
+  height: 15px;
+  color: var(--primary);
 }
 
 /* Compact section — tuned to fit within the first screen, scales with
@@ -5473,12 +5497,19 @@ textarea:focus-visible,
 .problem-card__icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   background: var(--sky-100);
   color: var(--primary);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+.problem-card:hover .problem-card__icon {
+  background: var(--grad-hero);
+  color: #fff;
+  transform: scale(1.06);
 }
 .problem-card h3 {
   font-size: 17px;
@@ -5950,11 +5981,18 @@ textarea:focus-visible,
 .trust-card__icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   background: var(--sky-100);
   color: var(--primary);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+.trust-card:hover .trust-card__icon {
+  background: var(--grad-hero);
+  color: #fff;
+  transform: scale(1.06);
 }
 .trust-card h3 {
   font-size: 16px;

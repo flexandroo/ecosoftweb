@@ -142,7 +142,11 @@ export default function HomePage() {
       <section className="section section--tight" id="problems">
         <div className="container">
           <Reveal className="section__head">
-            <h2 style={{ marginTop: 12 }}>Яку проблему з водою треба вирішити?</h2>
+            <span className="eyebrow">
+              <Icon name="drop" />
+              Проблеми з водою
+            </span>
+            <h2>Яку проблему з водою треба вирішити?</h2>
             <p>Оберіть знайому ситуацію — підкажемо тип системи, який її закриває.</p>
           </Reveal>
 
@@ -177,6 +181,10 @@ export default function HomePage() {
             <span className="fx-blobs" aria-hidden="true" />
             <span className="fx-noise" aria-hidden="true" />
             <div className="quiz-block__head">
+              <span className="eyebrow">
+                <Icon name="sparkle" />
+                Підбір за хвилину
+              </span>
               <h2>Підберіть систему без технічних знань</h2>
               <p>
                 Відповідайте на кілька простих питань — покажемо, яке рішення
@@ -206,7 +214,11 @@ export default function HomePage() {
       <section className="section section--tight" id="process">
         <div className="container">
           <Reveal className="section__head">
-            <h2 style={{ marginTop: 12 }}>Як ми працюємо</h2>
+            <span className="eyebrow">
+              <Icon name="wrench" />
+              Процес
+            </span>
+            <h2>Як ми працюємо</h2>
             <p>
               Від першого запиту до сервісу після встановлення — все в одному
               процесі.
@@ -245,7 +257,11 @@ export default function HomePage() {
       <section className="section section--tight" id="trust">
         <div className="container">
           <Reveal className="section__head">
-            <h2 style={{ marginTop: 12 }}>Чому нам можна довіряти</h2>
+            <span className="eyebrow">
+              <Icon name="shield" />
+              Гарантії
+            </span>
+            <h2>Чому нам можна довіряти</h2>
           </Reveal>
 
           <div className="trust-grid trust-grid--4">
