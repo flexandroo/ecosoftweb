@@ -260,30 +260,39 @@ textarea:focus-visible,
   font-weight: 600;
   line-height: 1;
   padding: 13px 22px;
-  border-radius: var(--r-sm);
+  border-radius: 12px;
   border: 1.5px solid transparent;
   cursor: pointer;
-  transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease, color 0.15s ease;
+  transition: transform 0.16s var(--ease), background 0.18s ease,
+    box-shadow 0.18s ease, border-color 0.15s ease, color 0.15s ease;
   white-space: nowrap;
 }
 .btn svg {
   width: 18px;
   height: 18px;
 }
-.btn:active {
-  transform: translateY(1px);
-}
 
 /* primary */
 .btn {
-  background: var(--primary);
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-600) 100%);
   color: #fff;
   box-shadow: var(--sh-sm);
 }
 .btn:hover {
-  background: var(--primary-600);
+  background: linear-gradient(
+    180deg,
+    var(--primary) 0%,
+    var(--primary-700) 100%
+  );
   box-shadow: var(--sh-md);
+}
+
+/* tactile lift on hover, press back down (skip disabled) */
+.btn:hover:not(:disabled):not(.btn--ghost) {
+  transform: translateY(-1.5px);
+}
+.btn:active:not(:disabled):not(.btn--ghost) {
+  transform: translateY(0);
 }
 
 /* secondary (aqua-tinted, light) */
@@ -344,7 +353,7 @@ textarea:focus-visible,
 .btn--lg {
   padding: 16px 30px;
   font-size: 16px;
-  border-radius: var(--r-sm);
+  border-radius: 14px;
 }
 .btn--sm {
   padding: 10px 16px;
