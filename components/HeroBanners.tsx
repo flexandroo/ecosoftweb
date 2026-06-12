@@ -168,8 +168,6 @@ export default function HeroBanners() {
     if (e.key === "ArrowLeft") go(i - 1);
   };
 
-  const slide = SLIDES[i];
-
   return (
     <section
       className="hb"
@@ -191,40 +189,54 @@ export default function HeroBanners() {
 
       <div className="hb-inner">
         <div className="hb-track">
-          <article className="hb-slide" data-accent={slide.accent} key={slide.key}>
-            <div className="hb-content">
-              <span className="hb-eyebrow"><span className="hb-dot" />{slide.eyebrow}</span>
-              <h1 className="hb-title">
-                {slide.title.map((t, k) => (k % 2 ? <em key={k}>{t}</em> : <span key={k}>{t}</span>))}
-              </h1>
-              <p className="hb-sub">{slide.sub}</p>
-              <div className="hb-chips">
-                {slide.chips.map((c) => (
-                  <span className="hb-chip" key={c}><Check />{c}</span>
-                ))}
-              </div>
-              <div className="hb-ctas">
-                <Link className="hb-btn hb-btn--primary" href={slide.primary.href}>
-                  {slide.primary.label}<Arrow />
-                </Link>
-                <Link className="hb-btn hb-btn--ghost" href={slide.ghost.href}>{slide.ghost.label}</Link>
-              </div>
-            </div>
-
-            <div className="hb-visual">
-              <div className="hb-halo" />
-              <div className="hb-rings" aria-hidden="true"><i /><i /><i /></div>
-              <Product which={slide.key} />
-              <div className="hb-stats">
-                {slide.stats.map((st) => (
-                  <div className="hb-stat" key={st.l}>
-                    <b>{st.v}</b>
-                    <span>{st.l}</span>
+          {SLIDES.map((s, idx) => {
+            const active = idx === i;
+            return (
+              <article
+                className={`hb-slide${active ? " is-active" : ""}`}
+                data-accent={s.accent}
+                key={s.key}
+                aria-hidden={!active}
+              >
+                <div className="hb-content">
+                  <span className="hb-eyebrow"><span className="hb-dot" />{s.eyebrow}</span>
+                  {React.createElement(
+                    active ? "h1" : "div",
+                    { className: "hb-title" },
+                    s.title.map((t, k) =>
+                      k % 2 ? <em key={k}>{t}</em> : <span key={k}>{t}</span>
+                    )
+                  )}
+                  <p className="hb-sub">{s.sub}</p>
+                  <div className="hb-chips">
+                    {s.chips.map((c) => (
+                      <span className="hb-chip" key={c}><Check />{c}</span>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          </article>
+                  <div className="hb-ctas">
+                    <Link className="hb-btn hb-btn--primary" href={s.primary.href} tabIndex={active ? 0 : -1}>
+                      {s.primary.label}<Arrow />
+                    </Link>
+                    <Link className="hb-btn hb-btn--ghost" href={s.ghost.href} tabIndex={active ? 0 : -1}>{s.ghost.label}</Link>
+                  </div>
+                </div>
+
+                <div className="hb-visual">
+                  <div className="hb-halo" />
+                  <div className="hb-rings" aria-hidden="true"><i /><i /><i /></div>
+                  <Product which={s.key} />
+                  <div className="hb-stats">
+                    {s.stats.map((st) => (
+                      <div className="hb-stat" key={st.l}>
+                        <b>{st.v}</b>
+                        <span>{st.l}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className="hb-controls">
@@ -297,13 +309,17 @@ export default function HeroBanners() {
         }
         .hb-wave { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; height: 120px; opacity: 0.5; pointer-events: none; }
         .hb-wave svg { width: 100%; height: 100%; }
-        .hb-track { position: relative; z-index: 1; }
+        .hb-track { position: relative; z-index: 1; display: grid; }
         .hb-slide {
+          grid-area: 1 / 1;
           display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 32px; align-items: center;
           min-height: 560px; padding: 64px 72px 92px;
-          animation: hb-slidein 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+          opacity: 0; visibility: hidden; transform: translateY(14px);
+          transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.8, 0.3, 1),
+            visibility 0.55s;
         }
-        @keyframes hb-slidein { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .hb-slide.is-active { opacity: 1; visibility: visible; transform: none; }
+        .hb-slide:not(.is-active) { pointer-events: none; }
         .hb-slide[data-accent="green"] { --accent: var(--green); --accent-dark: var(--green-dark); }
         .hb-slide[data-accent="teal"] { --accent: var(--teal); --accent-dark: #007a9c; }
         .hb-slide[data-accent="blue"] { --accent: var(--blue); --accent-dark: var(--primary-900, #003b73); }
@@ -415,7 +431,7 @@ export default function HeroBanners() {
         }
         @media (prefers-reduced-motion: reduce) {
           .hb-blobs, .hb-halo { animation: none; }
-          .hb-slide { animation: none; }
+          .hb-slide { transition: opacity 0.2s linear; transform: none; }
           .hb-visual :global(.hb-product) { animation: none; }
           .hb-tab.is-active .hb-bar { animation: none; width: 100%; }
         }
