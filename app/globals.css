@@ -6356,13 +6356,13 @@ p {
    Scoped to .about; does not leak into the rest of the site.
    ============================================================ */
 .about {
-  --about-bg: #faf9f6;
-  --about-card: #f5f5f3;
-  --about-ink: #111111;
-  --about-muted: #5f5f5f;
-  --about-accent: #2f5e5b;
-  --about-accent-soft: #e1ece9;
-  --about-line: #d9d6cf;
+  --about-bg: var(--sky-50);
+  --about-card: var(--bg-alt);
+  --about-ink: var(--ink);
+  --about-muted: var(--body);
+  --about-accent: var(--primary);
+  --about-accent-soft: var(--sky-100);
+  --about-line: var(--line);
   background: var(--about-bg);
   color: var(--about-ink);
   padding-bottom: 80px;
@@ -6448,7 +6448,7 @@ p {
   border-radius: 50%;
   background: var(--about-card);
   color: var(--about-accent);
-  box-shadow: 0 14px 28px -14px rgba(47, 94, 91, 0.35);
+  box-shadow: 0 14px 28px -14px rgba(0, 87, 184, 0.3);
 }
 
 /* Buttons (scoped) */
@@ -6470,8 +6470,8 @@ p {
 }
 .about-btn--primary:hover {
   transform: translateY(-2px);
-  background: #265049;
-  box-shadow: 0 14px 26px -10px rgba(47, 94, 91, 0.45);
+  background: var(--primary-700);
+  box-shadow: 0 14px 26px -10px rgba(0, 87, 184, 0.4);
 }
 .about-btn--secondary {
   background: #fff;
@@ -6489,8 +6489,8 @@ p {
 }
 .about-btn--accent:hover {
   transform: translateY(-2px);
-  background: #265049;
-  box-shadow: 0 14px 26px -10px rgba(47, 94, 91, 0.45);
+  background: var(--primary-700);
+  box-shadow: 0 14px 26px -10px rgba(0, 87, 184, 0.4);
 }
 
 /* Section frame */
@@ -6730,17 +6730,17 @@ p {
    INTERACTIVE HERO — scenario hub (atelier palette)
    ============================================================ */
 .ihero {
-  --ih-bg: #f5f5f3;
-  --ih-bg-deep: #efeee9;
+  --ih-bg: var(--sky-50);
+  --ih-bg-deep: var(--sky-100);
   --ih-card: #ffffff;
-  --ih-ink: #111111;
-  --ih-muted: #5f5f5f;
-  --ih-accent: #2f5e5b;
-  --ih-accent-soft: #e1ece9;
-  --ih-line: #d9d6cf;
-  --ih-shadow: 0 30px 60px -30px rgba(17, 17, 17, 0.18);
+  --ih-ink: var(--ink);
+  --ih-muted: var(--body);
+  --ih-accent: var(--primary);
+  --ih-accent-soft: var(--sky-100);
+  --ih-line: var(--line);
+  --ih-shadow: 0 30px 60px -30px rgba(11, 31, 51, 0.18);
   position: relative;
-  background: linear-gradient(180deg, var(--ih-bg) 0%, #fafaf7 60%, #f7f7f3 100%);
+  background: linear-gradient(180deg, var(--ih-bg) 0%, #ffffff 60%, var(--sky-50) 100%);
   border-bottom: 1px solid var(--ih-line);
   overflow: hidden;
   outline: none;
@@ -6764,7 +6764,7 @@ p {
   inset: auto auto -200px -160px;
   width: 420px;
   height: 420px;
-  background: radial-gradient(circle, #eef2f1, transparent 70%);
+  background: radial-gradient(circle, var(--sky-200), transparent 70%);
 }
 .ihero__inner {
   position: relative;
@@ -6856,7 +6856,7 @@ p {
   cursor: pointer;
 }
 .ihero-btn--primary { background: var(--ih-accent); color: #fff; }
-.ihero-btn--primary:hover { transform: translateY(-2px); background: #265049; box-shadow: 0 14px 26px -10px rgba(47, 94, 91, 0.45); }
+.ihero-btn--primary:hover { transform: translateY(-2px); background: var(--primary-700); box-shadow: 0 14px 26px -10px rgba(0, 87, 184, 0.4); }
 .ihero-btn--ghost { background: #fff; color: var(--ih-ink); border-color: var(--ih-line); }
 .ihero-btn--ghost:hover { border-color: var(--ih-accent); color: var(--ih-accent); }
 
@@ -7091,7 +7091,7 @@ p {
 .ihero-tab:hover { color: var(--ih-ink); }
 .ihero-tab.is-active { color: var(--ih-ink); }
 .ihero-tab.is-active .ihero-tab__num { color: var(--ih-accent); }
-.ihero-tab:focus-visible { background: rgba(47,94,91,0.05); border-radius: 8px; }
+.ihero-tab:focus-visible { background: rgba(0,87,184,0.05); border-radius: 8px; }
 .ihero-tab__bar {
   display: block; height: 2px;
   background: var(--ih-line); border-radius: 2px;
