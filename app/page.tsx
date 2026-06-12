@@ -1,5 +1,5 @@
 import Link from "next/link";
-import InteractiveHero from "@/components/InteractiveHero";
+import HeroBanners from "@/components/HeroBanners";
 import Reveal from "@/components/Reveal";
 import SystemQuiz from "@/components/SystemQuiz";
 import QuizLink from "@/components/QuizLink";
@@ -136,7 +136,9 @@ const faqItems: FAQItem[] = [
 export default function HomePage() {
   return (
     <>
-      <InteractiveHero />
+      <div className="container" style={{ marginTop: 28, marginBottom: 8 }}>
+        <HeroBanners />
+      </div>
 
       {/* 2 — WATER PROBLEMS */}
       <section className="section section--tight" id="problems">
