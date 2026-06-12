@@ -67,7 +67,7 @@
   --fs-lead: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
 
   /* --- Focus ring (accessibility) --- */
-  --focus: 0 0 0 3px rgba(0, 173, 239, 0.45);
+  --focus: 0 0 0 3px rgba(0, 87, 184, 0.4);
 }
 
 * {
