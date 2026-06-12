@@ -2135,9 +2135,9 @@ textarea:focus-visible,
   align-items: center;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
   padding: 16px 20px;
-  box-shadow: var(--sh-xs);
+  box-shadow: var(--sh-soft);
 }
 .cart-row__media {
   display: grid;
@@ -2191,9 +2191,11 @@ textarea:focus-visible,
   color: var(--ink);
 }
 .cart-row__price {
+  font-family: var(--font-head);
   font-weight: 800;
   color: var(--ink);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 .cart-row__remove {
   display: grid;
@@ -2218,9 +2220,9 @@ textarea:focus-visible,
   top: 100px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
   padding: 26px;
-  box-shadow: var(--sh-sm);
+  box-shadow: var(--sh-card);
 }
 .summary h3 {
   font-size: 20px;
@@ -2240,9 +2242,11 @@ textarea:focus-visible,
   padding-top: 16px;
   margin-top: 8px;
   border-top: 1px solid var(--line);
+  font-family: var(--font-head);
   font-size: 22px;
   font-weight: 800;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
 .empty {
