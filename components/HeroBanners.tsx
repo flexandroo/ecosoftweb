@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Accent = "green" | "teal" | "blue";
 type ProductKind = "ro" | "compact" | "column";
@@ -11,6 +12,7 @@ type Stat = { v: string; l: string };
 type Slide = {
   key: ProductKind;
   accent: Accent;
+  image: string;
   eyebrow: string;
   title: string[];
   sub: string;
@@ -24,6 +26,7 @@ const SLIDES: Slide[] = [
   {
     key: "ro",
     accent: "green",
+    image: "/banner-ro.png",
     eyebrow: "Зворотні осмоси",
     title: ["Питна вода ", "преміум-якості", " прямо з вашого крана"],
     sub: "Мембрана зворотного осмосу видаляє до 99,8% домішок, а мінералізатор повертає воді корисний склад і природний смак. Система компактно ховається під мийкою.",
@@ -38,6 +41,7 @@ const SLIDES: Slide[] = [
   {
     key: "compact",
     accent: "teal",
+    image: "/banner-compact.webp",
     eyebrow: "Компактні системи",
     title: ["Комплексне очищення, що ", "вміщується в шафу"],
     sub: "Кабінетні системи пом'якшення та комплексного очищення працюють на весь дім, але займають менше місця, ніж пральна машина. Ідеально для котеджів і квартир з обмеженим простором.",
@@ -52,6 +56,7 @@ const SLIDES: Slide[] = [
   {
     key: "column",
     accent: "blue",
+    image: "/banner-column.webp",
     eyebrow: "Колонні фільтри",
     title: ["Потужне очищення ", "для всього будинку"],
     sub: "Колонні системи знезалізнення та пом'якшення прибирають залізо, жорсткість і марганець із води зі свердловини чи магістралі. Чиста вода в кожному крані — без рудих плям і накипу.",
@@ -77,56 +82,6 @@ const Arrow = () => (
     <path d="M5 12h14m-6-6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
-function Product({ which }: { which: ProductKind }) {
-  if (which === "ro")
-    return (
-      <svg className="hb-product" width="300" height="320" viewBox="0 0 300 320" fill="none" aria-hidden="true">
-        <rect x="40" y="90" width="44" height="170" rx="14" fill="#fff" stroke="#bcd2e2" strokeWidth="2" />
-        <rect x="104" y="90" width="44" height="170" rx="14" fill="#fff" stroke="#bcd2e2" strokeWidth="2" />
-        <rect x="168" y="90" width="44" height="170" rx="14" fill="#fff" stroke="#bcd2e2" strokeWidth="2" />
-        <rect x="40" y="58" width="172" height="24" rx="10" fill="#eaf3fa" stroke="#7fbfe0" strokeWidth="2" />
-        <rect x="56" y="118" width="12" height="110" rx="6" fill="#0057b8" opacity=".25" />
-        <rect x="120" y="118" width="12" height="110" rx="6" fill="#0057b8" opacity=".45" />
-        <rect x="184" y="118" width="12" height="110" rx="6" fill="#0057b8" opacity=".75" />
-        <rect x="36" y="24" width="180" height="22" rx="11" fill="#eaf3fa" stroke="#7fbfe0" strokeWidth="2" />
-        <path d="M252 260v-130c0-22-14-34-30-34" stroke="#8aa0b5" strokeWidth="9" strokeLinecap="round" />
-        <circle cx="252" cy="272" r="13" fill="#eaf3fa" stroke="#8aa0b5" strokeWidth="3" />
-        <path d="M222 122c0 8 6 12 6 18a6 6 0 1 1-12 0c0-6 6-10 6-18Z" fill="#0057b8" />
-      </svg>
-    );
-  if (which === "compact")
-    return (
-      <svg className="hb-product" width="280" height="320" viewBox="0 0 280 320" fill="none" aria-hidden="true">
-        <rect x="60" y="40" width="160" height="240" rx="22" fill="#fff" stroke="#bcd2e2" strokeWidth="2" />
-        <rect x="60" y="40" width="160" height="56" rx="22" fill="#eaf3fa" />
-        <rect x="60" y="74" width="160" height="22" fill="#eaf3fa" />
-        <rect x="84" y="58" width="68" height="20" rx="10" fill="#fff" stroke="#00a6d6" strokeOpacity=".5" strokeWidth="2" />
-        <circle cx="188" cy="68" r="9" fill="#00a6d6" />
-        <circle cx="188" cy="68" r="14" stroke="#00a6d6" strokeOpacity=".3" strokeWidth="2" />
-        <path d="M76 200h128" stroke="#00a6d6" strokeOpacity=".35" strokeWidth="2" strokeDasharray="6 7" />
-        <path d="M76 236c14-10 28 10 42 0s28 10 42 0 28 10 44 0v30c0 8-7 14-15 14H91c-8 0-15-6-15-14v-30Z" fill="#00a6d6" opacity=".16" />
-        <path d="M30 120v80m0-80-9 11m9-11 9 11M30 200l-9-11m9 11 9-11" stroke="#8aa0b5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" opacity=".8" />
-        <path d="M250 120v80m0-80-9 11m9-11 9 11m-9 69-9-11m9 11 9-11" stroke="#8aa0b5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" opacity=".8" />
-      </svg>
-    );
-  return (
-    <svg className="hb-product" width="300" height="330" viewBox="0 0 300 330" fill="none" aria-hidden="true">
-      <rect x="70" y="64" width="104" height="240" rx="50" fill="#fff" stroke="#bcd2e2" strokeWidth="2" />
-      <rect x="92" y="100" width="14" height="160" rx="7" fill="#004ba0" opacity=".25" />
-      <rect x="120" y="100" width="14" height="160" rx="7" fill="#004ba0" opacity=".45" />
-      <rect x="148" y="100" width="14" height="160" rx="7" fill="#004ba0" opacity=".7" />
-      <rect x="86" y="26" width="72" height="44" rx="12" fill="#eaf3fa" stroke="#004ba0" strokeOpacity=".5" strokeWidth="2" />
-      <rect x="98" y="38" width="34" height="14" rx="5" fill="#fff" stroke="#004ba0" strokeOpacity=".5" strokeWidth="1.6" />
-      <circle cx="146" cy="45" r="5" fill="#004ba0" />
-      <path d="M158 44h36" stroke="#8aa0b5" strokeWidth="7" strokeLinecap="round" />
-      <rect x="208" y="170" width="72" height="134" rx="16" fill="#fff" stroke="#bcd2e2" strokeWidth="2" />
-      <rect x="224" y="160" width="40" height="16" rx="8" fill="#eaf3fa" stroke="#bcd2e2" strokeWidth="2" />
-      <path d="M218 246c10-8 21 8 32 0s21 8 32 0v40c0 7-6 12-13 12h-38c-7 0-13-5-13-12v-40Z" fill="#004ba0" opacity=".16" />
-      <path d="M194 60c8 30 8 80 0 120" stroke="#004ba0" strokeOpacity=".4" strokeWidth="2.5" strokeDasharray="5 7" />
-    </svg>
-  );
-}
 
 export default function HeroBanners() {
   const [i, setI] = useState(0);
@@ -224,7 +179,15 @@ export default function HeroBanners() {
                 <div className="hb-visual">
                   <div className="hb-halo" />
                   <div className="hb-rings" aria-hidden="true"><i /><i /><i /></div>
-                  <Product which={s.key} />
+                  <Image
+                    className="hb-photo"
+                    src={s.image}
+                    alt={s.eyebrow}
+                    width={460}
+                    height={460}
+                    priority={idx === 0}
+                    sizes="(max-width: 980px) 300px, 440px"
+                  />
                   <div className="hb-stats">
                     {s.stats.map((st) => (
                       <div className="hb-stat" key={st.l}>
@@ -374,7 +337,7 @@ export default function HeroBanners() {
         .hb-rings i:nth-child(1) { width: 300px; height: 300px; }
         .hb-rings i:nth-child(2) { width: 400px; height: 400px; border-color: color-mix(in srgb, var(--accent) 18%, transparent); }
         .hb-rings i:nth-child(3) { width: 500px; height: 500px; border-color: color-mix(in srgb, var(--accent) 9%, transparent); }
-        .hb-visual :global(.hb-product) { position: relative; z-index: 1; filter: drop-shadow(0 22px 34px rgba(11, 31, 51, 0.18)); animation: hb-floaty 6s ease-in-out infinite; }
+        .hb-visual :global(.hb-photo) { position: relative; z-index: 1; width: clamp(220px, 30vw, 440px); height: auto; object-fit: contain; filter: drop-shadow(0 26px 38px rgba(11, 31, 51, 0.22)); animation: hb-floaty 6s ease-in-out infinite; }
         @keyframes hb-floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         .hb-stats {
           position: relative; z-index: 2; display: flex; align-items: stretch;
@@ -424,7 +387,7 @@ export default function HeroBanners() {
           .hb-sub { font-size: 15.5px; }
           .hb-visual { min-height: 250px; }
           .hb-halo { width: 250px; height: 250px; }
-          .hb-visual :global(.hb-product) { max-width: 200px; height: auto; }
+          .hb-visual :global(.hb-photo) { width: 190px; height: auto; }
           .hb-rings i:nth-child(3) { display: none; }
           .hb-stat b { font-size: 15px; }
           .hb-stat { padding: 8px 10px; }
@@ -432,7 +395,7 @@ export default function HeroBanners() {
         @media (prefers-reduced-motion: reduce) {
           .hb-blobs, .hb-halo { animation: none; }
           .hb-slide { transition: opacity 0.2s linear; transform: none; }
-          .hb-visual :global(.hb-product) { animation: none; }
+          .hb-visual :global(.hb-photo) { animation: none; }
           .hb-tab.is-active .hb-bar { animation: none; width: 100%; }
         }
       `}</style>
