@@ -1,5 +1,5 @@
 import Link from "next/link";
-import HeroBanners from "@/components/HeroBanners";
+import HeroVideo from "@/components/HeroVideo";
 import Reveal from "@/components/Reveal";
 import SystemQuiz from "@/components/SystemQuiz";
 import QuizLink from "@/components/QuizLink";
@@ -143,7 +143,7 @@ const faqItems: FAQItem[] = [
 export default function HomePage() {
   return (
     <>
-      <HeroBanners />
+      <HeroVideo />
 
       {/* 2 — WATER PROBLEMS */}
       <section className="section section--tight" id="problems">
